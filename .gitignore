@@ -2,5 +2,7 @@
 .settings
 .project
 .class
+.bin
+.lock
 target/
 build/
