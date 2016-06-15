@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'net.researchgate.release'
+apply plugin: 'maven-publish'
+
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+group = 'br.com.correios'
+archivesBaseName = 'correios-tracker'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'net.researchgate:gradle-release:2.3.5'
+    }
+}
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+release {
+  failOnCommitNeeded = false
+  failOnPublishNeeded = true
+  failOnSnapshotDependencies = true
+  failOnUnversionedFiles = true
+  failOnUpdateNeeded = true
+  revertOnFail = true
+}
+
+afterReleaseBuild.dependsOn publish
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
