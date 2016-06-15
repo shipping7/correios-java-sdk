@@ -1,6 +1,5 @@
 package br.com.correios.api;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +20,10 @@ public class EventosFromCorreiosToPackageTrackerConverter {
 		pacoteTracker.setVersao(eventosDoCorreios.getVersao());
 		
 		eventosDoCorreios.getObjeto().forEach(objeto -> {
+			pacoteTracker.setNumero(objeto.getNumero());
+			pacoteTracker.setSigla(objeto.getSigla());
+			pacoteTracker.setNome(objeto.getNome());
+			pacoteTracker.setCategoria(objeto.getCategoria());
 			objeto.getEvento().forEach(eventoDoCorreio -> {
 				Evento evento = new Evento();
 				evento.setTipo(eventoDoCorreio.getTipo());
@@ -55,16 +58,4 @@ public class EventosFromCorreiosToPackageTrackerConverter {
 		return pacoteTracker;
 	}
 
-	public static void main(String[] args) {
-		String horaEmString = "02:38";
-		try {
-			Date date = new SimpleDateFormat("hh:mm").parse(horaEmString);
-			Calendar instance = Calendar.getInstance();
-			instance.setTime(date);
-			System.out.println(instance);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-	}
 }
