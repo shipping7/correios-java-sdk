@@ -3,12 +3,16 @@ apply plugin: 'eclipse'
 apply plugin: 'application'
 apply plugin: 'net.researchgate.release'
 apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 compileJava.options.encoding = 'UTF-8'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
 group = 'br.com.correios'
-archivesBaseName = 'correios-tracker'
+archivesBaseName = 'correios-tracking-java-sdk'
+version = '0.0.1-BETA'
 
 buildscript {
     repositories {
@@ -50,4 +54,77 @@ dependencies {
     testCompile "org.assertj:assertj-core:1.0.0"
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+        	groupId 'org.correios.tracking'
+            artifactId 'correios-tracking'
+            version '0.0.1-BETA'
+            
+            from components.java
+        }
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from tasks.javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
 mainClassName = ''
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+              authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+               name 'correios-tracking-java-sdk'
+               packaging 'jar'
+               description 'GradleFx is a Gradle plugin for building Flex and Actionscript applications'
+               url 'http://alexandregama.github.io/correios-tracking-java-sdk'
+
+               scm {
+                   url 'scm:git@github.com:alexandregama/correios-tracking-java-sdk.git'
+                   connection 'scm:git@github.com:alexandregama/correios-tracking-java-sdk.git'
+                   developerConnection 'scm:git@github.com:alexandregama/correios-tracking-java-sdk.git'
+               }
+
+               licenses {
+                   license {
+                       name 'The Apache Software License, Version 2.0'
+                       url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                       distribution 'repo'
+                   }
+               }
+
+               developers {
+                   developer {
+                       id 'alexandregama'
+                       name 'Alexandre Gama'
+                   }
+               }
+           }
+        }
+    }
+}
