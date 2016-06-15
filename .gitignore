@@ -4,5 +4,7 @@
 .class
 .bin
 .lock
+.gradle
 target/
 build/
+bin/
