@@ -1,5 +1,6 @@
 .classpath
 .settings
 .project
+.class
 target/
 build/
