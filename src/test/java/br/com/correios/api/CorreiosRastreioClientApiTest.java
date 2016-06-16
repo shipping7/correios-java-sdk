@@ -8,11 +8,11 @@ public class CorreiosRastreioClientApiTest {
 
 	@Test
 	public void deveriaRetornarOsEventos() throws Exception {
-		CorreiosCredentials credentials = new CorreiosCredentials("123456", "123132");
+		CorreiosCredentials credentials = new CorreiosCredentials("058457", "yhe8sa12");
 		
 		CorreiosRastreioClientApi correiosApi = new CorreiosRastreioClientApi(credentials);
-		
-		PacoteTracker pacoteTracker = correiosApi.getPacoteTrackerFrom("DU500853237BR");
+
+		PacoteTracker pacoteTracker = correiosApi.buscaPacoteTrackerUsando("DU500853238BR").emPortugues().comTodosOsEventos().build();
 		
 		System.out.println(pacoteTracker);
 	}
