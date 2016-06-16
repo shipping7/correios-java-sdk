@@ -54,18 +54,6 @@ dependencies {
     testCompile "org.assertj:assertj-core:1.0.0"
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-        	groupId 'org.correios.tracking'
-            artifactId 'correios-tracking'
-            version '0.0.1-BETA'
-            
-            from components.java
-        }
-    }
-}
-
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
     classifier = 'sources'
@@ -77,44 +65,5 @@ artifacts {
     archives sourcesJar
 }
 
-signing {
-    sign configurations.archives
-}
 
 mainClassName = ''
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            pom.project {
-               name 'correios-tracking-java-sdk'
-               packaging 'jar'
-               description 'GradleFx is a Gradle plugin for building Flex and Actionscript applications'
-               url 'http://alexandregama.github.io/correios-tracking-java-sdk'
-
-               scm {
-                   url 'scm:git@github.com:alexandregama/correios-tracking-java-sdk.git'
-                   connection 'scm:git@github.com:alexandregama/correios-tracking-java-sdk.git'
-                   developerConnection 'scm:git@github.com:alexandregama/correios-tracking-java-sdk.git'
-               }
-
-               licenses {
-                   license {
-                       name 'The Apache Software License, Version 2.0'
-                       url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                       distribution 'repo'
-                   }
-               }
-
-               developers {
-                   developer {
-                       id 'alexandregama'
-                       name 'Alexandre Gama'
-                   }
-               }
-           }
-        }
-    }
-}
