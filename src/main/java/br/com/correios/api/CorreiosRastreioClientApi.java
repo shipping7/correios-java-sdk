@@ -7,9 +7,6 @@ import static br.com.correios.api.CorreiosIdioma.PORTUGUES;
 import static br.com.correios.api.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 
 import br.com.correios.credentials.CorreiosCredentials;
-import br.com.correios.webservice.resource.Rastro;
-import br.com.correios.webservice.resource.Service;
-import br.com.correios.webservice.resource.Sroxml;
 
 /**
  * 
@@ -59,18 +56,11 @@ public class CorreiosRastreioClientApi {
 			public class CorreiosRastreioBuilder {
 
 				public PacoteTracker build() {
-					Service serviceApi = new Rastro().getServicePort();
-
-					Sroxml eventos = serviceApi.buscaEventos(credentials.getUsuario(), credentials.getSenha(),
-							LISTA_DE_OBJETOS.getCodigoInternoDosCorreios(), 
-							resultado.getCodigoInternoDosCorreios(),
-							idioma.getCodigoInternoDosCorreio(), 
-							trackingCode);
-
-					EventosFromCorreiosToPackageTrackerConverter converter = new EventosFromCorreiosToPackageTrackerConverter();
-					PacoteTracker pacoteTracker = converter.from(eventos);
-
-					return pacoteTracker;
+					SoapCorreiosTrackingServiceApi serviceApi = new SoapCorreiosTrackingServiceApi(credentials);
+					
+					PacoteTracker pacoteTrackerEncontrado = serviceApi.buscaPacoteTracker(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
+					
+					return pacoteTrackerEncontrado;
 				}
 
 			}
