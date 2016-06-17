@@ -1,4 +1,8 @@
-package br.com.correios.api;
+package br.com.correios.api.service;
+
+import br.com.correios.api.CorreiosEscopoResultado;
+import br.com.correios.api.CorreiosIdioma;
+import br.com.correios.api.CorreiosTipoIdentificador;
 
 public interface CorreiosTrackingServiceApi {
 

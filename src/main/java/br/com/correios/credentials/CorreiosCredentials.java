@@ -1,9 +1,8 @@
 package br.com.correios.credentials;
 
 /**
- * 
  * @author Alexandre Gama
- *
+ * Classe que deve ser usada para a autenticacao com a API dos correios. 
  */
 public class CorreiosCredentials {
 

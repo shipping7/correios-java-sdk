@@ -1,4 +1,4 @@
-package br.com.correios.api;
+package br.com.correios.api.service;
 
 import static br.com.correios.api.CorreiosEscopoResultado.TODOS_OS_EVENTOS;
 import static br.com.correios.api.CorreiosEscopoResultado.ULTIMO_EVENTO;
@@ -9,12 +9,15 @@ import static br.com.correios.api.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.correios.api.CorreiosEscopoResultado;
+import br.com.correios.api.CorreiosIdioma;
+import br.com.correios.api.CorreiosUnexpectedTrackingCodeException;
 import br.com.correios.credentials.CorreiosCredentials;
 
 /**
- * 
  * @author Alexandre Gama
- *
+ * 
+ * Classe que deve ser usada para as chamadas a API dos Correios
  */
 public class CorreiosRastreioClientApi {
 
@@ -28,49 +31,53 @@ public class CorreiosRastreioClientApi {
 		this.credentials = credentials;
 	}
 
-	public CorreiosRastreioIdioma buscaPacoteTrackerUsando(String trackingCode) {
+	public CorreiosRastreioComIdioma buscaPacoteTrackerUsandoOCodigo(String trackingCode) {
 		this.trackingCode = trackingCode;
-		return new CorreiosRastreioIdioma();
+		return new CorreiosRastreioComIdioma();
 	}
 	
-	public CorreiosRastreioIdioma buscaPacoteTrackerPelaListaDeTrackings(List<String> trackingCodes) {
+	public CorreiosRastreioComIdioma buscaPacoteTrackerPelaListaDeTrackings(List<String> trackingCodes) {
 		this.trackingCodes = trackingCodes;
-		return new CorreiosRastreioIdioma();
+		return new CorreiosRastreioComIdioma();
 	}
 
-	public class CorreiosRastreioIdioma {
+	public class CorreiosRastreioComIdioma {
 
-		public CorreiosRastreioTipoDeIdentificador emPortugues() {
+		public CorreiosRastreioComTipoDeIdentificador emPortugues() {
 			idioma = PORTUGUES;
-			return new CorreiosRastreioTipoDeIdentificador();
+			return new CorreiosRastreioComTipoDeIdentificador();
 		}
 
-		public CorreiosRastreioTipoDeIdentificador emIngles() {
+		public CorreiosRastreioComTipoDeIdentificador emIngles() {
 			idioma = INGLES;
-			return new CorreiosRastreioTipoDeIdentificador();
+			return new CorreiosRastreioComTipoDeIdentificador();
 		}
 
-		public class CorreiosRastreioTipoDeIdentificador {
+		public class CorreiosRastreioComTipoDeIdentificador {
 
-			public CorreiosRastreioBuilder comTodosOsEventos() {
+			public CorreiosRastreioTracker comTodosOsEventos() {
 				resultado = TODOS_OS_EVENTOS;
-				return new CorreiosRastreioBuilder();
+				return new CorreiosRastreioTracker();
 			}
 
-			public CorreiosRastreioBuilder somenteUltimoEvento() {
+			public CorreiosRastreioTracker somenteUltimoEvento() {
 				resultado = ULTIMO_EVENTO;
-				return new CorreiosRastreioBuilder();
+				return new CorreiosRastreioTracker();
 			}
 
-			public class CorreiosRastreioBuilder {
+			public class CorreiosRastreioTracker {
 
 				public PacoteTracker getPacoteTracker() {
-					if (trackingCodes != null && !trackingCodes.isEmpty()) {
+					boolean usuarioEnviouListaDeTrackingCodes = trackingCodes != null && !trackingCodes.isEmpty();
+					if (usuarioEnviouListaDeTrackingCodes) {
 						throw new CorreiosUnexpectedTrackingCodeException("Voce deve fazer a chamada do metodo getPacoteTracker passando somente 1 tracking code e nao uma lista. Caso seja necessario uma lista, voce podera usar o metodo getListaDePacotesTracker");
 					}
-					if (trackingCode == null || trackingCode.isEmpty()) {
+					
+					boolean trackingCodeVazio = trackingCode == null || trackingCode.isEmpty();
+					if (trackingCodeVazio) {
 						throw new CorreiosUnexpectedTrackingCodeException("O Tracking code nao pode ser vazio");
 					}
+					
 					SoapCorreiosTrackingServiceApi serviceApi = new SoapCorreiosTrackingServiceApi(credentials);
 					
 					PacoteTracker pacoteTrackerEncontrado = serviceApi.buscaPacoteTracker(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
@@ -79,12 +86,16 @@ public class CorreiosRastreioClientApi {
 				}
 				
 				public List<PacoteTracker> getListaDePacotesTracker() {
-					if (trackingCodes == null || trackingCodes.isEmpty()) {
+					boolean listaDeTrackingCodesEstaVazia = trackingCodes == null || trackingCodes.isEmpty();
+					if (listaDeTrackingCodesEstaVazia) {
 						throw new CorreiosUnexpectedTrackingCodeException("A lista de Tracking Codes nao pode ser nula ou vazia");
 					}
-					if (trackingCode != null && !trackingCode.isEmpty()) {
+					
+					boolean existeSomenteUmTrackingCode = trackingCode != null && !trackingCode.isEmpty();
+					if (existeSomenteUmTrackingCode) {
 						throw new CorreiosUnexpectedTrackingCodeException("Voce deve fazer a chamada do metodo getListaDePacotesTracker passando uma lista de tracking codes. Caso seja necessario, utilize o metodo getPacoteTracker para somente 1 tracking code");
 					}
+					
 					SoapCorreiosTrackingServiceApi serviceApi = new SoapCorreiosTrackingServiceApi(credentials);
 					
 					List<PacoteTracker> pacotesEncontrados = new ArrayList<>();

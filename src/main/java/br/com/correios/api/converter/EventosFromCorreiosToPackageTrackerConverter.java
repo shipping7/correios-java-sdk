@@ -1,9 +1,13 @@
-package br.com.correios.api;
+package br.com.correios.api.converter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import br.com.correios.api.Destino;
+import br.com.correios.api.Evento;
+import br.com.correios.api.LocalDoPacote;
+import br.com.correios.api.service.PacoteTracker;
 import br.com.correios.exception.DataInvalidaDoEventoException;
 import br.com.correios.webservice.resource.Sroxml;
 
