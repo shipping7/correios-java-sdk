@@ -4,7 +4,7 @@ package br.com.correios.credentials;
  * @author Alexandre Gama
  * Classe que deve ser usada para a autenticacao com a API dos correios. 
  */
-public class CorreiosCredentials {
+public class CorreiosCredenciais {
 
 	/**
 	 * Identificação do cliente
@@ -20,7 +20,7 @@ public class CorreiosCredentials {
 	 */
 	private String senha;
 
-	public CorreiosCredentials(String usuario, String senha) {
+	public CorreiosCredenciais(String usuario, String senha) {
 		this.usuario = usuario;
 		this.senha = senha;
 	}
