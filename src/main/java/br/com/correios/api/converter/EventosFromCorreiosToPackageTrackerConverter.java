@@ -9,7 +9,7 @@ import br.com.correios.api.Evento;
 import br.com.correios.api.LocalDoPacote;
 import br.com.correios.api.service.PacoteTracker;
 import br.com.correios.exception.DataInvalidaDoEventoException;
-import br.com.correios.webservice.resource.Sroxml;
+import br.com.correios.webservice.resource.EventosDosCorreios;
 
 /**
  * 
@@ -18,7 +18,7 @@ import br.com.correios.webservice.resource.Sroxml;
  */
 public class EventosFromCorreiosToPackageTrackerConverter {
 
-	public PacoteTracker from(Sroxml eventosDoCorreios) {
+	public PacoteTracker from(EventosDosCorreios eventosDoCorreios) {
 		PacoteTracker pacoteTracker = new PacoteTracker();
 		pacoteTracker.setQuantidade(Integer.valueOf(eventosDoCorreios.getQtd()));
 		pacoteTracker.setVersao(eventosDoCorreios.getVersao());

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
     "tipoResultado",
     "objeto"
 })
-public class Sroxml {
+public class EventosDosCorreios {
 
     protected String versao;
     protected String qtd;

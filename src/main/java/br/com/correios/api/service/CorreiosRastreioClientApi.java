@@ -75,7 +75,7 @@ public class CorreiosRastreioClientApi {
 					
 					boolean trackingCodeVazio = trackingCode == null || trackingCode.isEmpty();
 					if (trackingCodeVazio) {
-						throw new CorreiosUnexpectedTrackingCodeException("O Tracking code nao pode ser vazio");
+						throw new CorreiosUnexpectedTrackingCodeException("O Tracking code do objeto nao pode ser vazio");
 					}
 					
 					SoapCorreiosTrackingServiceApi serviceApi = new SoapCorreiosTrackingServiceApi(credentials);
@@ -98,11 +98,11 @@ public class CorreiosRastreioClientApi {
 					
 					SoapCorreiosTrackingServiceApi serviceApi = new SoapCorreiosTrackingServiceApi(credentials);
 					
-					List<PacoteTracker> pacotesEncontrados = new ArrayList<>();
-					trackingCodes.forEach(trackingCode -> {
+					List<PacoteTracker> pacotesEncontrados = new ArrayList<PacoteTracker>();
+					for (String trackingCode : trackingCodes) {
 						PacoteTracker pacoteTrackerEncontrado = serviceApi.buscaPacoteTracker(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
 						pacotesEncontrados.add(pacoteTrackerEncontrado);
-					});
+					}
 					
 					return pacotesEncontrados;
 				}

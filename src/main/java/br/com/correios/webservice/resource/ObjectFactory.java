@@ -48,11 +48,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Sroxml }
+     * Create an instance of {@link EventosDosCorreios }
      * 
      */
-    public Sroxml createSroxml() {
-        return new Sroxml();
+    public EventosDosCorreios createSroxml() {
+        return new EventosDosCorreios();
     }
 
     /**
@@ -291,12 +291,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Sroxml }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link EventosDosCorreios }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://resource.webservice.correios.com.br/", name = "rastro")
-    public JAXBElement<Sroxml> createRastro(Sroxml value) {
-        return new JAXBElement<Sroxml>(_Rastro_QNAME, Sroxml.class, null, value);
+    public JAXBElement<EventosDosCorreios> createRastro(EventosDosCorreios value) {
+        return new JAXBElement<EventosDosCorreios>(_Rastro_QNAME, EventosDosCorreios.class, null, value);
     }
 
     /**
