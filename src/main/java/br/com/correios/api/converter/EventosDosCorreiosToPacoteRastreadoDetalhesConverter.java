@@ -1,5 +1,7 @@
 package br.com.correios.api.converter;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
