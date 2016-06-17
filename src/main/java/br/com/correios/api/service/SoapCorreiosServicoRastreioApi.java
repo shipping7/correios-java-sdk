@@ -43,7 +43,7 @@ class SoapCorreiosServicoRastreioApi implements CorreiosServicoRastreioApi {
 		try {
 			EventosDosCorreiosToPacoteRastreadoDetalhesConverter converter = new EventosDosCorreiosToPacoteRastreadoDetalhesConverter();
 
-			return converter.from(eventos);
+			return converter.convert(eventos);
 		} catch (Exception e) {
 			throw new CorreiosEventosConverterException("Ocorreu um erro ao tentar converter o Evento vindo dos correios", e);
 		}

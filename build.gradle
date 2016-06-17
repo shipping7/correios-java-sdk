@@ -7,8 +7,6 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 compileJava.options.encoding = 'UTF-8'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 group = 'br.com.correios'
 archivesBaseName = 'correios-tracking-java-sdk'
