@@ -12,7 +12,7 @@ import br.com.correios.api.Evento;
  * Classe que contem todas as informacoes de um Objeto Rastreado, inclusive os eventos associados ao Objeto em questao
  * 
  */
-public class PacoteTracker {
+public class PacoteRastreadoDetalhes {
 
 	/**
 	 * Versão do SRO XML
