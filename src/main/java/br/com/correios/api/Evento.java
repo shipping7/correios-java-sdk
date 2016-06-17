@@ -6,27 +6,45 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 
  * @author Alexandre Gama
- *
+ * 
+ * Classe que contem os dados de um determinado evento ocorrido no objeto desejado
  */
 public class Evento {
 
+	/**
+	 * Tipo do evento de retorno
+	 */
 	private String tipo;
 
+	/**
+	 * Status do evento de retorno
+	 */
 	private String status;
 
+	/**
+	 * Data do evento
+	 */
 	private Calendar data;
 
+	/**
+	 * Hora que ocorreu o evento
+	 */
 	private String hora;
 
+	/**
+	 * Descrição do evento ocorrido
+	 */
 	private String descricao;
 
+	/**
+	 * CEP da unidade ECT
+	 */
 	private String codigo;
 
 	private LocalDoPacote local;
 
-	private List<Destino> destinos = new ArrayList<>();
+	private List<Destino> destinos = new ArrayList<Destino>();
 	
 	public Evento(String tipo, String status, Calendar data, String hora, String descricao, String codigo,
 			LocalDoPacote local) {

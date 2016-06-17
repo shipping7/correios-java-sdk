@@ -33,17 +33,17 @@ import javax.xml.bind.annotation.XmlType;
 public class BuscaEventosListaResponse {
 
     @XmlElement(name = "return")
-    protected Sroxml _return;
+    protected EventosDosCorreios _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link Sroxml }
+     *     {@link EventosDosCorreios }
      *     
      */
-    public Sroxml getReturn() {
+    public EventosDosCorreios getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class BuscaEventosListaResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Sroxml }
+     *     {@link EventosDosCorreios }
      *     
      */
-    public void setReturn(Sroxml value) {
+    public void setReturn(EventosDosCorreios value) {
         this._return = value;
     }
 

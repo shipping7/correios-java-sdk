@@ -41,7 +41,7 @@ public interface Service {
     @RequestWrapper(localName = "buscaEventos", targetNamespace = "http://resource.webservice.correios.com.br/", className = "br.com.correios.webservice.resource.BuscaEventos")
     @ResponseWrapper(localName = "buscaEventosResponse", targetNamespace = "http://resource.webservice.correios.com.br/", className = "br.com.correios.webservice.resource.BuscaEventosResponse")
     @Action(input = "buscaEventos", output = "http://resource.webservice.correios.com.br/Service/buscaEventosResponse")
-    public Sroxml buscaEventos(
+    public EventosDosCorreios buscaEventos(
         @WebParam(name = "usuario", targetNamespace = "")
         String usuario,
         @WebParam(name = "senha", targetNamespace = "")
@@ -71,7 +71,7 @@ public interface Service {
     @RequestWrapper(localName = "buscaEventosLista", targetNamespace = "http://resource.webservice.correios.com.br/", className = "br.com.correios.webservice.resource.BuscaEventosLista")
     @ResponseWrapper(localName = "buscaEventosListaResponse", targetNamespace = "http://resource.webservice.correios.com.br/", className = "br.com.correios.webservice.resource.BuscaEventosListaResponse")
     @Action(input = "buscaEventosLista", output = "http://resource.webservice.correios.com.br/Service/buscaEventosListaResponse")
-    public Sroxml buscaEventosLista(
+    public EventosDosCorreios buscaEventosLista(
         @WebParam(name = "usuario", targetNamespace = "")
         String usuario,
         @WebParam(name = "senha", targetNamespace = "")

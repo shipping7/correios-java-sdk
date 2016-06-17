@@ -7,25 +7,47 @@ import java.util.List;
 import br.com.correios.api.Evento;
 
 /**
- * 
  * @author Alexandre Gama
- *
+ * 
+ * Classe que contem todas as informacoes de um Objeto Rastreado, inclusive os eventos associados ao Objeto em questao
+ * 
  */
 public class PacoteTracker {
 
+	/**
+	 * Versão do SRO XML
+	 */
 	private String versao;
 	
+	/**
+	 * Quantidade de objetos consultados
+	 */
 	private Integer quantidade;
 	
+	/**
+	 * Número do objeto
+	 */
 	private String numero;
 	
+	/**
+	 * Sigla do objeto solicitado
+	 */
 	private String sigla;
 	
+	/**
+	 * Nome do objeto solicitado
+	 */
 	private String nome;
 	
+	/**
+	 * Categoria do objeto solicitado
+	 */
 	private String categoria;
 	
-	private List<Evento> eventos = new ArrayList<>();
+	/**
+	 * Lista dos eventos que ocorreram com o objeto desejado
+	 */
+	private List<Evento> eventos = new ArrayList<Evento>();
 
 	public String getVersao() {
 		return versao;
