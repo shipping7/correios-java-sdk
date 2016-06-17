@@ -1,8 +1,10 @@
-package br.com.correios.api;
+package br.com.correios.api.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import br.com.correios.api.Evento;
 
 /**
  * 

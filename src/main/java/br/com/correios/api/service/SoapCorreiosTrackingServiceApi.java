@@ -1,7 +1,11 @@
-package br.com.correios.api;
+package br.com.correios.api.service;
 
 import static br.com.correios.api.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 
+import br.com.correios.api.CorreiosEscopoResultado;
+import br.com.correios.api.CorreiosIdioma;
+import br.com.correios.api.CorreiosTipoIdentificador;
+import br.com.correios.api.converter.EventosFromCorreiosToPackageTrackerConverter;
 import br.com.correios.credentials.CorreiosCredentials;
 import br.com.correios.webservice.resource.Rastro;
 import br.com.correios.webservice.resource.Service;

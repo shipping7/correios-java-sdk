@@ -108,7 +108,7 @@ public class Evento {
 	
 	@Override
 	public String toString() {
-		return "Evento [tipo=" + tipo + ", status=" + status + ", data=" + data + ", hora=" + getHora() + ", descricao="
+		return "Evento [tipo=" + tipo + ", status=" + status + ", descricao="
 				+ descricao + ", codigo=" + codigo + ", local=" + local + ", destino=" + destinos + "]";
 	}
 }
