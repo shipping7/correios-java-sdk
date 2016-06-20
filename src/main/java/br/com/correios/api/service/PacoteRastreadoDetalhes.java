@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.correios.api.exception.EventoInexistenteException;
+import com.google.common.base.Optional;
+
 import br.com.correios.api.model.Evento;
 
 /**
@@ -111,24 +112,24 @@ public class PacoteRastreadoDetalhes {
 		return eventos.size() > 0 ? eventos.size(): 0; 
 	}
 	
-	public Evento getPrimeiroEvento() {
+	public Optional<Evento> getPrimeiroEvento() {
 		if (eventos.size() > 0) {
-			return eventos.get(0);
+			return Optional.of(eventos.get(0));
 		}
-		throw new EventoInexistenteException("Não existem eventos para o pacote desejado");
+		return Optional.absent(); 
 	}
 	
-	public Evento getUltimoEvento() {
+	public Optional<Evento> getUltimoEvento() {
 		if (eventos.size() > 0) {
-			return eventos.get(eventos.size() - 1);
+			return Optional.of(eventos.get(eventos.size() - 1));
 		}
-		throw new EventoInexistenteException("Não existem eventos para o pacote desejado");
-	}
-	
-	@Override
-	public String toString() {
-		return "PacoteTracker [versao=" + versao + ", quantidade=" + quantidade + ", numero=" + numero + ", sigla="
-				+ sigla + ", nome=" + nome + ", categoria=" + categoria + ", eventos=" + eventos + "]";
+		return Optional.absent();
 	}
 
+	@Override
+	public String toString() {
+		return "PacoteRastreadoDetalhes [versao=" + versao + ", quantidade=" + quantidade + ", numero=" + numero
+				+ ", sigla=" + sigla + ", nome=" + nome + ", categoria=" + categoria + ", eventos=" + eventos + "]";
+	}
+	
 }
