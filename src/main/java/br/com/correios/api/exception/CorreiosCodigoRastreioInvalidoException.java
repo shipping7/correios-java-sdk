@@ -1,4 +1,4 @@
-package br.com.correios.api;
+package br.com.correios.api.exception;
 
 public class CorreiosCodigoRastreioInvalidoException extends RuntimeException {
 

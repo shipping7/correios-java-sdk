@@ -1,11 +1,13 @@
-package br.com.correios.api;
+package br.com.correios.api.model;
 
 /**
  * @author Alexandre Gama
  * 
- * Delimitação do escopo da resposta a ser dada à consulta do rastreamento de cada objeto
+ * @description Delimitação do escopo da resposta a ser dada à consulta do rastreamento de cada objeto
  * T: Serão retornados todos os eventos do objeto 
  * U: Será retornado apenas o último evento do objeto
+ * 
+ * @since 0.0.1-BETA
  */
 public enum CorreiosEscopoResultado {
 

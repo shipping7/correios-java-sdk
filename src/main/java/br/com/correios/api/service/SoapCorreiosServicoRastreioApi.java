@@ -1,11 +1,13 @@
 package br.com.correios.api.service;
 
-import static br.com.correios.api.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
+import static br.com.correios.api.model.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 
-import br.com.correios.api.CorreiosEscopoResultado;
-import br.com.correios.api.CorreiosIdioma;
-import br.com.correios.api.CorreiosTipoIdentificador;
 import br.com.correios.api.converter.EventosDosCorreiosToPacoteRastreadoDetalhesConverter;
+import br.com.correios.api.exception.CorreiosEventosConverterException;
+import br.com.correios.api.exception.CorreiosServicoSoapException;
+import br.com.correios.api.model.CorreiosEscopoResultado;
+import br.com.correios.api.model.CorreiosIdioma;
+import br.com.correios.api.model.CorreiosTipoIdentificador;
 import br.com.correios.credentials.CorreiosCredenciais;
 import br.com.correios.webservice.resource.EventosDosCorreios;
 import br.com.correios.webservice.resource.Rastro;

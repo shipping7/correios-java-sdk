@@ -1,9 +1,11 @@
-package br.com.correios.api;
+package br.com.correios.api.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+
+import br.com.correios.api.exception.DestinoInexistenteException;
 
 /**
  * @author Alexandre Gama
@@ -110,6 +112,20 @@ public class Evento {
 
 	public List<Destino> getDestinos() {
 		return Collections.unmodifiableList(destinos);
+	}
+	
+	public Destino getPrimeiroDestino() {
+		if (destinos.size() > 0) {
+			return destinos.get(0);
+		}
+		throw new DestinoInexistenteException("O destino deseja nao existe");
+	}
+	
+	public Destino getUltimoDestino() {
+		if (destinos.size() > 0) {
+			return destinos.get(destinos.size() - 1);
+		}
+		throw new DestinoInexistenteException("O destino deseja nao existe");
 	}
 
 	public String getHora() {
