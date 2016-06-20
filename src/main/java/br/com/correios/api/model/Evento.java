@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.correios.api.exception.DestinoInexistenteException;
+import com.google.common.base.Optional;
 
 /**
  * @author Alexandre Gama
@@ -114,18 +114,18 @@ public class Evento {
 		return Collections.unmodifiableList(destinos);
 	}
 	
-	public Destino getPrimeiroDestino() {
+	public Optional<Destino> getPrimeiroDestino() {
 		if (destinos.size() > 0) {
-			return destinos.get(0);
+			return Optional.of(destinos.get(0));
 		}
-		throw new DestinoInexistenteException("O destino deseja nao existe");
+		return Optional.absent();
 	}
 	
-	public Destino getUltimoDestino() {
+	public Optional<Destino> getUltimoDestino() {
 		if (destinos.size() > 0) {
-			return destinos.get(destinos.size() - 1);
+			return Optional.of(destinos.get(destinos.size() - 1));
 		}
-		throw new DestinoInexistenteException("O destino deseja nao existe");
+		return Optional.absent();
 	}
 
 	public String getHora() {
