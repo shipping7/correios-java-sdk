@@ -2,12 +2,8 @@ package br.com.correios.api.converter;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-import br.com.correios.api.exception.DataInvalidaDoEventoException;
 import br.com.correios.api.model.Destino;
 import br.com.correios.api.model.Evento;
 import br.com.correios.api.model.LocalDoPacote;
@@ -74,16 +70,9 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Con
 	}
 
 	private void converteData(Eventos eventoDoCorreio, Evento evento) {
-		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-		Date date;
-		try {
-			date = formatador.parse(eventoDoCorreio.getData());
-			Calendar dataDoEvento = Calendar.getInstance();
-			dataDoEvento.setTime(date);
-			evento.setData(dataDoEvento);
-		} catch (ParseException e) {
-			throw new DataInvalidaDoEventoException(String.format("A seguinte data retornada pelo correios é inválida: %s", eventoDoCorreio.getData()));
-		}
+		Calendar data = DateFormatter.formataComPadraoDosCorreios(eventoDoCorreio.getData());
+		
+		evento.setData(data);
 	}
 
 }
