@@ -1,9 +1,11 @@
-package br.com.correios.api;
+package br.com.correios.api.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+
+import com.google.common.base.Optional;
 
 /**
  * @author Alexandre Gama
@@ -110,6 +112,20 @@ public class Evento {
 
 	public List<Destino> getDestinos() {
 		return Collections.unmodifiableList(destinos);
+	}
+	
+	public Optional<Destino> getPrimeiroDestino() {
+		if (destinos.size() > 0) {
+			return Optional.of(destinos.get(0));
+		}
+		return Optional.absent();
+	}
+	
+	public Optional<Destino> getUltimoDestino() {
+		if (destinos.size() > 0) {
+			return Optional.of(destinos.get(destinos.size() - 1));
+		}
+		return Optional.absent();
 	}
 
 	public String getHora() {

@@ -1,4 +1,4 @@
-package br.com.correios.api.service;
+package br.com.correios.api.exception;
 
 public class CorreiosEventosConverterException extends RuntimeException {
 

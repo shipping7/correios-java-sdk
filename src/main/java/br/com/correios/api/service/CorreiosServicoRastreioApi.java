@@ -1,8 +1,8 @@
 package br.com.correios.api.service;
 
-import br.com.correios.api.CorreiosEscopoResultado;
-import br.com.correios.api.CorreiosIdioma;
-import br.com.correios.api.CorreiosTipoIdentificador;
+import br.com.correios.api.model.CorreiosEscopoResultado;
+import br.com.correios.api.model.CorreiosIdioma;
+import br.com.correios.api.model.CorreiosTipoIdentificador;
 
 public interface CorreiosServicoRastreioApi {
 

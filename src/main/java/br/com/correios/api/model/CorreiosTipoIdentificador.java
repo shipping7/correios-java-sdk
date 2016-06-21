@@ -1,9 +1,13 @@
-package br.com.correios.api;
+package br.com.correios.api.model;
 
 /**
  * @author Alexandre Gama
- * Definição de como a lista de identificadores de objetos deverá ser interpretada pelo servidor SRO.
- * L: lista de objetos. O servidor fará a consulta individual de cada identificador informado; F: intervalo de objetos. O servidor fará a consulta sequencial do primeiro ao último objeto informado,
+ * 
+ * @description Definição de como a lista de identificadores de objetos deverá ser interpretada pelo servidor SRO.
+ * L: lista de objetos. O servidor fará a consulta individual de cada identificador informado; 
+ * F: intervalo de objetos. O servidor fará a consulta sequencial do primeiro ao último objeto informado,
+ * 
+ * @since 0.0.1-BETA
  */
 public enum CorreiosTipoIdentificador {
 

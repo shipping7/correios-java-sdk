@@ -1,4 +1,4 @@
-package br.com.correios.exception;
+package br.com.correios.api.exception;
 
 public class DataInvalidaDoEventoException extends RuntimeException {
 

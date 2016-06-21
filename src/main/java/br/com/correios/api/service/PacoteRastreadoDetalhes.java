@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.correios.api.Evento;
+import com.google.common.base.Optional;
+
+import br.com.correios.api.model.Evento;
 
 /**
  * @author Alexandre Gama
  * 
- * Classe que contem todas as informacoes de um Objeto Rastreado, inclusive os eventos associados ao Objeto em questao
+ * @description Classe que contem todas as informacoes de um Objeto Rastreado, inclusive os eventos associados ao Objeto em questao
  * 
+ * @since 0.0.1-BETA
  */
 public class PacoteRastreadoDetalhes {
 
@@ -105,10 +108,28 @@ public class PacoteRastreadoDetalhes {
 		this.categoria = categoria;
 	}
 
-	@Override
-	public String toString() {
-		return "PacoteTracker [versao=" + versao + ", quantidade=" + quantidade + ", numero=" + numero + ", sigla="
-				+ sigla + ", nome=" + nome + ", categoria=" + categoria + ", eventos=" + eventos + "]";
+	public int getQuantidadeDeEventosOcorridos() {
+		return eventos.size() > 0 ? eventos.size(): 0; 
+	}
+	
+	public Optional<Evento> getPrimeiroEvento() {
+		if (eventos.size() > 0) {
+			return Optional.of(eventos.get(0));
+		}
+		return Optional.absent(); 
+	}
+	
+	public Optional<Evento> getUltimoEvento() {
+		if (eventos.size() > 0) {
+			return Optional.of(eventos.get(eventos.size() - 1));
+		}
+		return Optional.absent();
 	}
 
+	@Override
+	public String toString() {
+		return "PacoteRastreadoDetalhes [versao=" + versao + ", quantidade=" + quantidade + ", numero=" + numero
+				+ ", sigla=" + sigla + ", nome=" + nome + ", categoria=" + categoria + ", eventos=" + eventos + "]";
+	}
+	
 }

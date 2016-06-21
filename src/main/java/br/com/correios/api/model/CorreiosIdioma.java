@@ -1,4 +1,4 @@
-package br.com.correios.api;
+package br.com.correios.api.model;
 
 /**
  * @author Alexandre Gama
