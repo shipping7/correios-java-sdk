@@ -12,7 +12,7 @@ import br.com.correios.credentials.CorreiosCredenciais;
 public class CorreiosRastreioClientApiTest {
 
 	@Test
-	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() throws Exception {
+	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() {
 		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
 		
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
@@ -23,7 +23,7 @@ public class CorreiosRastreioClientApiTest {
 	}
 	
 	@Test
-	public void deveriaRetornarSomenteOUltimoEventoAPartirDeUmTrackingCode() throws Exception {
+	public void deveriaRetornarSomenteOUltimoEventoAPartirDeUmTrackingCode() {
 		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
 		
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
@@ -34,7 +34,7 @@ public class CorreiosRastreioClientApiTest {
 	}
 	
 	@Test
-	public void deveriaRetornarOsEventosAPartirDeUmaListaDeTrackingCodes() throws Exception {
+	public void deveriaRetornarOsEventosAPartirDeUmaListaDeTrackingCodes() {
 		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
 		
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);

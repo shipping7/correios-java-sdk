@@ -70,7 +70,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Con
 	}
 
 	private void converteData(Eventos eventoDoCorreio, Evento evento) {
-		Calendar data = DateFormatter.formataComPadraoDosCorreios(eventoDoCorreio.getData());
+		Calendar data = FormatadorData.formataComPadraoDosCorreios(eventoDoCorreio.getData());
 		
 		evento.setData(data);
 	}

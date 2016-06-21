@@ -8,13 +8,13 @@ import org.junit.Test;
 
 import br.com.correios.api.exception.DataInvalidaDoEventoException;
 
-public class DateFormatterTest {
+public class FormatadorDataTest {
 
 	@Test
 	public void deveriaFormatarDataEnviadaPelosCorreiosDeAcordoComOSeuPadrao() throws Exception {
 		String dataDoCorreio = "15/06/2016";
 		
-		Calendar dataFormatada = DateFormatter.formataComPadraoDosCorreios(dataDoCorreio);
+		Calendar dataFormatada = FormatadorData.formataComPadraoDosCorreios(dataDoCorreio);
 		
 		assertThat(dataFormatada.get(Calendar.DAY_OF_MONTH)).isEqualTo(15);
 		assertThat(dataFormatada.get(Calendar.MONTH)).isEqualTo(5);
@@ -25,7 +25,7 @@ public class DateFormatterTest {
 	public void deveriaLancarUmaExcecaoQuandoADataVindaDosCorreiosEstiverInvalida() throws Exception {
 		String dataDoCorreio = "invalido";
 		
-		DateFormatter.formataComPadraoDosCorreios(dataDoCorreio);
+		FormatadorData.formataComPadraoDosCorreios(dataDoCorreio);
 	}
 	
 }

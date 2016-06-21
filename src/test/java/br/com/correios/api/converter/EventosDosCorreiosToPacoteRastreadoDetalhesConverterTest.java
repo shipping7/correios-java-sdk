@@ -124,7 +124,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		EventosDosCorreiosToPacoteRastreadoDetalhesConverter converter = new EventosDosCorreiosToPacoteRastreadoDetalhesConverter();
 		PacoteRastreadoDetalhes pacoteRastreado = converter.convert(eventosDosCorreios);
 		
-		LocalDoPacote localDoDestino = pacoteRastreado.getPrimeiroEvento().get().getPrimeiroDestino().getLocal();
+		LocalDoPacote localDoDestino = pacoteRastreado.getPrimeiroEvento().get().getPrimeiroDestino().get().getLocal();
 		
 		assertThat(pacoteRastreado.getQuantidadeDeEventosOcorridos()).isEqualTo(1);
 		assertThat(localDoDestino.getNome()).isEqualTo("Rua Beira Rio");

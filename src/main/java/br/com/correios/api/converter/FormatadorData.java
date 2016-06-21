@@ -7,7 +7,7 @@ import java.util.Date;
 
 import br.com.correios.api.exception.DataInvalidaDoEventoException;
 
-public class DateFormatter {
+public class FormatadorData {
 
 	public static Calendar formataComPadraoDosCorreios(String data) {
 		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
