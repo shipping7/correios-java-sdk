@@ -64,3 +64,5 @@ artifacts {
 
     archives sourcesJar
 }
+
+mainClassName = ''
