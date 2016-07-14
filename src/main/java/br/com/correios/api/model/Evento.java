@@ -9,7 +9,7 @@ import com.google.common.base.Optional;
 
 /**
  * @author Alexandre Gama
- * 
+ *
  * Classe que contem os dados de um determinado evento ocorrido no objeto desejado
  */
 public class Evento {
@@ -47,7 +47,7 @@ public class Evento {
 	private LocalDoPacote local;
 
 	private List<Destino> destinos = new ArrayList<Destino>();
-	
+
 	public Evento(String tipo, String status, Calendar data, String hora, String descricao, String codigo,
 			LocalDoPacote local) {
 		this.tipo = tipo;
@@ -57,8 +57,8 @@ public class Evento {
 		this.descricao = descricao;
 		this.codigo = codigo;
 		this.local = local;
-	}  
-	
+	}
+
 	public Evento() {
 	}
 
@@ -113,19 +113,23 @@ public class Evento {
 	public List<Destino> getDestinos() {
 		return Collections.unmodifiableList(destinos);
 	}
-	
+
 	public Optional<Destino> getPrimeiroDestino() {
 		if (destinos.size() > 0) {
 			return Optional.of(destinos.get(0));
 		}
 		return Optional.absent();
 	}
-	
+
 	public Optional<Destino> getUltimoDestino() {
 		if (destinos.size() > 0) {
 			return Optional.of(destinos.get(destinos.size() - 1));
 		}
 		return Optional.absent();
+	}
+
+	public boolean isFinalStatus() {
+		return CorreiosStatusFinal.isFinal(tipo, status);
 	}
 
 	public String getHora() {
@@ -135,11 +139,11 @@ public class Evento {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	
+
 	public void adicionaDestino(Destino destinoDoPacote) {
 		this.destinos.add(destinoDoPacote);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Evento [tipo=" + tipo + ", status=" + status + ", descricao="
