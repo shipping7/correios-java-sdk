@@ -10,7 +10,6 @@ compileJava.options.encoding = 'UTF-8'
 
 group = 'br.com.correios'
 archivesBaseName = 'correios-tracking-java-sdk'
-version = '0.0.1-BETA'
 
 buildscript {
     repositories {
