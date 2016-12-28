@@ -9,9 +9,9 @@ import br.com.correios.api.model.CorreiosEscopoResultado;
 import br.com.correios.api.model.CorreiosIdioma;
 import br.com.correios.api.model.CorreiosTipoIdentificador;
 import br.com.correios.credentials.CorreiosCredenciais;
-import br.com.correios.webservice.resource.EventosDosCorreios;
-import br.com.correios.webservice.resource.Rastro;
-import br.com.correios.webservice.resource.Service;
+import br.com.correios.webservice.rastreio.EventosDosCorreios;
+import br.com.correios.webservice.rastreio.Rastro;
+import br.com.correios.webservice.rastreio.Service;
 
 /**
  * @author Alexandre Gama

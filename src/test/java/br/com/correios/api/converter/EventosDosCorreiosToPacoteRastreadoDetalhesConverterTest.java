@@ -10,10 +10,10 @@ import org.junit.Test;
 import br.com.correios.api.model.Evento;
 import br.com.correios.api.model.LocalDoPacote;
 import br.com.correios.api.service.PacoteRastreadoDetalhes;
-import br.com.correios.webservice.resource.Destinos;
-import br.com.correios.webservice.resource.Eventos;
-import br.com.correios.webservice.resource.EventosDosCorreios;
-import br.com.correios.webservice.resource.Objeto;
+import br.com.correios.webservice.rastreio.Destinos;
+import br.com.correios.webservice.rastreio.Eventos;
+import br.com.correios.webservice.rastreio.EventosDosCorreios;
+import br.com.correios.webservice.rastreio.Objeto;
 
 public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 
