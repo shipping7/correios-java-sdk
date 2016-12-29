@@ -22,11 +22,17 @@ public class CartaoPostagem {
 
     private String statusCartaoPostagem;
 
+    private Status status;
+
     private String unidadeGenerica;
 
     private List<UnidadePostagem> unidadesPostagem;
 
     private CartaoPostagem() {}
+
+    public Status getStatus() {
+		return status;
+	}
 
     public String getCodigoAdministrativo() {
 		return codigoAdministrativo;
@@ -89,6 +95,16 @@ public class CartaoPostagem {
 			return this;
 		}
 
+		public CartaoPostagemBuilder comStatusCartaoPostagem(String statusCartaoPostagem) {
+			this.cartao.statusCartaoPostagem = statusCartaoPostagem;
+			return this;
+		}
+
+		public CartaoPostagemBuilder comUnidadeGenerica(String unidadeGenerica) {
+			this.cartao.unidadeGenerica = unidadeGenerica;
+			return this;
+		}
+
 		public CartaoPostagemBuilder atualizadoNaData(Calendar dataDeAtualizacao) {
 			this.cartao.dataAtualizacao = dataDeAtualizacao;
 			return this;
@@ -96,6 +112,11 @@ public class CartaoPostagem {
 
 		public CartaoPostagemBuilder comVigencia(DataVigencia vigencia) {
 			this.cartao.dataDaVigencia = vigencia;
+			return this;
+		}
+
+		public CartaoPostagemBuilder comStatus(Status status) {
+			this.cartao.status = status;
 			return this;
 		}
 

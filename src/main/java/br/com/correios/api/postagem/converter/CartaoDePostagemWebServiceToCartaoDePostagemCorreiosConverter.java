@@ -9,6 +9,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import br.com.correios.api.postagem.CartaoPostagem;
 import br.com.correios.api.postagem.DataVigencia;
 import br.com.correios.api.postagem.ServicoCorreio;
+import br.com.correios.api.postagem.Status;
 import br.com.correios.webservice.postagem.CartaoPostagemERP;
 import br.com.correios.webservice.postagem.ServicoERP;
 
@@ -40,7 +41,10 @@ public class CartaoDePostagemWebServiceToCartaoDePostagemCorreiosConverter {
 			.comCodigoAdministrativo(cartaoWebService.getCodigoAdministrativo())
 			.atualizadoNaData(dataDeAtualizacao)
 			.comVigencia(vigencia)
+			.comStatus(new Status(cartaoWebService.getDescricaoStatusCartao(), cartaoWebService.getStatusCodigo()))
+			.comUnidadeGenerica(cartaoWebService.getUnidadeGenerica())
 			.comDescricaoGenericaDeUnidadeDePostagem(cartaoWebService.getDescricaoUnidadePostagemGenerica())
+			.comStatusCartaoPostagem(cartaoWebService.getStatusCartaoPostagem())
 			.deNumero(cartaoWebService.getNumero())
 			.build();
 
