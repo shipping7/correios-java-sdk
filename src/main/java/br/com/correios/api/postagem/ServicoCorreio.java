@@ -118,6 +118,16 @@ public class ServicoCorreio {
     		return this;
     	}
 
+		public ServicoCorreioBuilder comTipoDeServico1(ServicoCorreioTipo tipoDeServico1) {
+			this.servicoCorreio.tipo1 = tipoDeServico1;
+			return this;
+		}
+
+		public ServicoCorreioBuilder comTipoDeServico2(ServicoCorreioTipo tipoDeServico2) {
+			this.servicoCorreio.tipo2 = tipoDeServico2;
+			return this;
+		}
+
 		public ServicoCorreio build() {
 			return this.servicoCorreio;
 		}

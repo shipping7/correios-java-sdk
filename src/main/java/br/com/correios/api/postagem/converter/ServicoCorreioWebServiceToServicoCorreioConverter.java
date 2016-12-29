@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import br.com.correios.api.postagem.DataVigencia;
 import br.com.correios.api.postagem.ServicoCorreio;
+import br.com.correios.api.postagem.ServicoCorreioTipo;
 import br.com.correios.webservice.postagem.ServicoERP;
 import br.com.correios.webservice.postagem.VigenciaERP;
 
@@ -32,6 +33,8 @@ public class ServicoCorreioWebServiceToServicoCorreioConverter {
 			.comCodigo(servicoWebService.getCodigo())
 			.comDescricao(servicoWebService.getDescricao())
 			.comVigencia(dataVigencia)
+			.comTipoDeServico1(new ServicoCorreioTipo(servicoWebService.getTipo1Codigo(), servicoWebService.getTipo1Descricao()))
+			.comTipoDeServico2(new ServicoCorreioTipo(servicoWebService.getTipo2Codigo(), servicoWebService.getTipo2Descricao()))
 			.atualizadoNaData(dataDeAtualizacao)
 			.build();
 
