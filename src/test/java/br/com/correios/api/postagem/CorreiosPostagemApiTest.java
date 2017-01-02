@@ -13,7 +13,7 @@ public class CorreiosPostagemApiTest {
 
 	@Before
 	public void startUp() {
-		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "a6923l");
+		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "123456");
 	}
 
 	@Test

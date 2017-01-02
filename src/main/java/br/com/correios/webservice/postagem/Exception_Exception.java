@@ -15,7 +15,9 @@ public class Exception_Exception
     extends java.lang.Exception
 {
 
-    /**
+	private static final long serialVersionUID = -7991977127301372277L;
+
+	/**
      * Java type that goes as soapenv:Fault detail element.
      *
      */
