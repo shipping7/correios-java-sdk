@@ -88,6 +88,8 @@ Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github
 
 # Correios Rastreio
 
+[Link](https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/rastreamento-de-objetos/Manual_SROXML_28fev14.pdf) para o manual completo de integração com o WebService de Rastreio dos Correios
+
 ### Exemplos de Requisições via SOAP
 
 Requisição para pesquisar a situação de um determinado **Tracking Code**
