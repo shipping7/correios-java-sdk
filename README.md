@@ -86,7 +86,9 @@ Alexandre Gama (@alexandregama)
 
 Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-tracking-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível
 
-# Exemplos de Requisições via SOAP
+# Correios Rastreio
+
+### Exemplos de Requisições via SOAP
 
 Requisição para pesquisar a situação de um determinado **Tracking Code**
 
@@ -108,6 +110,30 @@ Requisição para pesquisar a situação de um determinado **Tracking Code**
          <!--Zero or more repetitions:-->
          <objetos>PN560740569BR</objetos>
       </res:buscaEventosLista>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+# Correios PLP
+
+### Exemplo de consulta de SRO pelo WebService dos Correios
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:consultaSRO>
+         <!--Zero or more repetitions:-->
+         <listaObjetos>PN560740569BR</listaObjetos>
+         <!--Optional:-->
+         <tipoConsulta>L</tipoConsulta>
+         <!--Optional:-->
+         <tipoResultado>T</tipoResultado>
+         <!--Optional:-->
+         <usuarioSro>123456</usuarioSro>
+         <!--Optional:-->
+         <senhaSro>123456</senhaSro>
+      </cli:consultaSRO>
    </soapenv:Body>
 </soapenv:Envelope>
 ```
