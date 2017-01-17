@@ -85,3 +85,29 @@ Alexandre Gama (@alexandregama)
 ## Support or Contact
 
 Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-tracking-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível
+
+# Exemplos de Requisições via SOAP
+
+Requisição para pesquisar a situação de um determinado **Tracking Code**
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:res="http://resource.webservice.correios.com.br/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <res:buscaEventosLista>
+         <!--Optional:-->
+         <usuario>12345</usuario>
+         <!--Optional:-->
+         <senha>12345</senha>
+         <!--Optional:-->
+         <tipo>L</tipo>
+         <!--Optional:-->
+         <resultado>T</resultado>
+         <!--Optional:-->
+         <lingua>101</lingua>
+         <!--Zero or more repetitions:-->
+         <objetos>PN560740569BR</objetos>
+      </res:buscaEventosLista>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
