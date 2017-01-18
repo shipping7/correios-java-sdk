@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for UnidadesSRO complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="UnidadesSRO">
  *   &lt;complexContent>
@@ -22,11 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UnidadesSRO", propOrder = {
+@XmlType(namespace = "unidadesSRO", name = "UnidadesSRO", propOrder = {
     "codigoSRO"
 })
 public class UnidadesSRO {
@@ -35,11 +35,11 @@ public class UnidadesSRO {
 
     /**
      * Gets the value of the codigoSRO property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getCodigoSRO() {
         return codigoSRO;
@@ -47,11 +47,11 @@ public class UnidadesSRO {
 
     /**
      * Sets the value of the codigoSRO property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setCodigoSRO(String value) {
         this.codigoSRO = value;

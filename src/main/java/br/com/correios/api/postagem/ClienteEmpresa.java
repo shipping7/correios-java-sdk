@@ -1,5 +1,7 @@
 package br.com.correios.api.postagem;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -123,4 +125,15 @@ public class ClienteEmpresa {
 			return this.cliente;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return toStringHelper(this)
+				.add("id", this.id)
+				.add("nome", this.nome)
+				.add("cnpj", this.cnpj)
+				.toString();
+	}
+
+
 }

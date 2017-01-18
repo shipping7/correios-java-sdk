@@ -1,4 +1,4 @@
-package br.com.correios.api.postagem;
+package br.com.correios.api.postagem.webservice;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,7 +8,7 @@ import javax.xml.namespace.QName;
 import br.com.correios.webservice.postagem.AtendeCliente;
 import br.com.correios.webservice.postagem.AtendeClienteService;
 
-public class CorreiosWebService {
+public class CorreiosClienteWebService implements CorreiosClienteApi {
 
 	private static final String SERVICE_NAME_LOCATION = "http://cliente.bean.master.sigep.bsb.correios.com.br/";
 
@@ -16,7 +16,7 @@ public class CorreiosWebService {
 
 	private AtendeCliente correiosWebService;
 
-	public CorreiosWebService() {
+	public CorreiosClienteWebService() {
 		URL url;
 		try {
 			url = new URL(WSDL_ADDRESS);
@@ -28,6 +28,7 @@ public class CorreiosWebService {
 		}
 	}
 
+	@Override
 	public AtendeCliente getCorreiosWebService() {
 		return correiosWebService;
 	}

@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for ListaEntregaExternaResponse complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="ListaEntregaExternaResponse">
  *   &lt;complexContent>
@@ -23,11 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ListaEntregaExternaResponse", propOrder = {
+@XmlType(namespace = "listaEntregaExternaResponse", name = "ListaEntregaExternaResponse", propOrder = {
     "_return"
 })
 public class ListaEntregaExternaResponse {
@@ -37,11 +37,11 @@ public class ListaEntregaExternaResponse {
 
     /**
      * Gets the value of the return property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link ListaEntregaExterna2 }
-     *     
+     *
      */
     public ListaEntregaExterna2 getReturn() {
         return _return;
@@ -49,11 +49,11 @@ public class ListaEntregaExternaResponse {
 
     /**
      * Sets the value of the return property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link ListaEntregaExterna2 }
-     *     
+     *
      */
     public void setReturn(ListaEntregaExterna2 value) {
         this._return = value;

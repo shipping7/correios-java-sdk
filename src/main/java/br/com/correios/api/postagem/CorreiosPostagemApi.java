@@ -4,6 +4,8 @@ import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.converter.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
+import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
+import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.SigepClienteException;
@@ -11,17 +13,22 @@ import br.com.correios.webservice.postagem.SigepClienteException;
 public class CorreiosPostagemApi implements PostagemApi {
 
 	private CorreiosPostagemDadosAutenticacao credenciais;
-	private CorreiosWebService correiosWebService;
+	private CorreiosClienteApi clienteApi;
 
 	public CorreiosPostagemApi(CorreiosPostagemDadosAutenticacao credenciais) {
 		this.credenciais = credenciais;
-		this.correiosWebService = new CorreiosWebService();
+		this.clienteApi = new CorreiosClienteWebService();
+	}
+
+	public CorreiosPostagemApi(CorreiosPostagemDadosAutenticacao credenciais, CorreiosClienteApi clienteApi) {
+		this.credenciais = credenciais;
+		this.clienteApi = clienteApi;
 	}
 
 	@Override
 	public Optional<ClienteEmpresa> buscaCliente(ClienteInformacao informacao) {
 		try {
-			ClienteERP clienteRetornadoDosCorreios = correiosWebService
+			ClienteERP clienteRetornadoDosCorreios = clienteApi
 					.getCorreiosWebService()
 					.buscaCliente(informacao.getContrato(), informacao.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
 

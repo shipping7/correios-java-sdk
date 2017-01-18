@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import br.com.correios.api.rastreio.service.CorreiosRastreioApi;
-import br.com.correios.api.rastreio.service.PacoteRastreadoDetalhes;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 public class CorreiosRastreioClientApiTest {
@@ -17,7 +15,7 @@ public class CorreiosRastreioClientApiTest {
 
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
 
-		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("DU500853237BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
+		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN560740569BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
 
 		System.out.println(pacoteTracker);
 	}
@@ -39,7 +37,7 @@ public class CorreiosRastreioClientApiTest {
 
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
 
-		List<String> trackingCodes = new ArrayList<String>();
+		List<String> trackingCodes = new ArrayList<>();
 		trackingCodes.add("DU500853237BR");
 		trackingCodes.add("DU496842125BR");
 

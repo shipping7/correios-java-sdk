@@ -7,34 +7,36 @@ public class CartaoPostagem {
 
 	private String codigoAdministrativo;
 
-	//TODO Um Contrato ja possui uma lista de CartaoPostagem, provavelmente podemos remover esse aqui
-    private List<Contrato> contratos;
+	// TODO Um Contrato ja possui uma lista de CartaoPostagem, provavelmente
+	// podemos remover esse aqui
+	private List<Contrato> contratos;
 
-    private Calendar dataAtualizacao;
+	private Calendar dataAtualizacao;
 
-    private DataVigencia dataDaVigencia;
+	private DataVigencia dataDaVigencia;
 
-    private String descricaoUnidadePostagemGenerica;
+	private String descricaoUnidadePostagemGenerica;
 
-    private String numero;
+	private String numero;
 
-    private List<ServicoCorreio> servicos;
+	private List<ServicoCorreio> servicos;
 
-    private String statusCartaoPostagem;
+	private String statusCartaoPostagem;
 
-    private Status status;
+	private Status status;
 
-    private String unidadeGenerica;
+	private String unidadeGenerica;
 
-    private List<UnidadePostagem> unidadesPostagem;
+	private List<UnidadePostagem> unidadesPostagem;
 
-    private CartaoPostagem() {}
+	private CartaoPostagem() {
+	}
 
-    public Status getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-    public String getCodigoAdministrativo() {
+	public String getCodigoAdministrativo() {
 		return codigoAdministrativo;
 	}
 
@@ -75,15 +77,15 @@ public class CartaoPostagem {
 	}
 
 	public static CartaoPostagemBuilder novoCartao() {
-    	return new CartaoPostagemBuilder();
-    }
+		return new CartaoPostagemBuilder();
+	}
 
-    public static class CartaoPostagemBuilder {
+	public static class CartaoPostagemBuilder {
 
-    	private CartaoPostagem cartao;
+		private CartaoPostagem cartao;
 
-    	public CartaoPostagemBuilder() {
-    		this.cartao = new CartaoPostagem();
+		public CartaoPostagemBuilder() {
+			this.cartao = new CartaoPostagem();
 		}
 
 		public CartaoPostagem build() {
@@ -129,6 +131,6 @@ public class CartaoPostagem {
 			this.cartao.numero = numero;
 			return this;
 		}
-    }
+	}
 
 }

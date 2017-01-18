@@ -13,18 +13,19 @@ public class CorreiosPostagemApiTest {
 
 	@Before
 	public void startUp() {
-		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "123456");
+		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "a6923l");
 	}
 
 	@Test
 	public void deveriaBuscarOClienteDosCorreiosAPartirDasInformacoesDoCadastroDoCliente() throws Exception {
-		CorreiosPostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
+		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
 
 		ClienteInformacao informacoesDeCadastro = new ClienteInformacao("9912319865", "0066253438");
 
 		Optional<ClienteEmpresa> cliente = postagemApi.buscaCliente(informacoesDeCadastro);
 
 		assertThat(cliente.isPresent()).isTrue();
+		System.out.println(cliente.get());
 	}
 
 }
