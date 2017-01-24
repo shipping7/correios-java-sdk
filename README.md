@@ -118,6 +118,8 @@ Requisição para pesquisar a situação de um determinado **Tracking Code**
 
 # Correios PLP
 
+[WSDL](https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl) usado para acesso ao sistema Sigep dos Correios
+
 ### Exemplo de consulta de SRO pelo WebService dos Correios
 
 ```xml
@@ -136,6 +138,24 @@ Requisição para pesquisar a situação de um determinado **Tracking Code**
          <!--Optional:-->
          <senhaSro>123456</senhaSro>
       </cli:consultaSRO>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+### Solicitando XML da PLP via WebService
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:solicitaXmlPlp>
+         <!--Optional:-->
+         <idPlpMaster>Id da sua PLP</idPlpMaster>
+         <!--Optional:-->
+         <usuario>Seu usuario</usuario>
+         <!--Optional:-->
+         <senha>Sua senha</senha>
+      </cli:solicitaXmlPlp>
    </soapenv:Body>
 </soapenv:Envelope>
 ```
