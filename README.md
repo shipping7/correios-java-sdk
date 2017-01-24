@@ -36,7 +36,7 @@ O código completo fica como o a seguir:
 ```java
 	@Test
 	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() throws Exception {
-		CorreiosCredentials credentials = new CorreiosCredentials("058457", "yhe8sa11");
+		CorreiosCredentials credentials = new CorreiosCredentials("seu-usuario", "sua-senha");
 		
 		CorreiosRastreioClientApi correiosApi = new CorreiosRastreioClientApi(credentials);
 
