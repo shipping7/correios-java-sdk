@@ -13,7 +13,7 @@ public class CorreiosPostagemApiTest {
 
 	@Before
 	public void startUp() {
-		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "a6923l");
+		credenciais = new CorreiosPostagemDadosAutenticacao("usuario", "senha");
 	}
 
 	@Test
@@ -25,7 +25,6 @@ public class CorreiosPostagemApiTest {
 		Optional<ClienteEmpresa> cliente = postagemApi.buscaCliente(informacoesDeCadastro);
 
 		assertThat(cliente.isPresent()).isTrue();
-		System.out.println(cliente.get());
 	}
 
 }
