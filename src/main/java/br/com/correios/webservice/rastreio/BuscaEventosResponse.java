@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for buscaEventosResponse complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="buscaEventosResponse">
  *   &lt;complexContent>
@@ -23,11 +23,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "buscaEventosResponse", propOrder = {
+@XmlType(namespace = "buscaEventosResponse", name = "buscaEventosResponse", propOrder = {
     "_return"
 })
 public class BuscaEventosResponse {
@@ -37,11 +37,11 @@ public class BuscaEventosResponse {
 
     /**
      * Gets the value of the return property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link EventosDosCorreios }
-     *     
+     *
      */
     public EventosDosCorreios getReturn() {
         return _return;
@@ -49,11 +49,11 @@ public class BuscaEventosResponse {
 
     /**
      * Sets the value of the return property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link EventosDosCorreios }
-     *     
+     *
      */
     public void setReturn(EventosDosCorreios value) {
         this._return = value;

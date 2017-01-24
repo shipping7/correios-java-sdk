@@ -7,9 +7,9 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
-import br.com.correios.api.model.Evento;
-import br.com.correios.api.model.LocalDoPacote;
-import br.com.correios.api.service.PacoteRastreadoDetalhes;
+import br.com.correios.api.rastreio.model.Evento;
+import br.com.correios.api.rastreio.model.LocalDoPacote;
+import br.com.correios.api.rastreio.service.PacoteRastreadoDetalhes;
 import br.com.correios.webservice.rastreio.Destinos;
 import br.com.correios.webservice.rastreio.Eventos;
 import br.com.correios.webservice.rastreio.EventosDosCorreios;

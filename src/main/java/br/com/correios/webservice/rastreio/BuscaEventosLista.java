@@ -3,6 +3,7 @@ package br.com.correios.webservice.rastreio;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -10,9 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for buscaEventosLista complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="buscaEventosLista">
  *   &lt;complexContent>
@@ -29,11 +30,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "buscaEventosLista", propOrder = {
+@XmlType(namespace = "buscaEventosLista", name = "buscaEventosLista", propOrder = {
     "usuario",
     "senha",
     "tipo",
@@ -52,11 +53,11 @@ public class BuscaEventosLista {
 
     /**
      * Gets the value of the usuario property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getUsuario() {
         return usuario;
@@ -64,11 +65,11 @@ public class BuscaEventosLista {
 
     /**
      * Sets the value of the usuario property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setUsuario(String value) {
         this.usuario = value;
@@ -76,11 +77,11 @@ public class BuscaEventosLista {
 
     /**
      * Gets the value of the senha property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getSenha() {
         return senha;
@@ -88,11 +89,11 @@ public class BuscaEventosLista {
 
     /**
      * Sets the value of the senha property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setSenha(String value) {
         this.senha = value;
@@ -100,11 +101,11 @@ public class BuscaEventosLista {
 
     /**
      * Gets the value of the tipo property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getTipo() {
         return tipo;
@@ -112,11 +113,11 @@ public class BuscaEventosLista {
 
     /**
      * Sets the value of the tipo property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setTipo(String value) {
         this.tipo = value;
@@ -124,11 +125,11 @@ public class BuscaEventosLista {
 
     /**
      * Gets the value of the resultado property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getResultado() {
         return resultado;
@@ -136,11 +137,11 @@ public class BuscaEventosLista {
 
     /**
      * Sets the value of the resultado property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setResultado(String value) {
         this.resultado = value;
@@ -148,11 +149,11 @@ public class BuscaEventosLista {
 
     /**
      * Gets the value of the lingua property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getLingua() {
         return lingua;
@@ -160,11 +161,11 @@ public class BuscaEventosLista {
 
     /**
      * Sets the value of the lingua property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setLingua(String value) {
         this.lingua = value;
@@ -172,29 +173,29 @@ public class BuscaEventosLista {
 
     /**
      * Gets the value of the objetos property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the objetos property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getObjetos().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
-     * 
-     * 
+     *
+     *
      */
     public List<String> getObjetos() {
         if (objetos == null) {
-            objetos = new ArrayList<String>();
+            objetos = new ArrayList<>();
         }
         return this.objetos;
     }
