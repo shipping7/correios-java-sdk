@@ -1,7 +1,7 @@
 package br.com.correios.api.postagem.converter;
 
-import static br.com.correios.api.postagem.GerenteDeConta.StatusDeAtivacao.ATIVO;
-import static br.com.correios.api.postagem.GerenteDeConta.TipoContaGerenciada.CONTA_SIMPLES;
+import static br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao.ATIVO;
+import static br.com.correios.api.postagem.gerente.GerenteDeConta.TipoContaGerenciada.CONTA_SIMPLES;
 import static br.com.correios.webservice.postagem.TipoGerente.GERENTE_CONTA;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,7 +12,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Test;
 
-import br.com.correios.api.postagem.GerenteDeConta;
+import br.com.correios.api.postagem.gerente.GerenteDeConta;
 import br.com.correios.webservice.postagem.GerenteConta;
 import br.com.correios.webservice.postagem.StatusGerente;
 

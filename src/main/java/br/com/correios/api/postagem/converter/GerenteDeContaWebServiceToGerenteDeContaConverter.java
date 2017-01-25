@@ -1,17 +1,17 @@
 package br.com.correios.api.postagem.converter;
 
-import static br.com.correios.api.postagem.GerenteDeConta.StatusDeAtivacao.ATIVO;
-import static br.com.correios.api.postagem.GerenteDeConta.StatusDeAtivacao.INATIVO;
-import static br.com.correios.api.postagem.GerenteDeConta.TipoContaGerenciada.CONTA_MASTER;
-import static br.com.correios.api.postagem.GerenteDeConta.TipoContaGerenciada.CONTA_SIMPLES;
+import static br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao.ATIVO;
+import static br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao.INATIVO;
+import static br.com.correios.api.postagem.gerente.GerenteDeConta.TipoContaGerenciada.CONTA_MASTER;
+import static br.com.correios.api.postagem.gerente.GerenteDeConta.TipoContaGerenciada.CONTA_SIMPLES;
 import static br.com.correios.webservice.postagem.TipoGerente.GERENTE_CONTA;
 import static br.com.correios.webservice.postagem.TipoGerente.GERENTE_CONTA_MASTER;
 
 import java.util.Calendar;
 
-import br.com.correios.api.postagem.GerenteDeConta;
-import br.com.correios.api.postagem.GerenteDeConta.StatusDeAtivacao;
-import br.com.correios.api.postagem.GerenteDeConta.TipoContaGerenciada;
+import br.com.correios.api.postagem.gerente.GerenteDeConta;
+import br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao;
+import br.com.correios.api.postagem.gerente.GerenteDeConta.TipoContaGerenciada;
 import br.com.correios.webservice.postagem.GerenteConta;
 import br.com.correios.webservice.postagem.StatusGerente;
 import br.com.correios.webservice.postagem.TipoGerente;

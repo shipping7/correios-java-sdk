@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import br.com.correios.api.postagem.ClienteEmpresa;
-import br.com.correios.api.postagem.Contrato;
-import br.com.correios.api.postagem.GerenteDeConta;
-import br.com.correios.api.postagem.Status;
+import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
+import br.com.correios.api.postagem.cliente.ClienteEmpresa;
+import br.com.correios.api.postagem.contrato.Contrato;
+import br.com.correios.api.postagem.gerente.GerenteDeConta;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.ContratoERP;
 import br.com.correios.webservice.postagem.GerenteConta;
@@ -42,7 +42,7 @@ public class ClienteRetornadoDosCorreiosToClienteConverter {
 			.comCnpj(clienteRetornadoDosCorreios.getCnpj())
 			.possuindoOsContratos(contratos)
 			.atualizadoNaData(dataDeAtualizacaoDoCliente)
-			.comStatus(new Status(clienteRetornadoDosCorreios.getDescricaoStatusCliente(), clienteRetornadoDosCorreios.getStatusCodigo()))
+			.comStatus(new StatusDoCartaoDaPostagem(clienteRetornadoDosCorreios.getDescricaoStatusCliente(), clienteRetornadoDosCorreios.getStatusCodigo()))
 			.pertencendoAosGerentes(gerentes)
 			.comInscricaoEstadual(clienteRetornadoDosCorreios.getInscricaoEstadual())
 			.build();

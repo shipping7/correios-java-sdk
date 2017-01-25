@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 
 import org.junit.Test;
 
+import br.com.correios.api.postagem.common.DataVigencia;
+
 public class DataVigenciaTest {
 
 	@Test

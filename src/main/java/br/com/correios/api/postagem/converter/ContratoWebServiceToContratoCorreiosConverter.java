@@ -6,11 +6,11 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import br.com.correios.api.postagem.CartaoPostagem;
-import br.com.correios.api.postagem.Contrato;
-import br.com.correios.api.postagem.ContratoDiretoria;
-import br.com.correios.api.postagem.DataVigencia;
-import br.com.correios.api.postagem.Status;
+import br.com.correios.api.postagem.cartao.CartaoPostagem;
+import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
+import br.com.correios.api.postagem.common.DataVigencia;
+import br.com.correios.api.postagem.contrato.Contrato;
+import br.com.correios.api.postagem.contrato.ContratoDiretoria;
 import br.com.correios.webservice.postagem.CartaoPostagemERP;
 import br.com.correios.webservice.postagem.ContratoERP;
 
@@ -45,7 +45,7 @@ public class ContratoWebServiceToContratoCorreiosConverter {
 				.atualizadoNaData(dataDeAtualizacao)
 				.comContratoDeDiretoria(new ContratoDiretoria(contratoWebService.getCodigoDiretoria()))
 				.comDescricaoDeDiretoriaRegional(contratoWebService.getDescricaoDiretoriaRegional())
-				.comStatus(new Status(contratoWebService.getDescricaoStatus(), contratoWebService.getStatusCodigo()))
+				.comStatus(new StatusDoCartaoDaPostagem(contratoWebService.getDescricaoStatus(), contratoWebService.getStatusCodigo()))
 				.comVigencia(vigencia)
 				.build();
 

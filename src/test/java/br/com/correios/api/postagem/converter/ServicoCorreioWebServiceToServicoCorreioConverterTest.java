@@ -9,7 +9,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Test;
 
-import br.com.correios.api.postagem.ServicoCorreio;
+import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.webservice.postagem.ServicoERP;
 import br.com.correios.webservice.postagem.VigenciaERP;
 
