@@ -15,7 +15,7 @@ public class CorreiosRastreioClientApiTest {
 
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
 
-		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN560740569BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
+		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
 
 		System.out.println(pacoteTracker);
 	}
