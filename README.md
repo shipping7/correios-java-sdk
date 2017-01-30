@@ -144,6 +144,8 @@ Requisição para pesquisar a situação de um determinado **Tracking Code**
 
 ### Solicitando XML da PLP via WebService
 
+Método utilizado: **solicitaXmlPLP**
+
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">
    <soapenv:Header/>
@@ -159,3 +161,4 @@ Requisição para pesquisar a situação de um determinado **Tracking Code**
    </soapenv:Body>
 </soapenv:Envelope>
 ```
+
