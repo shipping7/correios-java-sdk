@@ -10,6 +10,7 @@ import com.google.common.base.Optional;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
+import br.com.correios.api.postagem.plp.ObjetoPostado;
 
 public class CorreiosPostagemApiTest {
 
@@ -35,11 +36,22 @@ public class CorreiosPostagemApiTest {
 	public void deveriaBuscarOsDadosDaPlpViaPlpId() throws Exception {
 		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
 
-		Optional<DocumentoPlp> cliente = postagemApi.buscaInformacoesDaPlp(67488374L);
+		Optional<DocumentoPlp> cliente = postagemApi.buscaDocumentoPlp(67488374L);
 
 		System.out.println(cliente.get().getObjetoPostado().get(0).getNumeroEtiqueta());
 
 		assertThat(cliente.isPresent()).isTrue();
+	}
+
+	@Test
+	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlp() throws Exception {
+		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
+
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(67488374L);
+
+		Optional<ObjetoPostado> objetoPostado = plp.get().getObjetoPostadoComEtiqueta("PN578673520BR");
+
+		assertThat(objetoPostado.isPresent()).isTrue();
 	}
 
 }

@@ -7,6 +7,8 @@ public class RemetenteDaPostagem {
 	 *
 	 * Preenchimento Obrigatório. Não pode existir o caractere “-“ entre os
 	 * números.
+	 *
+	 * Tipo: Caractere(10)
 	 */
 	private String numeroDoContrato;
 
@@ -14,6 +16,8 @@ public class RemetenteDaPostagem {
 	 * Número da Diretoria Regional do contrato do cliente, conforme Anexo 05.
 	 *
 	 * Preenchimento Obrigatório.
+	 *
+	 * Tipo: Numerico(2)
 	 */
 	private int numeroDaDiretoriaRegional;
 
@@ -22,6 +26,8 @@ public class RemetenteDaPostagem {
 	 *
 	 * Preenchimento Obrigatório. Não pode existir o caractere “-“ entre os
 	 * números.
+	 *
+	 * Caractere(8)
 	 */
 	private String codigoAdministrativo;
 
@@ -29,8 +35,10 @@ public class RemetenteDaPostagem {
 	 * Nome do remetente
 	 *
 	 * Preenchimento Obrigatório.
+	 *
+	 * Tipo: Caractere(50)
 	 */
-	private String nome = "";
+	private String nome;
 
 	/**
 	 * Dados de Contato do Remetente

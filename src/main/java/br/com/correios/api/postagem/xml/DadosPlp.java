@@ -50,7 +50,7 @@ import org.eclipse.persistence.oxm.annotations.XmlNullPolicy;
     "cartaoPostagem"
 })
 @XmlRootElement(name = "plp")
-public class Plp {
+public class DadosPlp {
 
     @XmlElement(name = "id_plp", required = true)
     @XmlNullPolicy(emptyNodeRepresentsNull = true, nullRepresentationForXml = XmlMarshalNullRepresentation.EMPTY_NODE)

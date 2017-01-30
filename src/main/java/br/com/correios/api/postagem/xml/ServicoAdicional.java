@@ -80,7 +80,7 @@ public class ServicoAdicional {
      */
     public List<String> getCodigoServicoAdicional() {
         if (codigoServicoAdicional == null) {
-            codigoServicoAdicional = new ArrayList<String>();
+            codigoServicoAdicional = new ArrayList<>();
         }
         return this.codigoServicoAdicional;
     }
@@ -107,6 +107,14 @@ public class ServicoAdicional {
      */
     public void setValorDeclarado(String value) {
         this.valorDeclarado = value;
+    }
+
+    public void addCodigoServicoAdicional(String codigoAdicional) {
+    	if (this.codigoServicoAdicional == null) {
+			this.codigoServicoAdicional = new ArrayList<>();
+		}
+
+    	this.codigoServicoAdicional.add(codigoAdicional);
     }
 
 }

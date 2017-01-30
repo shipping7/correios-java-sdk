@@ -10,6 +10,6 @@ public interface PostagemApi {
 
 	Optional<ClienteEmpresa> buscaCliente(ClienteInformacao informacao);
 
-	Optional<DocumentoPlp> buscaInformacoesDaPlp(Long plpId);
+	Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId);
 
 }

@@ -13,6 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.junit.Test;
 
 import br.com.correios.api.postagem.gerente.GerenteDeConta;
+import br.com.correios.api.postagem.gerente.GerenteDeContaWebServiceToGerenteDeContaConverter;
 import br.com.correios.webservice.postagem.GerenteConta;
 import br.com.correios.webservice.postagem.StatusGerente;
 

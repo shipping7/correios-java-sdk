@@ -68,7 +68,7 @@ public class Correioslog {
 
     @XmlElement(required = true)
     @XmlNullPolicy(emptyNodeRepresentsNull = true, nullRepresentationForXml = XmlMarshalNullRepresentation.EMPTY_NODE)
-    protected Plp plp;
+    protected DadosPlp plp;
 
     @XmlElement(required = true)
     @XmlNullPolicy(emptyNodeRepresentsNull = true, nullRepresentationForXml = XmlMarshalNullRepresentation.EMPTY_NODE)
@@ -135,10 +135,10 @@ public class Correioslog {
      *
      * @return
      *     possible object is
-     *     {@link Plp }
+     *     {@link DadosPlp }
      *
      */
-    public Plp getPlp() {
+    public DadosPlp getPlp() {
         return plp;
     }
 
@@ -147,10 +147,10 @@ public class Correioslog {
      *
      * @param value
      *     allowed object is
-     *     {@link Plp }
+     *     {@link DadosPlp }
      *
      */
-    public void setPlp(Plp value) {
+    public void setPlp(DadosPlp value) {
         this.plp = value;
     }
 

@@ -6,6 +6,8 @@ public class DestinatarioDoObjeto {
 	 * Nome do destinatário
 	 *
 	 * Preenchimento Obrigatório.
+	 *
+	 * Tipo: Caractere(50)
 	 */
     private String nome;
 

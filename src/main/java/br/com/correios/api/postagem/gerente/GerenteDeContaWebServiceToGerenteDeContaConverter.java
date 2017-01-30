@@ -1,4 +1,4 @@
-package br.com.correios.api.postagem.converter;
+package br.com.correios.api.postagem.gerente;
 
 import static br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao.ATIVO;
 import static br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao.INATIVO;
@@ -9,7 +9,6 @@ import static br.com.correios.webservice.postagem.TipoGerente.GERENTE_CONTA_MAST
 
 import java.util.Calendar;
 
-import br.com.correios.api.postagem.gerente.GerenteDeConta;
 import br.com.correios.api.postagem.gerente.GerenteDeConta.StatusDeAtivacao;
 import br.com.correios.api.postagem.gerente.GerenteDeConta.TipoContaGerenciada;
 import br.com.correios.webservice.postagem.GerenteConta;

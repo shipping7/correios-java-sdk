@@ -7,7 +7,9 @@ public class DadosDeContatoDoRemetente {
 	 *
 	 * Preenchimento não obrigatório
 	 *
-	 * Não pode existir o caractere “-“ entre os números.
+	 * Não pode existir o caractere "-" entre os números.
+	 *
+	 * Tipo: Numérico (12)
 	 */
 	private String telefone;
 
@@ -16,7 +18,9 @@ public class DadosDeContatoDoRemetente {
 	 *
 	 * Preenchimento não obrigatório. 99999999999
 	 *
-	 * Não pode existir o caractere “-“ entre os números
+	 * Não pode existir o caractere "-" entre os números
+	 *
+	 * Tipo: Numérico (12)
 	 */
 	private String fax;
 
@@ -24,6 +28,8 @@ public class DadosDeContatoDoRemetente {
 	 * Email do remetente
 	 *
 	 * Preenchimento não obrigatório.
+	 *
+	 * Tipo: Caractere (50)
 	 */
 	private String email;
 

@@ -3,6 +3,8 @@ package br.com.correios.api.postagem.plp;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.google.common.base.Optional;
+
 import br.com.correios.api.postagem.remetente.RemetenteDaPostagem;
 
 public class DocumentoPlp {
@@ -14,7 +16,7 @@ public class DocumentoPlp {
 
 	private BigDecimal versaoArquivo;
 
-	private Plp plp;
+	private InformacoesPlp plp;
 
 	/**
 	 * Identifica o remetente da postagem. Esta Tag deverá aparecer somente uma vez no arquivo
@@ -34,7 +36,7 @@ public class DocumentoPlp {
 	 */
 	private List<ObjetoPostado> objetoPostado;
 
-	public DocumentoPlp(String tipoDoArquivoNosCorreios, BigDecimal versaoArquivo, Plp plp,
+	public DocumentoPlp(String tipoDoArquivoNosCorreios, BigDecimal versaoArquivo, InformacoesPlp plp,
 			RemetenteDaPostagem remetente, String formaPagamento, List<ObjetoPostado> objetoPostado) {
 		this.tipoDoArquivoNosCorreios = tipoDoArquivoNosCorreios;
 		this.versaoArquivo = versaoArquivo;
@@ -52,7 +54,7 @@ public class DocumentoPlp {
 		return versaoArquivo;
 	}
 
-	public Plp getPlp() {
+	public InformacoesPlp getPlp() {
 		return plp;
 	}
 
@@ -66,6 +68,15 @@ public class DocumentoPlp {
 
 	public List<ObjetoPostado> getObjetoPostado() {
 		return objetoPostado;
+	}
+
+	public Optional<ObjetoPostado> getObjetoPostadoComEtiqueta(String numeroDaEtiqueta) {
+		for (ObjetoPostado objeto: objetoPostado) {
+			if (objeto.getNumeroEtiqueta().equals(numeroDaEtiqueta)) {
+				return Optional.of(objeto);
+			}
+		}
+		return Optional.absent();
 	}
 
 }

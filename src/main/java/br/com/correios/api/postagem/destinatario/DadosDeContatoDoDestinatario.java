@@ -6,6 +6,8 @@ public class DadosDeContatoDoDestinatario {
      * Email do Destinatário
      *
      * Preenchimento não obrigatório.
+     *
+     * Tipo: Caractere(50)
      */
     private String email;
 
@@ -13,6 +15,8 @@ public class DadosDeContatoDoDestinatario {
      * Telefone do Destinatário
      *
      * Preenchimento não obrigatório. 99999999999 Não pode existir o caractere "-" entre os números
+     *
+     * Tipo: Numérico (12)
      */
     private String telefone;
 
@@ -20,6 +24,8 @@ public class DadosDeContatoDoDestinatario {
      * Celular do Destinatário
      *
      * Preenchimento não obrigatório. 99999999999 Não pode existir o caractere "-" entre os números
+     *
+     * Tipo: Numérico (12)
      */
     private String celular;
 

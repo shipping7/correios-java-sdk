@@ -10,12 +10,16 @@ public class ObjetoToDadosDeEntregaConverter {
 		EnderecoDeEntrega enderecoDeEntrega = null;
 		NotaFiscal notaFiscal = null;
 		if (nacional != null) {
-			enderecoDeEntrega = new EnderecoDeEntrega(nacional.getBairroDestinatario(), nacional.getCidadeDestinatario(), nacional.getUfDestinatario(), nacional.getCepDestinatario());
+			enderecoDeEntrega = new EnderecoDeEntrega(nacional.getBairroDestinatario(),
+					nacional.getCidadeDestinatario(), nacional.getUfDestinatario(), nacional.getCepDestinatario());
 
-			notaFiscal = new NotaFiscal(nacional.getNumeroNotaFiscal(), nacional.getSerieNotaFiscal(), nacional.getValorNotaFiscal(), nacional.getNaturezaNotaFiscal());
+			notaFiscal = new NotaFiscal(nacional.getNumeroNotaFiscal(), nacional.getSerieNotaFiscal(),
+					nacional.getValorNotaFiscal(), nacional.getNaturezaNotaFiscal());
 		}
 
-		DadosDeEntrega dadosDeEntrega = new DadosDeEntrega(enderecoDeEntrega, nacional.getCodigoUsuarioPostal(), nacional.getCentroCustoCliente(), notaFiscal, nacional.getDescricaoObjeto(), nacional.getValorACobrar());
+		DadosDeEntrega dadosDeEntrega = new DadosDeEntrega(enderecoDeEntrega, nacional.getCodigoUsuarioPostal(),
+				nacional.getCentroCustoCliente(), notaFiscal, nacional.getDescricaoObjeto(),
+				nacional.getValorACobrar());
 
 		return dadosDeEntrega;
 	}

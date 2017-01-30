@@ -6,6 +6,8 @@ public class NotaFiscal {
      * Número da nota fiscal. Se torna obrigatório se o serviço for Encomenda PAC – 41068
      *
      * Preenchimento Obrigatório para encomenda PAC.
+     *
+     * Tipo: Numérico(7)
      */
     private String numeroNotaFiscal;
 
@@ -13,6 +15,8 @@ public class NotaFiscal {
      * Série da nota fiscal. Se torna obrigatório se o serviço for Encomenda PAC – 41068
      *
      * Preenchimento Obrigatório para encomenda PAC.
+     *
+     * Tipo: Caractere(20)
      */
     private String serieNotaFiscal;
 
@@ -20,6 +24,9 @@ public class NotaFiscal {
      * Valor da nota fiscal
      *
      * Preenchimento não obrigatório.
+     *
+     * Numérico(9,2)
+     *
      */
     private String valorNotaFiscal;
 
@@ -27,6 +34,8 @@ public class NotaFiscal {
      * Natureza da nota fiscal
      *
      * Deverá ser enviada sem preenchimento nenhum.
+     *
+     * Tipo: Caractere(0)
      */
     private String naturezaNotaFiscal;
 

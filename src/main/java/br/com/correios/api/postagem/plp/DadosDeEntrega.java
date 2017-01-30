@@ -13,6 +13,8 @@ public class DadosDeEntrega {
      * Código do usuário postal
      *
      * Preenchimento não obrigatório.
+     *
+     * Tipo: Caractere(20)
      */
     private String codigoDoUsuarioPostal;
 
@@ -20,6 +22,8 @@ public class DadosDeEntrega {
      * Centro de custo do cliente
      *
      * Preenchimento não obrigatório.
+     *
+     * Tipo: Caractere(20)
      */
     private String centroDeCustoDoCliente;
 
@@ -32,6 +36,8 @@ public class DadosDeEntrega {
      * Descrição do objeto
      *
      * Preenchimento não obrigatório.
+     *
+     * Tipo: Caractere(20)
      */
     private String descricaoDoObjeto;
 
@@ -39,6 +45,8 @@ public class DadosDeEntrega {
      * Valor a cobrar do destinatário
      *
      * Obrigatório para o serviço na modalidade a cobrar.
+     *
+     * Tipo: Numérico(9,2)
      */
     private String valorACobrarDoDestinatario;
 

@@ -6,9 +6,9 @@ import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
-import br.com.correios.api.postagem.converter.ClienteRetornadoDosCorreiosToClienteConverter;
-import br.com.correios.api.postagem.converter.CorreiosLogToPlpDocumentoConverter;
+import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
+import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
@@ -52,7 +52,7 @@ public class CorreiosPostagemApi implements PostagemApi {
 	}
 
 	@Override
-	public Optional<DocumentoPlp> buscaInformacoesDaPlp(Long plpId) {
+	public Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId) {
 		try {
 			String xmlPlp = clienteApi
 				.getCorreiosWebService()

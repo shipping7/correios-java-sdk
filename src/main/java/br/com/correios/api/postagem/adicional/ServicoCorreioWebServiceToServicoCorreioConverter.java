@@ -1,9 +1,7 @@
-package br.com.correios.api.postagem.converter;
+package br.com.correios.api.postagem.adicional;
 
 import java.util.Calendar;
 
-import br.com.correios.api.postagem.adicional.ServicoCorreio;
-import br.com.correios.api.postagem.adicional.ServicoCorreioTipo;
 import br.com.correios.api.postagem.common.DataVigencia;
 import br.com.correios.webservice.postagem.ServicoERP;
 import br.com.correios.webservice.postagem.VigenciaERP;

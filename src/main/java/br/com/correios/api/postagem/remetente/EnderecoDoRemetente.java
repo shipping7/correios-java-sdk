@@ -6,52 +6,66 @@ public class EnderecoDoRemetente {
 	 * Logradouro do remetente. Recomendado utilizar o método buscaCEP()
 	 *
 	 * Preenchimento Obrigatório
+	 *
+	 * Tipo: Caractere(40)
 	 */
-	private String logradouro = "";
+	private String logradouro;
 
 	/**
 	 * Parte do endereço do Remetente
 	 *
 	 * Preenchimento Obrigatório
+	 *
+	 * Tipo: Caractere(5)
 	 */
-	private String numero = "";
+	private String numero;
 
 	/**
 	 * Complemento do endereço
 	 *
 	 * Preenchimento não Obrigatório
+	 *
+	 * Tipo: Caractere(20)
 	 */
-	private String complemento = "";
+	private String complemento;
 
 	/**
 	 * Bairro do remetente
 	 *
 	 * Preenchimento Obrigatório
+	 *
+	 * Tipo: Caractere(20)
 	 */
-	private String bairro = "";
+	private String bairro;
 
 	/**
 	 * Cep do Remetente
 	 *
 	 * Preenchimento Obrigatório 99999999
 	 *
-	 * Não pode existir o caractere “-“ entre os números.
+	 * Não pode existir o caractere "-" entre os números.
+	 *
+	 * Tipo: Numérico(8)
 	 */
-	private String cep = "";
+	private String cep;
 
 	/**
 	 * Estado do Remetente
 	 *
 	 * Preenchimento Obrigatório
+	 *
+	 * Tipo: Caractere(30)
 	 */
-	private String cidade = "";
+	private String cidade;
 
 	/**
 	 * Estado do Remetente
 	 *
 	 * Preenchimento Obrigatório
+	 *
+	 * Tipo: Caractere(2)
 	 */
-	private String estado = "";
+	private String estado;
 
 	public EnderecoDoRemetente(String logradouro, String numero, String complemento, String bairro, String cep,
 			String cidade, String estado) {

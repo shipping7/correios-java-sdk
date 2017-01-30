@@ -1,4 +1,4 @@
-package br.com.correios.api.postagem.converter;
+package br.com.correios.api.postagem.contrato;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,11 +6,10 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import br.com.correios.api.postagem.cartao.CartaoDePostagemWebServiceToCartaoDePostagemCorreiosConverter;
 import br.com.correios.api.postagem.cartao.CartaoPostagem;
 import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
 import br.com.correios.api.postagem.common.DataVigencia;
-import br.com.correios.api.postagem.contrato.Contrato;
-import br.com.correios.api.postagem.contrato.ContratoDiretoria;
 import br.com.correios.webservice.postagem.CartaoPostagemERP;
 import br.com.correios.webservice.postagem.ContratoERP;
 
