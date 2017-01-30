@@ -5,7 +5,7 @@ Quer um resumo simples e prático? Visite a [página oficial](http://alexandrega
 
 ## Correios Rastreio Java SDK.
 
-Este SDK foi criada para facilitar a sua vida quando precisar fazer integração com o serviço de [Rastreios de Objetos](http://www2.correios.com.br/sistemas/rastreamento/) dos Correios \o/
+Este SDK foi criada para facilitar a sua vida quando precisar fazer integração com o serviço de [Rastreios de Objetos](http://www2.correios.com.br/sistemas/rastreamento/) dos Correios através do [WSDL](https://webservice.correios.com.br/service/rastro/Rastro.wsdl) \o/
 
 O SDK é totalmente Free e Open Source! Como você deve ter notado, usamos o GitHub, então sinta-se à vontade para fazer alterações necessárias e [abrir um Pull Request](https://help.github.com/articles/using-pull-requests/) pra gente :)
 
@@ -46,7 +46,7 @@ O código completo fica como o a seguir:
 	}
 ```
 
-Note que usamos uma [Interface Fluent](https://en.wikipedia.org/wiki/Fluent_interface) que já indica pra você quais métodos devem ser invocados e nem deixa você errar! E o resto fazemos internamente pra você! Que demais né? \o/
+Note que usamos uma [Fluent Interface](https://en.wikipedia.org/wiki/Fluent_interface) que já indica pra você quais métodos devem ser invocados e nem deixa você errar! E o resto fazemos internamente pra você! Que demais né? \o/
 
 ## Buscando mais de um Objeto
 
