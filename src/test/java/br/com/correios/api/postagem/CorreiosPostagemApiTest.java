@@ -54,4 +54,14 @@ public class CorreiosPostagemApiTest {
 		assertThat(objetoPostado.isPresent()).isTrue();
 	}
 
+	@Test
+	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlp2() throws Exception {
+		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
+
+		long plpIdInextistente = 250045L;
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(plpIdInextistente);
+
+		assertThat(plp.isPresent()).isFalse();
+	}
+
 }

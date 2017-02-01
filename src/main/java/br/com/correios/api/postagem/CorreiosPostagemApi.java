@@ -2,6 +2,8 @@ package br.com.correios.api.postagem;
 
 import static java.lang.String.format;
 
+import java.util.NoSuchElementException;
+
 import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
@@ -69,6 +71,10 @@ public class CorreiosPostagemApi implements PostagemApi {
 			}
 		} catch (AutenticacaoException | SigepClienteException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: ", credenciais));
+		} catch (NoSuchElementException e) {
+			return Optional.absent();
+		} catch (Exception e) {
+			return Optional.absent();
 		}
 		return Optional.absent();
 	}
