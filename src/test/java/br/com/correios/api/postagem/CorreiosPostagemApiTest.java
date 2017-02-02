@@ -18,7 +18,7 @@ public class CorreiosPostagemApiTest {
 
 	@Before
 	public void startUp() {
-		credenciais = new CorreiosPostagemDadosAutenticacao("seu usuario", "sua senha");
+		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "a6923l");
 	}
 
 	@Test
