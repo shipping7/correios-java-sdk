@@ -2,11 +2,15 @@ package br.com.correios.api.postagem.dimensao;
 
 import static java.lang.String.format;
 
+import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
 
 import br.com.correios.api.postagem.exception.CorreiosUnsupportedTipoObjetoException;
 
 public class DimensoesDoObjeto {
+
+	private final static NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
 
 	/**
 	 * Contém o código do tipo de objeto que foi postado (embalagem)
@@ -129,22 +133,20 @@ public class DimensoesDoObjeto {
 	}
 
 	public Integer getComprimentoNumerico() throws ParseException {
-		if (this.comprimento != null && !comprimento.isEmpty()) {
-			return Integer.valueOf(comprimento);
-		}
-		return null;
+		return parseNumber(comprimento);
 	}
 
 	public Integer getAlturaNumerico() throws ParseException {
-		if (this.altura != null && !altura.isEmpty()) {
-			return Integer.valueOf(altura);
-		}
-		return null;
+		return parseNumber(altura);
 	}
 
-	public Integer getLarguraNumerico() {
-		if (this.largura != null && !largura.isEmpty()) {
-			return Integer.valueOf(largura);
+	public Integer getLarguraNumerico() throws ParseException {
+		return parseNumber(largura);
+	}
+
+	private Integer parseNumber(String number) throws ParseException {
+		if (this.comprimento != null && !comprimento.isEmpty()) {
+			return NUMBER_FORMAT.parse(number).intValue();
 		}
 		return null;
 	}
