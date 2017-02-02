@@ -1,11 +1,21 @@
 package br.com.correios.api.postagem;
 
+import static java.lang.String.format;
+
+import java.util.NoSuchElementException;
+
 import com.google.common.base.Optional;
 
-import br.com.correios.api.postagem.converter.ClienteRetornadoDosCorreiosToClienteConverter;
+import br.com.correios.api.postagem.cliente.ClienteEmpresa;
+import br.com.correios.api.postagem.cliente.ClienteInformacao;
+import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
+import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
+import br.com.correios.api.postagem.plp.DocumentoPlp;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
+import br.com.correios.api.postagem.xml.Correioslog;
+import br.com.correios.api.postagem.xml.XmlPlpParser;
 import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.SigepClienteException;
@@ -13,6 +23,7 @@ import br.com.correios.webservice.postagem.SigepClienteException;
 public class CorreiosPostagemApi implements PostagemApi {
 
 	private CorreiosPostagemDadosAutenticacao credenciais;
+
 	private CorreiosClienteApi clienteApi;
 
 	public CorreiosPostagemApi(CorreiosPostagemDadosAutenticacao credenciais) {
@@ -37,7 +48,33 @@ public class CorreiosPostagemApi implements PostagemApi {
 				return Optional.of(cliente);
 			}
 		} catch (AutenticacaoException | SigepClienteException e) {
-			throw new CorreiosPostagemAutenticacaoException(String.format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: ", credenciais));
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: ", credenciais));
+		}
+		return Optional.absent();
+	}
+
+	@Override
+	public Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId) {
+		try {
+			String xmlPlp = clienteApi
+				.getCorreiosWebService()
+				.solicitaXmlPlp(plpId, credenciais.getUsuario(), credenciais.getSenha());
+
+			boolean xmlPlpDosCorreiosEstaValido = xmlPlp != null && !xmlPlp.isEmpty();
+
+			if (xmlPlpDosCorreiosEstaValido) {
+				Optional<Correioslog> correiosPlp = new XmlPlpParser().convert(xmlPlp);
+
+				if (correiosPlp.isPresent()) {
+					return new CorreiosLogToPlpDocumentoConverter().convert(correiosPlp.get());
+				}
+			}
+		} catch (AutenticacaoException | SigepClienteException e) {
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: ", credenciais));
+		} catch (NoSuchElementException e) {
+			return Optional.absent();
+		} catch (Exception e) {
+			return Optional.absent();
 		}
 		return Optional.absent();
 	}

@@ -9,7 +9,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.junit.Test;
 
-import br.com.correios.api.postagem.ClienteEmpresa;
+import br.com.correios.api.postagem.cliente.ClienteEmpresa;
+import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.webservice.postagem.ClienteERP;
 
 public class ClienteRetornadoDosCorreiosToClienteConverterTest {
