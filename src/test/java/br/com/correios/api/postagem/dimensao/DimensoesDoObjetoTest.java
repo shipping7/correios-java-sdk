@@ -18,16 +18,16 @@ public class DimensoesDoObjetoTest {
 
 	@Test
 	public void deveriaRetornarOComprimentoComoNumero() throws Exception {
-		DimensoesDoObjeto dimensoes = new DimensoesDoObjeto(tipoDoObjeto, "24", "22", "21", 50);
+		DimensoesDoObjeto dimensoes = new DimensoesDoObjeto(tipoDoObjeto, "24", "22", "1.021,52", 50);
 
 		Integer comprimento = dimensoes.getComprimentoNumerico();
 
-		assertThat(comprimento).isEqualTo(21);
+		assertThat(comprimento).isEqualTo(1021);
 	}
 
 	@Test
 	public void deveriaRetornarAAlturaComoNumero() throws Exception {
-		DimensoesDoObjeto dimensoes = new DimensoesDoObjeto(tipoDoObjeto, "24", "22", "21", 50);
+		DimensoesDoObjeto dimensoes = new DimensoesDoObjeto(tipoDoObjeto, "24,20", "22", "21", 50);
 
 		Integer altura = dimensoes.getAlturaNumerico();
 
@@ -36,11 +36,11 @@ public class DimensoesDoObjetoTest {
 
 	@Test
 	public void deveriaRetornarALarguraComoNumero() throws Exception {
-		DimensoesDoObjeto dimensoes = new DimensoesDoObjeto(tipoDoObjeto, "24", "22", "21", 50);
+		DimensoesDoObjeto dimensoes = new DimensoesDoObjeto(tipoDoObjeto, "24", "2213,12", "21", 50);
 
 		Integer largura = dimensoes.getLarguraNumerico();
 
-		assertThat(largura).isEqualTo(22);
+		assertThat(largura).isEqualTo(2213);
 	}
 
 }
