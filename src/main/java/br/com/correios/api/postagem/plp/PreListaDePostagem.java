@@ -46,7 +46,7 @@ public class PreListaDePostagem {
 			} else if (status.equals(StatusPlp.POSTADA)) {
 				return POSTADA;
 			}
-			throw new IllegalArgumentException("O status enviado pelos Correios È inv·lido ou n„o existe");
+			throw new IllegalArgumentException("O status enviado pelos Correios √© inv√°lido ou n√£o existe");
 		}
     }
 
