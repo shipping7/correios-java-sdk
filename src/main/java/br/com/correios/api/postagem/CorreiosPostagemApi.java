@@ -2,10 +2,9 @@ package br.com.correios.api.postagem;
 
 import static java.lang.String.format;
 
-import java.util.NoSuchElementException;
-
 import com.google.common.base.Optional;
 
+import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
@@ -47,8 +46,12 @@ public class CorreiosPostagemApi implements PostagemApi {
  				ClienteEmpresa cliente = new ClienteRetornadoDosCorreiosToClienteConverter().convert(clienteRetornadoDosCorreios);
 				return Optional.of(cliente);
 			}
-		} catch (AutenticacaoException | SigepClienteException e) {
-			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: ", credenciais));
+		} catch (AutenticacaoException e) {
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
+		} catch (SigepClienteException e) {
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacao), e);
+		} catch (Exception e) {
+			return Optional.absent();
 		}
 		return Optional.absent();
 	}
@@ -69,10 +72,10 @@ public class CorreiosPostagemApi implements PostagemApi {
 					return new CorreiosLogToPlpDocumentoConverter().convert(correiosPlp.get());
 				}
 			}
-		} catch (AutenticacaoException | SigepClienteException e) {
-			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: ", credenciais));
-		} catch (NoSuchElementException e) {
-			return Optional.absent();
+		} catch (AutenticacaoException e) {
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
+		} catch (SigepClienteException e) {
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com o PLP de id %d", plpId), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}
