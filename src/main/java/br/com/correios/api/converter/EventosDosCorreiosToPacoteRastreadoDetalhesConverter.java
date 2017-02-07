@@ -5,74 +5,80 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import java.util.Calendar;
 
 import br.com.correios.api.rastreio.model.Destino;
+import br.com.correios.api.rastreio.model.DetalhesRastreio;
 import br.com.correios.api.rastreio.model.Evento;
 import br.com.correios.api.rastreio.model.LocalDoPacote;
-import br.com.correios.api.rastreio.service.PacoteRastreadoDetalhes;
+import br.com.correios.api.rastreio.model.ObjetoRastreio;
 import br.com.correios.webservice.rastreio.Destinos;
 import br.com.correios.webservice.rastreio.Eventos;
 import br.com.correios.webservice.rastreio.EventosDosCorreios;
 import br.com.correios.webservice.rastreio.Objeto;
 
+
+
 /**
  * @author Alexandre Gama
- * 
- * Classe responsavel por converter o objeto de Eventos que é retornado pelos Correios para o objeto @see PacoteRastreadoDetalhes
+ *
+ * Classe responsavel por converter o objeto de Eventos que sao retornado pelos Correios
+ *
+ * @see DetalhesRastreio
  */
-public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Converter<EventosDosCorreios, PacoteRastreadoDetalhes> {
+public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Converter<EventosDosCorreios, DetalhesRastreio> {
 
 	@Override
-	public PacoteRastreadoDetalhes convert(EventosDosCorreios eventosDoCorreios) {
-		PacoteRastreadoDetalhes pacoteRastreado = new PacoteRastreadoDetalhes();
-		pacoteRastreado.setQuantidade(Integer.valueOf(eventosDoCorreios.getQtd()));
-		pacoteRastreado.setVersao(eventosDoCorreios.getVersao());
+	public DetalhesRastreio convert(EventosDosCorreios eventosDoCorreios) {
+		DetalhesRastreio detalhesRastreio = new DetalhesRastreio();
+		detalhesRastreio.setQuantidade(Integer.valueOf(eventosDoCorreios.getQtd()));
+		detalhesRastreio.setVersao(eventosDoCorreios.getVersao());
 
 		for (Objeto objeto : eventosDoCorreios.getObjeto()) {
-			converteOsDadosDoPacote(pacoteRastreado, objeto);
+			ObjetoRastreio objetoRastreio = converteOsDadosDoPacote(objeto);
 
 			for (Eventos eventoDoCorreio : objeto.getEvento()) {
 				Evento evento = converteDadosDoLocalDoEvento(eventoDoCorreio);
+
 				for (Destinos destino : eventoDoCorreio.getDestino()) {
-					converteDestinoDoEvento(evento, destino);
+					Destino destinoDoPacote = converteDestinoDoEvento(destino);
+					evento.adicionaDestino(destinoDoPacote);
 				}
-				pacoteRastreado.adicionaEvento(evento);
+				objetoRastreio.adicionaEvento(evento);
 			}
+			detalhesRastreio.adicionaObjetoRastreio(objetoRastreio);
 		}
-		return pacoteRastreado;
+
+		return detalhesRastreio;
 	}
 
-	private void converteOsDadosDoPacote(PacoteRastreadoDetalhes pacoteRastreado, Objeto objeto) {
-		pacoteRastreado.setNumero(objeto.getNumero());
-		pacoteRastreado.setSigla(objeto.getSigla());
-		pacoteRastreado.setNome(objeto.getNome());
-		pacoteRastreado.setCategoria(objeto.getCategoria());
+	private static ObjetoRastreio converteOsDadosDoPacote(Objeto objeto) {
+		ObjetoRastreio objetoRastreio = new ObjetoRastreio();
+
+		objetoRastreio.setNumero(objeto.getNumero());
+		objetoRastreio.setSigla(objeto.getSigla());
+		objetoRastreio.setNome(objeto.getNome());
+		objetoRastreio.setCategoria(objeto.getCategoria());
+		return objetoRastreio;
 	}
 
-	private void converteDestinoDoEvento(Evento evento, Destinos destino) {
+	private static Destino converteDestinoDoEvento(Destinos destino) {
 		LocalDoPacote localDoDestino = new LocalDoPacote(destino.getLocal(), destino.getCodigo(), destino.getCidade(), destino.getBairro(), destino.getUf());
-		Destino destinoDoPacote = new Destino(localDoDestino);
-		evento.adicionaDestino(destinoDoPacote);
+		return new Destino(localDoDestino);
 	}
 
-	private Evento converteDadosDoLocalDoEvento(Eventos eventoDoCorreio) {
+	private static Evento converteDadosDoLocalDoEvento(Eventos eventoDoCorreios) {
 		Evento evento = new Evento();
-		evento.setTipo(eventoDoCorreio.getTipo());
-		evento.setStatus(eventoDoCorreio.getStatus());
-		evento.setHora(eventoDoCorreio.getHora());
-		evento.setDescricao(eventoDoCorreio.getDescricao());
+		evento.setTipo(eventoDoCorreios.getTipo());
+		evento.setStatus(eventoDoCorreios.getStatus());
+		evento.setHora(eventoDoCorreios.getHora());
+		evento.setDescricao(eventoDoCorreios.getDescricao());
 
-		if (isNotBlank(eventoDoCorreio.getData())) {
-			converteData(eventoDoCorreio, evento);
+		if (isNotBlank(eventoDoCorreios.getData())) {
+			Calendar data = FormatadorData.formataComPadraoDosCorreios(eventoDoCorreios.getData());
+			evento.setData(data);
 		}
 
-		LocalDoPacote localDoPacote = new LocalDoPacote(eventoDoCorreio.getLocal(), eventoDoCorreio.getCodigo(), eventoDoCorreio.getCidade(), null, eventoDoCorreio.getUf());
+		LocalDoPacote localDoPacote = new LocalDoPacote(eventoDoCorreios.getLocal(), eventoDoCorreios.getCodigo(), eventoDoCorreios.getCidade(), null, eventoDoCorreios.getUf());
 		evento.setLocal(localDoPacote);
 		return evento;
-	}
-
-	private void converteData(Eventos eventoDoCorreio, Evento evento) {
-		Calendar data = FormatadorData.formataComPadraoDosCorreios(eventoDoCorreio.getData());
-		
-		evento.setData(data);
 	}
 
 }

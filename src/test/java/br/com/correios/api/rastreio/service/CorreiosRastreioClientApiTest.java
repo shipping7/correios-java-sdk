@@ -3,47 +3,45 @@ package br.com.correios.api.rastreio.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import br.com.correios.api.rastreio.model.DetalhesRastreio;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 public class CorreiosRastreioClientApiTest {
 
+	private CorreiosRastreioApi correiosApi;
+
+	@Before
+	public void setup() {
+		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
+		correiosApi = new CorreiosRastreioApi(credentials);
+	}
+
 	@Test
 	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() {
-		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
-
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
-
-		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
+		DetalhesRastreio pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 
 		System.out.println(pacoteTracker);
 	}
 
 	@Test
 	public void deveriaRetornarSomenteOUltimoEventoAPartirDeUmTrackingCode() {
-		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
+		DetalhesRastreio detalhesRastreio = correiosApi.buscaPacoteRastreadoUsandoOCodigo("DU500853237BR").comRetornoEmPortugues().somenteUltimoEvento().getDetalhesRastreio();
 
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
-
-		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("DU500853237BR").comRetornoEmPortugues().somenteUltimoEvento().getPacoteRastreado();
-
-		System.out.println(pacoteTracker);
+		System.out.println(detalhesRastreio);
 	}
 
 	@Test
 	public void deveriaRetornarOsEventosAPartirDeUmaListaDeTrackingCodes() {
-		CorreiosCredenciais credentials = new CorreiosCredenciais("12345", "12345");
-
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
-
 		List<String> trackingCodes = new ArrayList<>();
 		trackingCodes.add("DU500853237BR");
 		trackingCodes.add("DU496842125BR");
 
-		List<PacoteRastreadoDetalhes> listaDeEventos = correiosApi.buscaPacoteTrackerPelaListaDeTrackings(trackingCodes).comRetornoEmPortugues().comTodosOsEventos().getListaDePacotesRastreados();
+		DetalhesRastreio detalhesRastreio = correiosApi.buscaPacotesRastreadosPelaListaDeTrackings(trackingCodes).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 
-		System.out.println(listaDeEventos);
+		System.out.println(detalhesRastreio);
 	}
 
 }
