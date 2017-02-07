@@ -8,6 +8,8 @@ import static br.com.correios.api.rastreio.model.CorreiosTipoIdentificador.LISTA
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import br.com.correios.api.exception.CorreiosCodigoRastreioInvalidoException;
 import br.com.correios.api.rastreio.model.CorreiosEscopoResultado;
 import br.com.correios.api.rastreio.model.CorreiosIdioma;
@@ -39,7 +41,7 @@ public class CorreiosRastreioApi {
 		return new CorreiosRastreioComIdioma();
 	}
 
-	public CorreiosRastreioComIdioma buscaPacoteTrackerPelaListaDeTrackings(List<String> trackingCodes) {
+	public CorreiosRastreioComIdioma buscaPacotesRastreadosPelaListaDeTrackings(List<String> trackingCodes) {
 		this.trackingCodes = trackingCodes;
 		return new CorreiosRastreioComIdioma();
 	}
@@ -82,36 +84,14 @@ public class CorreiosRastreioApi {
 
 			public class CorreiosRastreioTracker {
 
-				public DetalhesRastreio getPacoteRastreado() {
-					boolean usuarioEnviouListaDeTrackingCodes = trackingCodes != null && !trackingCodes.isEmpty();
-					if (usuarioEnviouListaDeTrackingCodes) {
-						throw new CorreiosCodigoRastreioInvalidoException("Voce deve fazer a chamada do metodo getPacoteTracker passando somente 1 tracking code e nao uma lista. Caso seja necessario uma lista, voce podera usar o metodo getListaDePacotesTracker");
+				public DetalhesRastreio getDetalhesRastreio() {
+					if (trackingCodes != null && !trackingCodes.isEmpty()) {
+						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(trackingCodes, idioma, resultado, LISTA_DE_OBJETOS);
+					} else if (StringUtils.isNotEmpty(trackingCode)) {
+						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
+					} else {
+						throw new CorreiosCodigoRastreioInvalidoException("É necessário buscar os detalhes por pelo menos um código de rastreio");
 					}
-
-					boolean trackingCodeVazio = trackingCode == null || trackingCode.isEmpty();
-					if (trackingCodeVazio) {
-						throw new CorreiosCodigoRastreioInvalidoException("O Tracking code do objeto nao pode ser vazio");
-					}
-
-					SoapCorreiosServicoRastreioApi serviceApi = new SoapCorreiosServicoRastreioApi(credentials);
-
-					return serviceApi.buscaDetalhesRastreio(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
-				}
-
-				public DetalhesRastreio getListaDePacotesRastreados() {
-					boolean listaDeTrackingCodesEstaVazia = trackingCodes == null || trackingCodes.isEmpty();
-					if (listaDeTrackingCodesEstaVazia) {
-						throw new CorreiosCodigoRastreioInvalidoException("A lista de Tracking Codes nao pode ser nula ou vazia");
-					}
-
-					boolean existeSomenteUmTrackingCode = trackingCode != null && !trackingCode.isEmpty();
-					if (existeSomenteUmTrackingCode) {
-						throw new CorreiosCodigoRastreioInvalidoException("Voce deve fazer a chamada do metodo getListaDePacotesTracker passando uma lista de tracking codes. Caso seja necessario, utilize o metodo getPacoteTracker para somente 1 tracking code");
-					}
-
-					SoapCorreiosServicoRastreioApi serviceApi = new SoapCorreiosServicoRastreioApi(credentials);
-
-					return serviceApi.buscaDetalhesRastreio(trackingCodes, idioma, resultado, LISTA_DE_OBJETOS);
 				}
 
 			}
