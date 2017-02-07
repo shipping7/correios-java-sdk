@@ -6,19 +6,20 @@ import static br.com.correios.api.rastreio.model.CorreiosIdioma.INGLES;
 import static br.com.correios.api.rastreio.model.CorreiosIdioma.PORTUGUES;
 import static br.com.correios.api.rastreio.model.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.correios.api.exception.CorreiosCodigoRastreioInvalidoException;
 import br.com.correios.api.rastreio.model.CorreiosEscopoResultado;
 import br.com.correios.api.rastreio.model.CorreiosIdioma;
+import br.com.correios.api.rastreio.model.DetalhesRastreio;
+import br.com.correios.api.rastreio.model.ObjetoRastreio;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 /**
  * @author Alexandre Gama
- * 
+ *
  * @description Classe que deve ser usada para as chamadas a API dos Correios
- * 
+ *
  * @since 0.0.1-BETA
  */
 public class CorreiosRastreioApi {
@@ -37,7 +38,7 @@ public class CorreiosRastreioApi {
 		this.trackingCode = trackingCode;
 		return new CorreiosRastreioComIdioma();
 	}
-	
+
 	public CorreiosRastreioComIdioma buscaPacoteTrackerPelaListaDeTrackings(List<String> trackingCodes) {
 		this.trackingCodes = trackingCodes;
 		return new CorreiosRastreioComIdioma();
@@ -70,8 +71,8 @@ public class CorreiosRastreioApi {
 			 * Metodo para retornar somente o ultimo evento de um Pacote Rastreado.
 			 * Note que neste caso passamos para o correios um parametro diferenciado indicando que sera retornado somente o ultimo evento
 			 * Note tambem que neste caso a lista de eventos sera preenchida com somente 1 evento.
-			 * Para retornar somente o ultimo evento do Pacote rastreado basta usar o metodo {@link PacoteRastreadoDetalhes#getUltimoEvento()}
-			 * 
+			 * Para retornar somente o ultimo evento do Pacote rastreado basta usar o metodo {@link ObjetoRastreio#getUltimoEvento()}
+			 *
 			 * @return CorreiosRastreioTracker
 			 */
 			public CorreiosRastreioTracker somenteUltimoEvento() {
@@ -81,44 +82,36 @@ public class CorreiosRastreioApi {
 
 			public class CorreiosRastreioTracker {
 
-				public PacoteRastreadoDetalhes getPacoteRastreado() {
+				public DetalhesRastreio getPacoteRastreado() {
 					boolean usuarioEnviouListaDeTrackingCodes = trackingCodes != null && !trackingCodes.isEmpty();
 					if (usuarioEnviouListaDeTrackingCodes) {
 						throw new CorreiosCodigoRastreioInvalidoException("Voce deve fazer a chamada do metodo getPacoteTracker passando somente 1 tracking code e nao uma lista. Caso seja necessario uma lista, voce podera usar o metodo getListaDePacotesTracker");
 					}
-					
+
 					boolean trackingCodeVazio = trackingCode == null || trackingCode.isEmpty();
 					if (trackingCodeVazio) {
 						throw new CorreiosCodigoRastreioInvalidoException("O Tracking code do objeto nao pode ser vazio");
 					}
-					
+
 					SoapCorreiosServicoRastreioApi serviceApi = new SoapCorreiosServicoRastreioApi(credentials);
-					
-					PacoteRastreadoDetalhes pacoteTrackerEncontrado = serviceApi.buscaPacoteRastreadoDetalhes(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
-					
-					return pacoteTrackerEncontrado;
+
+					return serviceApi.buscaDetalhesRastreio(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
 				}
-				
-				public List<PacoteRastreadoDetalhes> getListaDePacotesRastreados() {
+
+				public DetalhesRastreio getListaDePacotesRastreados() {
 					boolean listaDeTrackingCodesEstaVazia = trackingCodes == null || trackingCodes.isEmpty();
 					if (listaDeTrackingCodesEstaVazia) {
 						throw new CorreiosCodigoRastreioInvalidoException("A lista de Tracking Codes nao pode ser nula ou vazia");
 					}
-					
+
 					boolean existeSomenteUmTrackingCode = trackingCode != null && !trackingCode.isEmpty();
 					if (existeSomenteUmTrackingCode) {
 						throw new CorreiosCodigoRastreioInvalidoException("Voce deve fazer a chamada do metodo getListaDePacotesTracker passando uma lista de tracking codes. Caso seja necessario, utilize o metodo getPacoteTracker para somente 1 tracking code");
 					}
-					
+
 					SoapCorreiosServicoRastreioApi serviceApi = new SoapCorreiosServicoRastreioApi(credentials);
-					
-					List<PacoteRastreadoDetalhes> pacotesEncontrados = new ArrayList<PacoteRastreadoDetalhes>();
-					for (String trackingCode : trackingCodes) {
-						PacoteRastreadoDetalhes pacoteTrackerEncontrado = serviceApi.buscaPacoteRastreadoDetalhes(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
-						pacotesEncontrados.add(pacoteTrackerEncontrado);
-					}
-					
-					return pacotesEncontrados;
+
+					return serviceApi.buscaDetalhesRastreio(trackingCodes, idioma, resultado, LISTA_DE_OBJETOS);
 				}
 
 			}

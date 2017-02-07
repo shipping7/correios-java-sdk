@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import br.com.correios.api.rastreio.model.DetalhesRastreio;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 public class CorreiosRastreioClientApiTest {
@@ -15,7 +16,7 @@ public class CorreiosRastreioClientApiTest {
 
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
 
-		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
+		DetalhesRastreio pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getPacoteRastreado();
 
 		System.out.println(pacoteTracker);
 	}
@@ -26,9 +27,9 @@ public class CorreiosRastreioClientApiTest {
 
 		CorreiosRastreioApi correiosApi = new CorreiosRastreioApi(credentials);
 
-		PacoteRastreadoDetalhes pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("DU500853237BR").comRetornoEmPortugues().somenteUltimoEvento().getPacoteRastreado();
+		DetalhesRastreio detalhesRastreio = correiosApi.buscaPacoteRastreadoUsandoOCodigo("DU500853237BR").comRetornoEmPortugues().somenteUltimoEvento().getPacoteRastreado();
 
-		System.out.println(pacoteTracker);
+		System.out.println(detalhesRastreio);
 	}
 
 	@Test
@@ -41,9 +42,9 @@ public class CorreiosRastreioClientApiTest {
 		trackingCodes.add("DU500853237BR");
 		trackingCodes.add("DU496842125BR");
 
-		List<PacoteRastreadoDetalhes> listaDeEventos = correiosApi.buscaPacoteTrackerPelaListaDeTrackings(trackingCodes).comRetornoEmPortugues().comTodosOsEventos().getListaDePacotesRastreados();
+		DetalhesRastreio detalhesRastreio = correiosApi.buscaPacoteTrackerPelaListaDeTrackings(trackingCodes).comRetornoEmPortugues().comTodosOsEventos().getListaDePacotesRastreados();
 
-		System.out.println(listaDeEventos);
+		System.out.println(detalhesRastreio);
 	}
 
 }
