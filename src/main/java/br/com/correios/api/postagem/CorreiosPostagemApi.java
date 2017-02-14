@@ -15,22 +15,23 @@ import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.api.postagem.xml.Correioslog;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
+import br.com.correios.credentials.CorreiosCredenciais;
 import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.SigepClienteException;
 
 public class CorreiosPostagemApi implements PostagemApi {
 
-	private CorreiosPostagemDadosAutenticacao credenciais;
+	private CorreiosCredenciais credenciais;
 
 	private CorreiosClienteApi clienteApi;
 
-	public CorreiosPostagemApi(CorreiosPostagemDadosAutenticacao credenciais) {
+	public CorreiosPostagemApi(CorreiosCredenciais credenciais) {
 		this.credenciais = credenciais;
 		this.clienteApi = new CorreiosClienteWebService();
 	}
 
-	public CorreiosPostagemApi(CorreiosPostagemDadosAutenticacao credenciais, CorreiosClienteApi clienteApi) {
+	public CorreiosPostagemApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
 		this.credenciais = credenciais;
 		this.clienteApi = clienteApi;
 	}
@@ -49,7 +50,7 @@ public class CorreiosPostagemApi implements PostagemApi {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviÃ§o com as informaÃ§Ãµes de cliente %s", informacao), e);
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacao), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}
@@ -75,7 +76,7 @@ public class CorreiosPostagemApi implements PostagemApi {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviÃ§o com o PLP de id %d", plpId), e);
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com o PLP de id %d", plpId), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}
