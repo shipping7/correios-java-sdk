@@ -1,7 +1,5 @@
-apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
-apply plugin: 'net.researchgate.release'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -9,7 +7,7 @@ apply plugin: 'signing'
 compileJava.options.encoding = 'UTF-8'
 
 group = 'br.com.correios'
-archivesBaseName = 'correios-tracking-java-sdk'
+archivesBaseName = 'correios-java-sdk'
 
 buildscript {
     repositories {
@@ -48,7 +46,8 @@ repositories {
 dependencies {
     compile "org.apache.commons:commons-lang3:3.4"
     compile "com.google.guava:guava:19.0"
-	  compile "org.eclipse.persistence:org.eclipse.persistence.moxy:2.6.4"
+	compile "org.eclipse.persistence:org.eclipse.persistence.moxy:2.6.4"
+	
     testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-core:1.10.19"
     testCompile "org.assertj:assertj-core:1.0.0"
@@ -64,5 +63,3 @@ artifacts {
 
     archives sourcesJar
 }
-
-mainClassName = ''
