@@ -1,7 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/alexandregama/correios-tracking-java-sdk.png?label=ready&title=Ready)](https://waffle.io/alexandregama/correios-tracking-java-sdk)
+[![Stories in Ready](https://badge.waffle.io/alexandregama/correios-java-sdk.png?label=ready&title=Ready)](https://waffle.io/alexandregama/correios-java-sdk)
 # Correios Tracking Java SDK
 
-Quer um resumo simples e prático? Visite a [página oficial](http://alexandregama.github.io/correios-tracking-java-sdk/) do SDK :)
+Quer um resumo simples e prático? Visite a [página oficial](http://alexandregama.github.io/correios-java-sdk/) do SDK :)
 
 ## Correios Rastreio Java SDK.
 
@@ -9,7 +9,7 @@ Este SDK foi criada para facilitar a sua vida quando precisar fazer integração
 
 O SDK é totalmente Free e Open Source! Como você deve ter notado, usamos o GitHub, então sinta-se à vontade para fazer alterações necessárias e [abrir um Pull Request](https://help.github.com/articles/using-pull-requests/) pra gente :)
 
-O SDK não tem alguma funcionalidade que você deseja? Não se preocupe, basta criar uma [issue](https://github.com/alexandregama/correios-tracking-java-sdk/issues) explicando o que você gostaria e implementaremos pra você :)
+O SDK não tem alguma funcionalidade que você deseja? Não se preocupe, basta criar uma [issue](https://github.com/alexandregama/correios-java-sdk/issues) explicando o que você gostaria e implementaremos pra você :)
 
 ## Usando o SDK
 
@@ -84,7 +84,7 @@ Alexandre Gama (@alexandregama)
 
 ## Support or Contact
 
-Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-tracking-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível
+Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível
 
 # Correios Rastreio
 

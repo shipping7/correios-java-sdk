@@ -1,8 +1,5 @@
 package br.com.correios.api.postagem.xml;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.StringReader;
 
 import javax.xml.bind.JAXBContext;
@@ -44,21 +41,4 @@ public class XmlPlpParser {
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		XmlPlpParser parser = new XmlPlpParser();
-
-		BufferedReader reader = new BufferedReader(new FileReader("/Users/Developer/dev/correios-tracking-java-sdk/src/main/java/br/com/correios/api/postagem/xml/plp.xml"));
-
-		String line = "";
-		StringBuilder xml = new StringBuilder();
-		while ((line = reader.readLine()) != null) {
-			xml.append(line);
-		}
-		reader.close();
-
-		System.out.println(xml.toString());
-		Correioslog correioslog = parser.parseFrom(xml.toString());
-
-		System.out.println(correioslog.getObjetoPostal().get(0).getNumeroEtiqueta());
-	}
 }
