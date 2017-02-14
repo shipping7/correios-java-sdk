@@ -11,14 +11,15 @@ import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
 import br.com.correios.api.postagem.plp.ObjetoPostado;
+import br.com.correios.credentials.CorreiosCredenciais;
 
 public class CorreiosPostagemApiTest {
 
-	private CorreiosPostagemDadosAutenticacao credenciais;
+	private CorreiosCredenciais credenciais;
 
 	@Before
 	public void startUp() {
-		credenciais = new CorreiosPostagemDadosAutenticacao("CARLOS.CURIONI", "a6923l");
+		credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
 	}
 
 	@Test
@@ -37,8 +38,6 @@ public class CorreiosPostagemApiTest {
 		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
 
 		Optional<DocumentoPlp> cliente = postagemApi.buscaDocumentoPlp(67488374L);
-
-		System.out.println(cliente.get().getObjetoPostado().get(0).getNumeroEtiqueta());
 
 		assertThat(cliente.isPresent()).isTrue();
 	}
