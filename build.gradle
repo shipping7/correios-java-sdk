@@ -1,5 +1,5 @@
+apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'application'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 apply plugin: 'signing'
@@ -26,17 +26,6 @@ eclipse {
         downloadSources = true
     }
 }
-
-release {
-  failOnCommitNeeded = false
-  failOnPublishNeeded = true
-  failOnSnapshotDependencies = true
-  failOnUnversionedFiles = true
-  failOnUpdateNeeded = true
-  revertOnFail = true
-}
-
-afterReleaseBuild.dependsOn publish
 
 repositories {
     mavenCentral()
