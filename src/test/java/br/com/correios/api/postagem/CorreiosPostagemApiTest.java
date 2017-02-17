@@ -26,7 +26,7 @@ public class CorreiosPostagemApiTest {
 	public void deveriaBuscarOClienteDosCorreiosAPartirDasInformacoesDoCadastroDoCliente() throws Exception {
 		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
 
-		ClienteInformacao informacoesDeCadastro = new ClienteInformacao("9912319865", "0066253438");
+		ClienteInformacao informacoesDeCadastro = new ClienteInformacao("12345678", "123456");
 
 		Optional<ClienteEmpresa> cliente = postagemApi.buscaCliente(informacoesDeCadastro);
 
