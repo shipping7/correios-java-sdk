@@ -5,6 +5,10 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 import java.util.Calendar;
 import java.util.List;
 
+import com.google.common.base.Optional;
+
+import br.com.correios.api.postagem.adicional.ServicoCorreio;
+import br.com.correios.api.postagem.cartao.CartaoPostagem;
 import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
 import br.com.correios.api.postagem.contrato.Contrato;
 import br.com.correios.api.postagem.gerente.GerenteDeConta;
@@ -137,6 +141,24 @@ public class ClienteEmpresa {
 				.add("nome", this.nome)
 				.add("cnpj", this.cnpj)
 				.toString();
+	}
+
+	public Optional<Long> getServicoIdPeloCodigo(String codigoDoDestinatario) {
+		if (contratos.isEmpty()) {
+			return Optional.absent();
+		}
+		for (Contrato contrato: contratos) {
+			List<CartaoPostagem> cartoesDePostagem = contrato.getCartoesPostagem();
+			for (CartaoPostagem cartao: cartoesDePostagem) {
+				List<ServicoCorreio> servicos = cartao.getServicos();
+				for (ServicoCorreio servico: servicos) {
+					if (codigoDoDestinatario.equals(servico.getCodigo().trim())) {
+						return Optional.of(servico.getId());
+					}
+				}
+			}
+		}
+		return Optional.absent();
 	}
 
 

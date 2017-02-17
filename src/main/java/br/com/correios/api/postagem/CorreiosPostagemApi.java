@@ -2,13 +2,20 @@ package br.com.correios.api.postagem;
 
 import static java.lang.String.format;
 
+import java.util.List;
+
 import com.google.common.base.Optional;
 
 import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
+import br.com.correios.api.postagem.etiqueta.Etiqueta;
+import br.com.correios.api.postagem.etiqueta.RangeDeEtiqueta;
+import br.com.correios.api.postagem.etiqueta.TipoDestinatario;
+import br.com.correios.api.postagem.exception.CorreiosEtiquetaException;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
+import br.com.correios.api.postagem.exception.CorreiosPostagemDadosInvalidosException;
 import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
@@ -50,7 +57,7 @@ public class CorreiosPostagemApi implements PostagemApi {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacao), e);
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviï¿½o com as informaï¿½ï¿½es de cliente %s", informacao), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}
@@ -76,11 +83,36 @@ public class CorreiosPostagemApi implements PostagemApi {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com o PLP de id %d", plpId), e);
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviÃ§o com o PLP de id %d", plpId), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}
 		return Optional.absent();
+	}
+
+	@Override
+	public List<Etiqueta> solicitaEtiquetas(ClienteInformacao informacoesDeCadastro, TipoDestinatario destinatario, TipoServicoDeEntrega tipoDeEntrega, String cnpj, Integer quantidadeDesejadaDeEtiquetas) {
+		try {
+			Optional<ClienteEmpresa> clienteOptional = buscaCliente(informacoesDeCadastro);
+			if (!clienteOptional.isPresent()) {
+				throw new CorreiosPostagemDadosInvalidosException("As informacoes enviadas de Contrato e CartÃ£o de Postagem nÃ£o retornaram um cliente");
+			}
+			Optional<Long> servicoIdOptional = clienteOptional.get().getServicoIdPeloCodigo(tipoDeEntrega.getCodigoDoContrato());
+			if (!servicoIdOptional.isPresent()) {
+				throw new CorreiosPostagemDadosInvalidosException("As informacoes enviadas de Contrato e CartÃ£o de Postagem nÃ£o retornaram um servico vÃ¡lido");
+			}
+
+			String offsetDosCorreios = clienteApi
+				.getCorreiosWebService()
+				.solicitaEtiquetas(destinatario.getCodigoDoDestinatario(), cnpj, servicoIdOptional.get(), quantidadeDesejadaDeEtiquetas, credenciais.getUsuario(), credenciais.getSenha());
+
+			RangeDeEtiqueta rangeDeEtiqueta = new RangeDeEtiqueta(offsetDosCorreios);
+			List<Etiqueta> etiquetas = rangeDeEtiqueta.getEtiquetas();
+
+			return etiquetas;
+		} catch (Exception e) {
+			throw new CorreiosEtiquetaException("Ocorreu um erro ao solicitar Etiquetas para os Correios", e);
+		}
 	}
 
 }

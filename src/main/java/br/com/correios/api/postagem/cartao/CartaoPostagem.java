@@ -136,6 +136,11 @@ public class CartaoPostagem {
 			this.cartao.numero = numero;
 			return this;
 		}
+
+		public CartaoPostagemBuilder comServicos(List<ServicoCorreio> servicos) {
+			this.cartao.servicos = servicos;
+			return this;
+		}
 	}
 
 }

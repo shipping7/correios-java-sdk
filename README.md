@@ -77,15 +77,6 @@ Os Correios enviam diversas informações relacionadas ao objeto que está sendo
 
 O objeto PacoteTracker é responsável por guardar essas informações, dê uma olhadinha na documentação na Wiki ;)
 
-## Authors and Contributors
-
-Autor: 
-Alexandre Gama (@alexandregama)
-
-## Support or Contact
-
-Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível
-
 # Correios Rastreio
 
 [Link](https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/rastreamento-de-objetos/Manual_SROXML_28fev14.pdf) para o manual completo de integração com o WebService de Rastreio dos Correios
@@ -162,3 +153,66 @@ Método utilizado: **solicitaXmlPLP**
 </soapenv:Envelope>
 ```
 
+## Solicitando Etiquetas via WebService
+
+Este método retorna numeração de registro(s) dos Correios para futura postagem de objeto(s). O número de registro é o identificador do objeto no fluxo postal da ECT, sendo utilizado como chave para rastreamento, conhecido também como **Tracking Code**.
+
+Com o atendimento da solicitação, o número de registro fica reservada para o CNPJ informado. Quando da preparação do objeto para postagem, cada número poderá ser usado para geração do rótulo de postagem.
+
+O método contempla o pedido de um ou mais números, por exemplo:
+
+- Situação 1: 
+Após a finalização de um processo (Ex: Compra de um produto na loja online), obter um número do registro da encomenda a ser postada.
+
+- Situação 2: 
+Aguardar a finalização de uma lista com **N** objetos a ser postada, solicitando em seguida, uma faixa de numeração.
+
+- Situação 3: 
+
+Solicitar uma quantidade maior de etiquetas e gerenciá-la localmente de acordo com os serviços utilizados, com rotina de controle do estoque das etiquetas, consumindo a numeração deste estoque. 
+
+Recomendamos solicitar uma faixa de etiquetas conforme previsão de postagem do dia por serviço (PAC, SEDEX, etc). Dessa forma quando se esgotar o estoque de etiquetas para o serviço, efetuar nova solicitação. 
+
+Esse processo evita a dependência de solicitação on-line de etiquetas, permitindo um controle local no sistema cliente.
+
+Para cada tipo de serviço deverá ser solicitada uma faixa de numeração.
+
+Este método pode ser utilizado sob demanda, quantas vezes o cliente necessitar.
+
+#### Solicitando Etiquetas via WebService
+
+Método utilizado: **solicitaEtiquetas**
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:solicitaEtiquetas>
+         <!--Optional:-->
+         <tipoDestinatario>tipo-desejada</tipoDestinatario>
+         <!--Optional:-->
+         <identificador>seu-identificador</identificador>
+         <!--Optional:-->
+         <idServico>seu-id-do-servico</idServico>
+         <!--Optional:-->
+         <qtdEtiquetas>1</qtdEtiquetas>
+         <!--Optional:-->
+         <usuario>seu-usuario</usuario>
+         <!--Optional:-->
+         <senha>sua-senha</senha>
+      </cli:solicitaEtiquetas>
+   </soapenv:Body>
+</soapenv:Envelope>
+``
+
+## Autores
+
+Alexandre Gama ([@alexandregama](https://github.com/alexandregama))
+Adriano Saturno ([@saturno](https://github.com/saturno))
+Eric Dallo ([@ericdallo](https://github.com/ericdallo))
+Gabriel Gomes ([@ericdallo](https://github.com/ericdallo))
+Douglas Campos ([@ericdallo](https://github.com/douglascampos))
+
+## Suporte ou Contato
+
+Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível
