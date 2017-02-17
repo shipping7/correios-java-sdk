@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.google.common.base.Optional;
 
+import br.com.correios.api.etiqueta.Etiqueta;
+import br.com.correios.api.etiqueta.TipoDestinatario;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
-import br.com.correios.api.postagem.etiqueta.Etiqueta;
-import br.com.correios.api.postagem.etiqueta.TipoDestinatario;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
 
 public interface PostagemApi {

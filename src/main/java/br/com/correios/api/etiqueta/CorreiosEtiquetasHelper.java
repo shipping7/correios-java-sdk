@@ -1,4 +1,4 @@
-package br.com.correios.api.postagem.etiqueta;
+package br.com.correios.api.etiqueta;
 
 import org.apache.commons.lang3.StringUtils;
 

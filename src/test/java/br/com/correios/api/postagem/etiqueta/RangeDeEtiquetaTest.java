@@ -7,6 +7,9 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import br.com.correios.api.etiqueta.Etiqueta;
+import br.com.correios.api.etiqueta.RangeDeEtiqueta;
+
 public class RangeDeEtiquetaTest {
 
 	@Test

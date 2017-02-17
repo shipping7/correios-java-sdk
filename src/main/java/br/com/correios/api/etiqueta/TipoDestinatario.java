@@ -1,4 +1,4 @@
-package br.com.correios.api.postagem.etiqueta;
+package br.com.correios.api.etiqueta;
 
 /**
  * Identificação com a letra "C", de cliente.

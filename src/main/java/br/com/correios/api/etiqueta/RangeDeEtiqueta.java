@@ -1,6 +1,6 @@
-package br.com.correios.api.postagem.etiqueta;
+package br.com.correios.api.etiqueta;
 
-import static br.com.correios.api.postagem.etiqueta.CorreiosEtiquetasHelper.geraEtiquetaComDigitoVerificador;
+import static br.com.correios.api.etiqueta.CorreiosEtiquetasHelper.geraEtiquetaComDigitoVerificador;
 
 import java.util.ArrayList;
 import java.util.Arrays;

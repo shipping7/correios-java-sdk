@@ -6,13 +6,13 @@ import java.util.List;
 
 import com.google.common.base.Optional;
 
+import br.com.correios.api.etiqueta.Etiqueta;
+import br.com.correios.api.etiqueta.RangeDeEtiqueta;
+import br.com.correios.api.etiqueta.TipoDestinatario;
 import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteInformacao;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
-import br.com.correios.api.postagem.etiqueta.Etiqueta;
-import br.com.correios.api.postagem.etiqueta.RangeDeEtiqueta;
-import br.com.correios.api.postagem.etiqueta.TipoDestinatario;
 import br.com.correios.api.postagem.exception.CorreiosEtiquetaException;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
 import br.com.correios.api.postagem.exception.CorreiosPostagemDadosInvalidosException;
