@@ -1,12 +1,14 @@
 package br.com.correios.api.etiqueta;
 
+import static br.com.correios.api.postagem.TipoServicoDeEntrega.SEDEX_COM_CONTRATO;
+
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.correios.api.postagem.TipoServicoDeEntrega;
-import br.com.correios.api.postagem.cliente.ClienteInformacao;
+import br.com.correios.api.CorreiosApi;
+import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 public class CorreiosEtiquetaApiTest {
@@ -19,14 +21,18 @@ public class CorreiosEtiquetaApiTest {
 	}
 
 	@Test
-	public void deveriaGerarUmaEtiqueta() throws Exception {
-		EtiquetaApi postagemApi = new CorreiosEtiquetaApi(credenciais);
+	public void deveriaSolicitarEtiquetasAosCorreios() throws Exception {
+		CorreiosApi api = new CorreiosApi();
 
-		ClienteInformacao informacoesDeCadastro = new ClienteInformacao("123456", "123456");
+		String cnpj = "123456878";
+		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, "123456878", "123456878");
 
-		String cnpj = "123456789";
-		int quantidadeDesejadaDeEtiquetas = 10;
-		List<Etiqueta> etiquetas = postagemApi.solicitaEtiquetas(informacoesDeCadastro, TipoDestinatario.CLIENTE, TipoServicoDeEntrega.SEDEX_COM_CONTRATO, cnpj, quantidadeDesejadaDeEtiquetas);
+		List<Etiqueta> etiquetas = api
+				.etiquetas(credenciais)
+				.solicita()
+				.retornando(2)
+				.usandoServicoDeEntrega(SEDEX_COM_CONTRATO)
+				.comContrato(contrato);
 
 		System.out.println(etiquetas);
 	}

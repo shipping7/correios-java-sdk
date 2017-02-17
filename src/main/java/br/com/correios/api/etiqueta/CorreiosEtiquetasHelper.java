@@ -2,7 +2,7 @@ package br.com.correios.api.etiqueta;
 
 import org.apache.commons.lang3.StringUtils;
 
-import br.com.correios.api.postagem.exception.CorreiosPostagemDadosInvalidosException;
+import br.com.correios.api.postagem.exception.CorreiosEtiquetaDadosInvalidosException;
 
 public class CorreiosEtiquetasHelper {
 
@@ -27,7 +27,7 @@ public class CorreiosEtiquetasHelper {
 		int soma = 0;
 
 		if (numeroEtiqueta.length() < 12) {
-			throw new CorreiosPostagemDadosInvalidosException("Correios ticket should has size equals to 12");
+			throw new CorreiosEtiquetaDadosInvalidosException("Correios ticket should has size equals to 12");
 
 		} else if (numero.length() < 8 && numeroEtiqueta.length() == 12) {
 			String zeros = "";

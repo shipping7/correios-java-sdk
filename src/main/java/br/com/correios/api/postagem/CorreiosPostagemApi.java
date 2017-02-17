@@ -6,7 +6,7 @@ import com.google.common.base.Optional;
 
 import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
-import br.com.correios.api.postagem.cliente.ClienteInformacao;
+import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
@@ -37,7 +37,7 @@ public class CorreiosPostagemApi implements PostagemApi {
 	}
 
 	@Override
-	public Optional<ClienteEmpresa> buscaCliente(ClienteInformacao informacao) {
+	public Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa informacao) {
 		try {
 			ClienteERP clienteRetornadoDosCorreios = clienteApi
 					.getCorreiosWebService()
