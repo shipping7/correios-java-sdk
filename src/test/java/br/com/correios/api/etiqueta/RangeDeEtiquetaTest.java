@@ -1,38 +1,66 @@
 package br.com.correios.api.etiqueta;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
-
-import br.com.correios.api.etiqueta.Etiqueta;
-import br.com.correios.api.etiqueta.RangeDeEtiqueta;
 
 public class RangeDeEtiquetaTest {
 
 	@Test
-	public void deveriaRetornarAsEtiquetas() throws Exception {
-		String offsetDeEtiquetasRetornadoDosCorreios = "DW83589539 BR,DW83589542 BR";
+	public void deveriaRetornarONumeroDaPrimeiraEtiquetaDoRange() throws Exception {
+		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
 
-		RangeDeEtiqueta rangeDeEtiqueta = new RangeDeEtiqueta(offsetDeEtiquetasRetornadoDosCorreios);
+		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
 
-		List<Etiqueta> etiquetas = rangeDeEtiqueta.getEtiquetas();
+		assertThat(rangeDeEtiquetas.getNumeroDaPrimeiraEtiqueta()).isEqualTo(83589539);
+	}
 
-		assertThat(etiquetas.size()).isEqualTo(4);
+	@Test
+	public void deveriaRetornarONumeroDaUltimaEtiquetaDoRange() throws Exception {
+		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
 
-		assertThat(etiquetas.get(0).getComDigitoVerificador()).isEqualTo("DW835895394BR");
-		assertThat(etiquetas.get(0).getSemDigitoVerificador()).isEqualTo("DW83589539 BR".replaceAll(" ", StringUtils.EMPTY));
+		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
 
-		assertThat(etiquetas.get(1).getComDigitoVerificador()).isEqualTo("DW835895403BR");
-		assertThat(etiquetas.get(1).getSemDigitoVerificador()).isEqualTo("DW83589540 BR".replaceAll(" ", StringUtils.EMPTY));
+		assertThat(rangeDeEtiquetas.getNumeroDaUltimaEtiqueta()).isEqualTo(83589542);
+	}
 
-		assertThat(etiquetas.get(2).getComDigitoVerificador()).isEqualTo("DW835895417BR");
-		assertThat(etiquetas.get(2).getSemDigitoVerificador()).isEqualTo("DW83589541 BR".replaceAll(" ", StringUtils.EMPTY));
+	@Test
+	public void deveriaRetornarOPrefixoUsadoNasEtiquetasDoRange() throws Exception {
+		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
 
-		assertThat(etiquetas.get(3).getComDigitoVerificador()).isEqualTo("DW835895425BR");
-		assertThat(etiquetas.get(3).getSemDigitoVerificador()).isEqualTo("DW83589542 BR".replaceAll(" ", StringUtils.EMPTY));
+		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
+
+		assertThat(rangeDeEtiquetas.getPrefixo()).isEqualTo("DW");
+	}
+
+	@Test
+	public void deveriaRetornarOSufixoUsadoNasEtiquetasDoRange() throws Exception {
+		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
+
+		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
+
+		assertThat(rangeDeEtiquetas.getSufixo()).isEqualTo("BR");
+	}
+
+	@Test
+	public void deveriaRetornarAQuantidadeDeEtiquetasDoRange() throws Exception {
+		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
+
+		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
+
+		assertThat(rangeDeEtiquetas.getQuantidadeDeEtiquetasSolicitadas()).isEqualTo(4);
+	}
+
+	@Test
+	public void deveriaAdicionarOsAfixosEmUmaDeterminadaEtiqueta() throws Exception {
+		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
+
+		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
+
+		assertThat(rangeDeEtiquetas.adicionaAfixosPara(83589539L)).isEqualTo("DW83589539 BR");
 	}
 
 }

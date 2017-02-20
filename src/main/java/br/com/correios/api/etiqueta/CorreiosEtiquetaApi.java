@@ -74,7 +74,7 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 
 		public List<Etiqueta> comContrato(ContratoEmpresa contrato) {
 			try {
-				Optional<ClienteEmpresa> clienteOptional = buscaCliente(contrato);
+				Optional<ClienteEmpresa> clienteOptional = buscaClienteCom(contrato);
 				if (!clienteOptional.isPresent()) {
 					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um cliente dos Correios");
 				}
@@ -87,8 +87,7 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 					.getCorreiosWebService()
 					.solicitaEtiquetas(CLIENTE.getCodigoDoDestinatario(), contrato.getCnpj(), servicoIdOptional.get(), quantidade, credenciais.getUsuario(), credenciais.getSenha());
 
-				RangeDeEtiqueta rangeDeEtiqueta = new RangeDeEtiqueta(offsetDosCorreios);
-				List<Etiqueta> etiquetas = rangeDeEtiqueta.getEtiquetas();
+				List<Etiqueta> etiquetas = EtiquetaGenerator.geraEtiquetasDo(offsetDosCorreios);
 
 				return etiquetas;
 			} catch (Exception e) {
@@ -98,11 +97,12 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 
 	}
 
-	private Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa informacoesDeCadastro) {
+	private Optional<ClienteEmpresa> buscaClienteCom(ContratoEmpresa informacoesDeCadastro) {
 		CorreiosPostagemApi correiosPostagemApi = new CorreiosPostagemApi(credenciais);
 
 		Optional<ClienteEmpresa> empresa = correiosPostagemApi.buscaCliente(informacoesDeCadastro);
 
 		return empresa;
 	}
+
 }

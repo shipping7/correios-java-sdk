@@ -3,6 +3,7 @@ package br.com.correios.api.etiqueta;
 public class Etiqueta {
 
 	private String semDigitoVerificador;
+
 	private String comDigitoVerificador;
 
 	public Etiqueta(String semDigitoVerificador, String comDigitoVerificador) {

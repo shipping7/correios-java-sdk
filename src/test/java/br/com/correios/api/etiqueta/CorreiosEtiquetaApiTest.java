@@ -24,8 +24,8 @@ public class CorreiosEtiquetaApiTest {
 	public void deveriaSolicitarEtiquetasAosCorreios() throws Exception {
 		CorreiosApi api = new CorreiosApi();
 
-		String cnpj = "123456878";
-		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, "123456878", "123456878");
+		String cnpj = "123456789";
+		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, "123456789", "123456789");
 
 		List<Etiqueta> etiquetas = api
 				.etiquetas(credenciais)

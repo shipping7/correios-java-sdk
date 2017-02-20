@@ -1,49 +1,71 @@
 package br.com.correios.api.etiqueta;
 
-import static br.com.correios.api.etiqueta.CorreiosEtiquetasHelper.geraEtiquetaComDigitoVerificador;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import br.com.correios.api.postagem.exception.CorreiosEtiquetaException;
+import org.apache.commons.lang3.StringUtils;
 
 public class RangeDeEtiqueta {
 
-	private static final String SEPARADOR_DE_ETIQUETAS_DOS_CORREIOS = ",";
+	private static final String CARACTERES_DIFERENTES_DE_NUMEROS = "[^0-9]";
+	private Long numeroDaPrimeiraEtiqueta;
+	private Long numeroDaUltimaEtiqueta;
+	private String prefixo;
+	private String sufixo;
 
-	private String offset;
-
-	private EtiquetaDosCorreiosExtractor etiquetaExtractor;
-
-	public RangeDeEtiqueta(String offsetDeEtiquetasDosCorreios) {
-		this.offset = offsetDeEtiquetasDosCorreios;
-		this.etiquetaExtractor = new EtiquetaDosCorreiosExtractor();
+	RangeDeEtiqueta(Long primeiraEtiqueta, Long ultimaEtiqueta,
+			String prefixo, String sufixo) {
+				this.numeroDaPrimeiraEtiqueta = primeiraEtiqueta;
+				this.numeroDaUltimaEtiqueta = ultimaEtiqueta;
+				this.prefixo = prefixo;
+				this.sufixo = sufixo;
 	}
 
-	public List<Etiqueta> getEtiquetas() {
-		if (offset == null || offset.isEmpty()) {
-			throw new CorreiosEtiquetaException("O Range de etiquetas retornado pelos Correios não pode ser nulo ou vazio");
-		}
+	public String adicionaAfixosPara(Long numeroDaEtiqueta) {
+		String espacoObrigatorio = " ";
+		return prefixo + numeroDaEtiqueta + espacoObrigatorio + sufixo;
+	}
 
-		List<String> etiquetasSemFormatacaoDosCorreios = Arrays.asList(offset.split(SEPARADOR_DE_ETIQUETAS_DOS_CORREIOS));
+	public Long getNumeroDaPrimeiraEtiqueta() {
+		return numeroDaPrimeiraEtiqueta;
+	}
 
-		EtiquetaExtraida etiquetaExtraida = etiquetaExtractor.extraiInformacoesDas(etiquetasSemFormatacaoDosCorreios);
+	public Long getNumeroDaUltimaEtiqueta() {
+		return numeroDaUltimaEtiqueta;
+	}
 
-		Long numeroDaEtiqueta = etiquetaExtraida.getNumeroDaPrimeiraEtiqueta();
+	public Long getQuantidadeDeEtiquetasSolicitadas() {
+		return numeroDaUltimaEtiqueta - numeroDaPrimeiraEtiqueta + 1;
+	}
 
-		List<Etiqueta> etiquetas = new ArrayList<>();
-		for (int i = 0; i < etiquetaExtraida.getQuantidadeDeEtiquetasSolicitadas(); i++) {
-			String etiquetaCompleta = etiquetaExtraida.adicionaAfixosPara(numeroDaEtiqueta);
-			String semDigitoVerificador = etiquetaExtraida.removeDigitoVerificador(etiquetaCompleta);
-			String comDigitoVerificador = geraEtiquetaComDigitoVerificador(etiquetaCompleta);
+	public String getPrefixo() {
+		return prefixo;
+	}
 
-			Etiqueta etiquetaFormatada = new Etiqueta(semDigitoVerificador, comDigitoVerificador);
-			etiquetas.add(etiquetaFormatada);
+	public String getSufixo() {
+		return sufixo;
+	}
 
-			numeroDaEtiqueta++;
-		}
-		return etiquetas;
+	public String removeDigitoVerificadorDa(String etiquetaCompleta) {
+		return etiquetaCompleta.replace(" ", StringUtils.EMPTY);
+	}
+
+	public static RangeDeEtiqueta extraiInformacoesDa(List<String> listaComOffsetDeEtiquetas) {
+		Long primeiraEtiqueta = removeLetrasRetornandoValorNumerico(listaComOffsetDeEtiquetas.get(0));
+		Long ultimaEtiqueta = removeLetrasRetornandoValorNumerico(listaComOffsetDeEtiquetas.get(1));
+
+		String prefixo = listaComOffsetDeEtiquetas.get(0).substring(0, 2);
+		String sufixo = listaComOffsetDeEtiquetas.get(0).substring(10).trim();
+
+		return new RangeDeEtiqueta(primeiraEtiqueta, ultimaEtiqueta, prefixo, sufixo);
+
+	}
+
+	private static Long removeLetrasRetornandoValorNumerico(String etiqueta) {
+		return Long.valueOf(etiqueta.replaceAll(CARACTERES_DIFERENTES_DE_NUMEROS, ""));
+	}
+
+	public String retornaEtiquetaComDigitoVerificadorPara(String etiquetaCompleta) {
+		return CorreiosDigitoVerificador.adicionaDigitoPara(etiquetaCompleta);
 	}
 
 }
