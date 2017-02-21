@@ -130,8 +130,9 @@ Obs: Atualizar o README após a aprovação da história
 Alexandre Gama ([@alexandregama](https://github.com/alexandregama))
 Adriano Saturno ([@saturno](https://github.com/saturno))
 Eric Dallo ([@ericdallo](https://github.com/ericdallo))
-Gabriel Gomes ([@ericdallo](https://github.com/ericdallo))
-Douglas Campos ([@ericdallo](https://github.com/douglascampos))
+Gabriel Gomes ([@gabriellimagomes](https://github.com/gabriellimagomes))
+Denis Schimidt ([@denis-schimidt](https://github.com/denis-schimidt))
+Douglas Campos ([@douglascampos](https://github.com/douglascampos))
 
 # Suporte ou Contato
 
