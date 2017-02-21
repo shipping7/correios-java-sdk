@@ -19,15 +19,6 @@ public class RangeDeEtiquetaTest {
 	}
 
 	@Test
-	public void deveriaRetornarONumeroDaUltimaEtiquetaDoRange() throws Exception {
-		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
-
-		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
-
-		assertThat(rangeDeEtiquetas.getNumeroDaUltimaEtiqueta()).isEqualTo(83589542);
-	}
-
-	@Test
 	public void deveriaRetornarOPrefixoUsadoNasEtiquetasDoRange() throws Exception {
 		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
 
@@ -52,15 +43,6 @@ public class RangeDeEtiquetaTest {
 		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
 
 		assertThat(rangeDeEtiquetas.getQuantidadeDeEtiquetasSolicitadas()).isEqualTo(4);
-	}
-
-	@Test
-	public void deveriaAdicionarOsAfixosEmUmaDeterminadaEtiqueta() throws Exception {
-		List<String> offsetDeEtiquetas = asList("DW83589539 BR", "DW83589542 BR");
-
-		RangeDeEtiqueta rangeDeEtiquetas = RangeDeEtiqueta.extraiInformacoesDa(offsetDeEtiquetas);
-
-		assertThat(rangeDeEtiquetas.adicionaAfixosPara(83589539L)).isEqualTo("DW83589539 BR");
 	}
 
 }

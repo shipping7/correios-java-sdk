@@ -12,7 +12,7 @@ public class RangeDeEtiqueta {
 	private String prefixo;
 	private String sufixo;
 
-	RangeDeEtiqueta(Long primeiraEtiqueta, Long ultimaEtiqueta,
+	private RangeDeEtiqueta(Long primeiraEtiqueta, Long ultimaEtiqueta,
 			String prefixo, String sufixo) {
 				this.numeroDaPrimeiraEtiqueta = primeiraEtiqueta;
 				this.numeroDaUltimaEtiqueta = ultimaEtiqueta;
@@ -20,9 +20,18 @@ public class RangeDeEtiqueta {
 				this.sufixo = sufixo;
 	}
 
-	public String adicionaAfixosPara(Long numeroDaEtiqueta) {
-		String espacoObrigatorio = " ";
-		return prefixo + numeroDaEtiqueta + espacoObrigatorio + sufixo;
+	public static RangeDeEtiqueta extraiInformacoesDa(List<String> listaComOffsetDeEtiquetas) {
+		Long primeiraEtiqueta = removeLetrasRetornandoValorNumerico(listaComOffsetDeEtiquetas.get(0));
+		Long ultimaEtiqueta = removeLetrasRetornandoValorNumerico(listaComOffsetDeEtiquetas.get(1));
+
+		String prefixo = listaComOffsetDeEtiquetas.get(0).substring(0, 2);
+		String sufixo = listaComOffsetDeEtiquetas.get(0).substring(10).trim();
+
+		return new RangeDeEtiqueta(primeiraEtiqueta, ultimaEtiqueta, prefixo, sufixo);
+	}
+
+	private static Long removeLetrasRetornandoValorNumerico(String etiqueta) {
+		return Long.valueOf(etiqueta.replaceAll(CARACTERES_DIFERENTES_DE_NUMEROS, ""));
 	}
 
 	public Long getNumeroDaPrimeiraEtiqueta() {
@@ -47,25 +56,6 @@ public class RangeDeEtiqueta {
 
 	public String removeDigitoVerificadorDa(String etiquetaCompleta) {
 		return etiquetaCompleta.replace(" ", StringUtils.EMPTY);
-	}
-
-	public static RangeDeEtiqueta extraiInformacoesDa(List<String> listaComOffsetDeEtiquetas) {
-		Long primeiraEtiqueta = removeLetrasRetornandoValorNumerico(listaComOffsetDeEtiquetas.get(0));
-		Long ultimaEtiqueta = removeLetrasRetornandoValorNumerico(listaComOffsetDeEtiquetas.get(1));
-
-		String prefixo = listaComOffsetDeEtiquetas.get(0).substring(0, 2);
-		String sufixo = listaComOffsetDeEtiquetas.get(0).substring(10).trim();
-
-		return new RangeDeEtiqueta(primeiraEtiqueta, ultimaEtiqueta, prefixo, sufixo);
-
-	}
-
-	private static Long removeLetrasRetornandoValorNumerico(String etiqueta) {
-		return Long.valueOf(etiqueta.replaceAll(CARACTERES_DIFERENTES_DE_NUMEROS, ""));
-	}
-
-	public String retornaEtiquetaComDigitoVerificadorPara(String etiquetaCompleta) {
-		return CorreiosDigitoVerificador.adicionaDigitoPara(etiquetaCompleta);
 	}
 
 }

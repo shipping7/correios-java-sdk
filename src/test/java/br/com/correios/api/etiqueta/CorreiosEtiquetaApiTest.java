@@ -1,6 +1,7 @@
 package br.com.correios.api.etiqueta;
 
 import static br.com.correios.api.postagem.TipoServicoDeEntrega.SEDEX_COM_CONTRATO;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class CorreiosEtiquetaApiTest {
 				.usandoServicoDeEntrega(SEDEX_COM_CONTRATO)
 				.comContrato(contrato);
 
-		System.out.println(etiquetas);
+		assertThat(etiquetas.size()).isGreaterThan(1);
 	}
 
 }

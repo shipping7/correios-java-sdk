@@ -20,32 +20,34 @@ public class EtiquetaGeneratorTest {
 		assertThat(etiquetas.size()).isEqualTo(4);
 
 		Etiqueta primeiraEtiqueta = etiquetas.get(0);
-		assertThat(primeiraEtiqueta.getComDigitoVerificador()).isEqualTo("DW835895394BR");
-		assertThat(primeiraEtiqueta.getSemDigitoVerificador()).isEqualTo("DW83589539 BR".replaceAll(" ", StringUtils.EMPTY));
+		assertThat(primeiraEtiqueta.getNumeroDaEtiquetaComDigitoVerificador()).isEqualTo("DW835895394BR");
+		assertThat(primeiraEtiqueta.getNumeroDaEtiquetaSemDigitoVerificador()).isEqualTo("DW83589539 BR".replaceAll(" ", StringUtils.EMPTY));
 
 		Etiqueta segundaEtiqueta = etiquetas.get(1);
-		assertThat(segundaEtiqueta.getComDigitoVerificador()).isEqualTo("DW835895403BR");
-		assertThat(segundaEtiqueta.getSemDigitoVerificador()).isEqualTo("DW83589540 BR".replaceAll(" ", StringUtils.EMPTY));
+		assertThat(segundaEtiqueta.getNumeroDaEtiquetaComDigitoVerificador()).isEqualTo("DW835895403BR");
+		assertThat(segundaEtiqueta.getNumeroDaEtiquetaSemDigitoVerificador()).isEqualTo("DW83589540 BR".replaceAll(" ", StringUtils.EMPTY));
 
 		Etiqueta terceiraEtiqueta = etiquetas.get(2);
-		assertThat(terceiraEtiqueta.getComDigitoVerificador()).isEqualTo("DW835895417BR");
-		assertThat(terceiraEtiqueta.getSemDigitoVerificador()).isEqualTo("DW83589541 BR".replaceAll(" ", StringUtils.EMPTY));
+		assertThat(terceiraEtiqueta.getNumeroDaEtiquetaComDigitoVerificador()).isEqualTo("DW835895417BR");
+		assertThat(terceiraEtiqueta.getNumeroDaEtiquetaSemDigitoVerificador()).isEqualTo("DW83589541 BR".replaceAll(" ", StringUtils.EMPTY));
 
 		Etiqueta quartaEtiqueta = etiquetas.get(3);
-		assertThat(quartaEtiqueta.getComDigitoVerificador()).isEqualTo("DW835895425BR");
-		assertThat(quartaEtiqueta.getSemDigitoVerificador()).isEqualTo("DW83589542 BR".replaceAll(" ", StringUtils.EMPTY));
+		assertThat(quartaEtiqueta.getNumeroDaEtiquetaComDigitoVerificador()).isEqualTo("DW835895425BR");
+		assertThat(quartaEtiqueta.getNumeroDaEtiquetaSemDigitoVerificador()).isEqualTo("DW83589542 BR".replaceAll(" ", StringUtils.EMPTY));
 	}
 
 	@Test(expected = CorreiosEtiquetaException.class)
 	public void deveriaLancarExcecaoQuandoOffsetEstaVazio() throws Exception {
-		String offsetDeEtiquetasRetornadoDosCorreios = "";
-		EtiquetaGenerator.geraEtiquetasDo(offsetDeEtiquetasRetornadoDosCorreios);
+		String offsetVazionDeEtiquetasRetornadoDosCorreios = "";
+
+		EtiquetaGenerator.geraEtiquetasDo(offsetVazionDeEtiquetasRetornadoDosCorreios);
 	}
 
 	@Test(expected = CorreiosEtiquetaException.class)
 	public void deveriaLancarExcecaoQuandoOffsetEstaNulo() throws Exception {
-		String offsetDeEtiquetasRetornadoDosCorreios = null;
-		EtiquetaGenerator.geraEtiquetasDo(offsetDeEtiquetasRetornadoDosCorreios);
+		String offsetNuloDeEtiquetasRetornadoDosCorreios = null;
+
+		EtiquetaGenerator.geraEtiquetasDo(offsetNuloDeEtiquetasRetornadoDosCorreios);
 	}
 
 }
