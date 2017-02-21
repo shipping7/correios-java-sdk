@@ -6,8 +6,8 @@ import com.google.common.base.Optional;
 
 import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
-import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
+import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
@@ -50,7 +50,7 @@ public class CorreiosPostagemApi implements PostagemApi {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servi�o com as informa��es de cliente %s", informacao), e);
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacao), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}

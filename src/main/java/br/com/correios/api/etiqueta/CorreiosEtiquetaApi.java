@@ -8,6 +8,7 @@ import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.CorreiosPostagemApi;
 import br.com.correios.api.postagem.TipoServicoDeEntrega;
+import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.CorreiosEtiquetaDadosInvalidosException;
@@ -78,14 +79,14 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 				if (!clienteOptional.isPresent()) {
 					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um cliente dos Correios");
 				}
-				Optional<Long> servicoIdOptional = clienteOptional.get().getServicoIdPeloCodigo(servicoDeEntrega.getCodigoDoContrato());
-				if (!servicoIdOptional.isPresent()) {
+				Optional<ServicoCorreio> servicoOptional = clienteOptional.get().getServicoPeloCodigo(servicoDeEntrega.getCodigoDoContrato());
+				if (!servicoOptional.isPresent()) {
 					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um servico válido dos Correios");
 				}
 
 				String offsetDosCorreios = clienteApi
 					.getCorreiosWebService()
-					.solicitaEtiquetas(CLIENTE.getCodigoDoDestinatario(), contrato.getCnpj(), servicoIdOptional.get(), quantidade, credenciais.getUsuario(), credenciais.getSenha());
+					.solicitaEtiquetas(CLIENTE.getCodigoDoDestinatario(), contrato.getCnpj(), servicoOptional.get().getId(), quantidade, credenciais.getUsuario(), credenciais.getSenha());
 
 				List<Etiqueta> etiquetas = EtiquetaGenerator.geraEtiquetasDo(offsetDosCorreios);
 

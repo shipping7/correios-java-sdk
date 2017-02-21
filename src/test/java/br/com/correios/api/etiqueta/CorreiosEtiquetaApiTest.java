@@ -29,11 +29,10 @@ public class CorreiosEtiquetaApiTest {
 		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, "123456789", "123456789");
 
 		List<Etiqueta> etiquetas = api
-				.etiquetas(credenciais)
-				.solicita()
-				.retornando(2)
-				.usandoServicoDeEntrega(SEDEX_COM_CONTRATO)
-				.comContrato(contrato);
+			.etiquetas(credenciais)
+			.solicita()
+			.retornando(2)
+			.usandoServicoDeEntrega(SEDEX_COM_CONTRATO).comContrato(contrato);
 
 		assertThat(etiquetas.size()).isGreaterThan(1);
 	}

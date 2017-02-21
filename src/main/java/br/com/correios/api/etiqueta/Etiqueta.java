@@ -92,11 +92,11 @@ public class Etiqueta {
 		return etiquetaCompletaComDigito;
 	}
 
-	private static String calculaDigitoParaO(String retorno) {
+	private static String calculaDigitoParaO(String numeroDaEtiqueta) {
 		int[] multiplicadoresObrigatoriosDosCorreios = { 8, 6, 4, 2, 3, 5, 9, 7 };
 		int soma = 0;
 		for (int i = 0; i < 8; i++) {
-			String numero = retorno.substring(i, (i + 1));
+			String numero = numeroDaEtiqueta.substring(i, (i + 1));
 			int multiplicador = multiplicadoresObrigatoriosDosCorreios[i];
 
 			soma += valueOf(numero) * multiplicador;

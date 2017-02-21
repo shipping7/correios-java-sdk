@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.correios.api.postagem.common.DataVigencia;
+import br.com.correios.api.postagem.exception.CorreiosEtiquetaException;
 
 public class ServicoCorreio {
 
@@ -136,5 +137,13 @@ public class ServicoCorreio {
 
     }
 
+	public boolean temMesmoCodigoDoDestinatario(String codigoDoDestinatario) {
+		boolean codigoDoDestinatarioEstaInvalido = codigoDoDestinatario == null || codigoDoDestinatario.isEmpty();
+		boolean codigoEstaInvalido = codigo == null || codigo.isEmpty();
+		if (codigoDoDestinatarioEstaInvalido || codigoEstaInvalido) {
+			throw new CorreiosEtiquetaException("O código do destinatário e o código no serviço não podem ser nulos ou vazios");
+		}
+		return codigo.trim().equals(codigoDoDestinatario);
+	}
 
 }
