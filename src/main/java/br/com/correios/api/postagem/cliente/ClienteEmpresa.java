@@ -146,10 +146,10 @@ public class ClienteEmpresa {
 	@Override
 	public String toString() {
 		return toStringHelper(this)
-				.add("id", this.id)
-				.add("nome", this.nome)
-				.add("cnpj", this.cnpj)
-				.toString();
+			.add("id", this.id)
+			.add("nome", this.nome)
+			.add("cnpj", this.cnpj)
+			.toString();
 	}
 
 }

@@ -7,9 +7,7 @@ import br.com.correios.credentials.CorreiosCredenciais;
 public class CorreiosApi {
 
 	public EtiquetaApi etiquetas(CorreiosCredenciais credenciais) {
-		CorreiosEtiquetaApi etiquetaApi = new CorreiosEtiquetaApi(credenciais);
-
-		return etiquetaApi;
+		return new CorreiosEtiquetaApi(credenciais);
 	}
 
 }

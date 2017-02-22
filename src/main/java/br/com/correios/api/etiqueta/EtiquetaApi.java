@@ -4,6 +4,6 @@ import br.com.correios.api.etiqueta.CorreiosEtiquetaApi.EtiquetaBuilder;
 
 public interface EtiquetaApi {
 
-	EtiquetaBuilder solicita();
+	EtiquetaBuilder solicita(int quantidadeDeEtiquetas);
 
 }

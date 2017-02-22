@@ -30,9 +30,9 @@ public class CorreiosEtiquetaApiTest {
 
 		List<Etiqueta> etiquetas = api
 			.etiquetas(credenciais)
-			.solicita()
-			.retornando(2)
-			.usandoServicoDeEntrega(SEDEX_COM_CONTRATO).comContrato(contrato);
+			.solicita(2)
+			.usandoServicoDeEntrega(SEDEX_COM_CONTRATO)
+			.comContrato(contrato);
 
 		assertThat(etiquetas.size()).isGreaterThan(1);
 	}

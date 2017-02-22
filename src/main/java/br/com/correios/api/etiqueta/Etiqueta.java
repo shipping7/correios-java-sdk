@@ -1,5 +1,6 @@
 package br.com.correios.api.etiqueta;
 
+import static com.google.common.base.MoreObjects.toStringHelper;
 import static java.lang.Integer.valueOf;
 
 import org.apache.commons.lang3.StringUtils;
@@ -124,5 +125,17 @@ public class Etiqueta {
 
 		return numeroComZerosAEsquerda;
 	}
+
+	@Override
+	public String toString() {
+		return toStringHelper(this)
+			.add("prefixo" , prefixo)
+			.add("sufixo" , sufixo)
+			.add("numeroDaEtiqueta" , numeroDaEtiqueta)
+			.add("etiquetaCompleta" , etiquetaCompleta)
+			.toString();
+	}
+
+
 
 }

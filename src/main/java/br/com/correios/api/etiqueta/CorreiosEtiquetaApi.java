@@ -34,31 +34,20 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 	}
 
 	@Override
-	public EtiquetaBuilder solicita() {
-		return new EtiquetaBuilder();
+	public EtiquetaBuilder solicita(int quantidadeDeEtiquetas) {
+		return new EtiquetaBuilder(quantidadeDeEtiquetas);
 	}
 
 	public class EtiquetaBuilder {
 
-		private Integer quantidade;
+		private int quantidadeDeEtiquetas;
 
-		public EtiquetaBuilderComServico retornando(Integer quantideDesejadaDeEtiquetas) {
-			this.quantidade = quantideDesejadaDeEtiquetas;
-			return new EtiquetaBuilderComServico(quantidade);
-		}
-
-	}
-
-	public class EtiquetaBuilderComServico {
-
-		private Integer quantidade;
-
-		public EtiquetaBuilderComServico(Integer quantidadeDeEtiquetas) {
-			this.quantidade = quantidadeDeEtiquetas;
+		public EtiquetaBuilder(int quantidadeDeEtiquetas) {
+			this.quantidadeDeEtiquetas = quantidadeDeEtiquetas;
 		}
 
 		public EtiquetaBuilderComIdentificador usandoServicoDeEntrega(TipoServicoDeEntrega servicoDeEntrega) {
-			return new EtiquetaBuilderComIdentificador(quantidade, servicoDeEntrega);
+			return new EtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, servicoDeEntrega);
 		}
 
 	}
@@ -88,9 +77,7 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 					.getCorreiosWebService()
 					.solicitaEtiquetas(CLIENTE.getCodigoDoDestinatario(), contrato.getCnpj(), servicoOptional.get().getId(), quantidade, credenciais.getUsuario(), credenciais.getSenha());
 
-				List<Etiqueta> etiquetas = EtiquetaGenerator.geraEtiquetasDo(offsetDosCorreios);
-
-				return etiquetas;
+				return EtiquetaGenerator.geraEtiquetasDo(offsetDosCorreios);
 			} catch (Exception e) {
 				throw new CorreiosEtiquetaException("Ocorreu um erro ao solicitar Etiquetas para os Correios", e);
 			}

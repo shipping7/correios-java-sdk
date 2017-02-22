@@ -3,6 +3,7 @@ package br.com.correios.api.postagem.contrato;
 import java.util.Calendar;
 import java.util.List;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.adicional.ServicoCorreio;
@@ -149,5 +150,19 @@ public class Contrato {
 		}
 		return Optional.absent();
 	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("contratoDiretoria", this.contratoDiretoria)
+			.add("cartoesPostagem", this.cartoesPostagem)
+			.add("cliente", this.cliente)
+			.add("codigoCliente", this.codigoCliente)
+			.add("descricaoDiretoriaRegional", this.descricaoDiretoriaRegional)
+			.add("status", this.status)
+			.add("unidadeDePostagem", this.unidadeDePostagem)
+			.toString();
+	}
+
 
 }

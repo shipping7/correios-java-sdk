@@ -36,6 +36,9 @@ public class CorreiosPostagemApi implements PostagemApi {
 		this.clienteApi = clienteApi;
 	}
 
+	/**
+	 * Este método retorna os serviços disponíveis no contrato para um determinado Cartão de Postagem.
+	 */
 	@Override
 	public Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa informacao) {
 		try {

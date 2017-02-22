@@ -5,7 +5,7 @@ package br.com.correios.api.etiqueta;
  *
  * Campo obrigatório para a solicitação de Etiquetas
  */
-public enum TipoDestinatario {
+enum TipoDestinatario {
 
 	CLIENTE("C");
 

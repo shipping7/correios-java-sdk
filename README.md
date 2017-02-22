@@ -3,6 +3,8 @@
 
 Quer um resumo simples e prático? Visite a [página oficial](http://alexandregama.github.io/correios-java-sdk/) do SDK :)
 
+Se mantenha atualizado sobre as novas versões, features novas e possíveis bugs : P através do nosso Twitter [@correios_sdk](https://twitter.com/correios_sdk)
+
 ## Correios Rastreio Java SDK.
 
 Este SDK foi criada para facilitar a sua vida quando precisar fazer integração com o serviço de [Rastreios de Objetos](http://www2.correios.com.br/sistemas/rastreamento/) dos Correios através do [WSDL](https://webservice.correios.com.br/service/rastro/Rastro.wsdl) \o/
@@ -18,15 +20,15 @@ Veja como é simples usar o SDK para Rastrear um objeto nos correios em 2 passos
 1 - Com as suas credenciais em mãos, instancie o seguinte objeto:
 
 ```java
-CorreiosCredentials credentials = new CorreiosCredentials("seu-usuario", "sua-senha");
+CorreiosCredenciais credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
 ```
 
 2 - Em seguida basta invocar o método para retornar os Eventos do objeto desejado:
 
 ```java
-CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credentials);
+CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
 
-DetalhesRastreio pacoteTracker =  correiosApi
+DetalhesRastreio pacoteRastreado =  correiosApi
 	.buscaPacoteRastreadoUsandoOCodigo("codigo_do_seu_objeto")
 	.emPortugues()
 	.comTodosOsEventos()
@@ -40,11 +42,11 @@ O código completo fica como o a seguir:
 ```java
 	@Test
 	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() throws Exception {
-		CorreiosCredentials credentials = new CorreiosCredentials("seu-usuario", "sua-senha");
+		CorreiosCredenciais credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
 		
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credentials);
+		CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
 
-		DetalhesRastreio pacoteTraqueado =  correiosApi
+		DetalhesRastreio pacoteRastreado =  correiosApi
 			.buscaPacoteRastreadoUsandoOCodigo("codigo_do_seu_objeto")
 			.emPortugues()
 			.comTodosOsEventos()
@@ -63,9 +65,9 @@ Também é possível buscar mais de um Objeto através de uma **lista de Código
 ```java
 @Test
 	public void deveriaRetornarOsEventosAPartirDeUmaListaDeTrackingCodes() throws Exception {
-		CorreiosCredentials credentials = new CorreiosCredentials("username", "password");
+		CorreiosCredenciais credenciais = new CorreiosCredenciais("username", "password");
 		
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credentials);
+		CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
 		
 		List<String> trackingCodes = new ArrayList<>();
 		trackingCodes.add("DU500853237BR");
@@ -81,7 +83,7 @@ Também é possível buscar mais de um Objeto através de uma **lista de Código
 	}
 ```
 
-Note que agora temos o objeto DetalhesRastreio, que por sua vez é contém uma lista com todas as informações que você precisa! Awesome!
+Note que agora temos o objeto DetalhesRastreio, que por sua vez contém uma lista com todas as informações que você precisa! Awesome!
 
 ## Informações de Retorno
 
@@ -128,10 +130,15 @@ Obs: Atualizar o README após a aprovação da história
 # Autores
 
 Alexandre Gama ([@alexandregama](https://github.com/alexandregama))
+
 Adriano Saturno ([@saturno](https://github.com/saturno))
+
 Eric Dallo ([@ericdallo](https://github.com/ericdallo))
+
 Gabriel Gomes ([@gabriellimagomes](https://github.com/gabriellimagomes))
+
 Denis Schimidt ([@denis-schimidt](https://github.com/denis-schimidt))
+
 Douglas Campos ([@douglascampos](https://github.com/douglascampos))
 
 # Suporte ou Contato
