@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
-import br.com.correios.api.postagem.cliente.ClienteInformacao;
+import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
 import br.com.correios.api.postagem.plp.ObjetoPostado;
 import br.com.correios.credentials.CorreiosCredenciais;
@@ -26,7 +26,8 @@ public class CorreiosPostagemApiTest {
 	public void deveriaBuscarOClienteDosCorreiosAPartirDasInformacoesDoCadastroDoCliente() throws Exception {
 		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
 
-		ClienteInformacao informacoesDeCadastro = new ClienteInformacao("9912319865", "0066253438");
+		String cnpj = "123456878";
+		ContratoEmpresa informacoesDeCadastro = new ContratoEmpresa(cnpj, "123456878", "123456878");
 
 		Optional<ClienteEmpresa> cliente = postagemApi.buscaCliente(informacoesDeCadastro);
 

@@ -44,6 +44,7 @@ public class CartaoDePostagemWebServiceToCartaoDePostagemCorreiosConverter {
 			.comUnidadeGenerica(cartaoWebService.getUnidadeGenerica())
 			.comDescricaoGenericaDeUnidadeDePostagem(cartaoWebService.getDescricaoUnidadePostagemGenerica())
 			.comStatusCartaoPostagem(cartaoWebService.getStatusCartaoPostagem())
+			.comServicos(servicos)
 			.deNumero(cartaoWebService.getNumero())
 			.build();
 

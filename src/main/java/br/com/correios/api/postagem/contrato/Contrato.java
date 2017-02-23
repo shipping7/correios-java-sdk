@@ -3,6 +3,10 @@ package br.com.correios.api.postagem.contrato;
 import java.util.Calendar;
 import java.util.List;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Optional;
+
+import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.api.postagem.cartao.CartaoPostagem;
 import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
 import br.com.correios.api.postagem.common.DataVigencia;
@@ -133,5 +137,32 @@ public class Contrato {
 		}
 
     }
+
+	public Optional<ServicoCorreio> retornaServicoPelo(String codigoDoDestinatario) {
+		List<CartaoPostagem> cartoesDePostagem = getCartoesPostagem();
+		for (CartaoPostagem cartao: cartoesDePostagem) {
+			List<ServicoCorreio> servicos = cartao.getServicos();
+			for (ServicoCorreio servico: servicos) {
+				if (servico.temMesmoCodigoDoDestinatario(codigoDoDestinatario)) {
+					return Optional.of(servico);
+				}
+			}
+		}
+		return Optional.absent();
+	}
+
+	@Override
+	public String toString() {
+		return MoreObjects.toStringHelper(this)
+			.add("contratoDiretoria", this.contratoDiretoria)
+			.add("cartoesPostagem", this.cartoesPostagem)
+			.add("cliente", this.cliente)
+			.add("codigoCliente", this.codigoCliente)
+			.add("descricaoDiretoriaRegional", this.descricaoDiretoriaRegional)
+			.add("status", this.status)
+			.add("unidadeDePostagem", this.unidadeDePostagem)
+			.toString();
+	}
+
 
 }

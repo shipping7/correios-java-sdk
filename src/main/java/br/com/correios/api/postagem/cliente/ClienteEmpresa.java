@@ -5,6 +5,9 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 import java.util.Calendar;
 import java.util.List;
 
+import com.google.common.base.Optional;
+
+import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
 import br.com.correios.api.postagem.contrato.Contrato;
 import br.com.correios.api.postagem.gerente.GerenteDeConta;
@@ -130,14 +133,23 @@ public class ClienteEmpresa {
 		}
 	}
 
+	public Optional<ServicoCorreio> getServicoPeloCodigo(String codigoDoDestinatario) {
+		for (Contrato contrato: contratos) {
+			Optional<ServicoCorreio> servico = contrato.retornaServicoPelo(codigoDoDestinatario);
+			if (servico.isPresent()) {
+				return servico;
+			}
+		}
+		return Optional.absent();
+	}
+
 	@Override
 	public String toString() {
 		return toStringHelper(this)
-				.add("id", this.id)
-				.add("nome", this.nome)
-				.add("cnpj", this.cnpj)
-				.toString();
+			.add("id", this.id)
+			.add("nome", this.nome)
+			.add("cnpj", this.cnpj)
+			.toString();
 	}
-
 
 }
