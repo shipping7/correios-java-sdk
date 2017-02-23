@@ -15,6 +15,9 @@ import br.com.correios.credentials.CorreiosCredenciais;
 public class CorreiosEtiquetaApiTest {
 
 	private CorreiosCredenciais credenciais;
+	private String cnpj = "123456789";
+	private String numeroDoContrato = "321564987";
+	private String numeroDoCartaoDePostagem = "654789123";
 
 	@Before
 	public void startUp() {
@@ -25,8 +28,7 @@ public class CorreiosEtiquetaApiTest {
 	public void deveriaSolicitarEtiquetasAosCorreios() throws Exception {
 		CorreiosApi api = new CorreiosApi();
 
-		String cnpj = "123456789";
-		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, "123456789", "123456789");
+		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, numeroDoContrato, numeroDoCartaoDePostagem);
 
 		List<Etiqueta> etiquetas = api
 			.etiquetas(credenciais)
