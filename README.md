@@ -1,19 +1,23 @@
 [![Stories in Ready](https://badge.waffle.io/alexandregama/correios-java-sdk.png?label=ready&title=Ready)](https://waffle.io/alexandregama/correios-java-sdk)
-# Correios Tracking Java SDK
+# Correios Java SDK
 
 Quer um resumo simples e prático? Visite a [página oficial](http://alexandregama.github.io/correios-java-sdk/) do SDK :)
 
-Se mantenha atualizado sobre as novas versões, features novas e possíveis bugs : P através do nosso Twitter [@correios_sdk](https://twitter.com/correios_sdk)
+Se mantenha atualizado sobre as novas versões, features novas e possíveis bugs (raros : P) através do nosso Twitter [@correios_sdk](https://twitter.com/correios_sdk)
 
-## Correios Rastreio Java SDK.
+### Correios Rastreio Java SDK.
 
-Este SDK foi criada para facilitar a sua vida quando precisar fazer integração com o serviço de [Rastreios de Objetos](http://www2.correios.com.br/sistemas/rastreamento/) dos Correios através do [WSDL](https://webservice.correios.com.br/service/rastro/Rastro.wsdl) \o/
+Este SDK foi criado para facilitar a sua vida quando precisar fazer integração com os seguintes serviços dos Correios:
+
+- [Rastreios de Objetos](http://www2.correios.com.br/sistemas/rastreamento/) 
+- [Geração de Etiquetas](https://www.correios.com.br/para-sua-empresa/comercio-eletronico/sistemas-geradores-de-etiquetas-de-enderecamento)
+- [PLPs - Pré Lista de Postagem](https://elo7.zendesk.com/hc/pt-br/articles/201894124-O-que-%C3%A9-a-PLP-pr%C3%A9-lista-de-postagem-)
 
 O SDK é totalmente **Free** e **Open Source**! Como você deve ter notado, usamos o GitHub, então sinta-se à vontade para fazer alterações necessárias e [abrir um Pull Request](https://help.github.com/articles/using-pull-requests/) pra gente :)
 
 O SDK não tem alguma funcionalidade que você deseja? Não se preocupe, basta criar uma [issue](https://github.com/alexandregama/correios-java-sdk/issues) explicando o que você gostaria e implementaremos pra você :)
 
-## Usando o SDK para Rastreio
+# Rastreio de Objetos
 
 Veja como é simples usar o SDK para Rastrear um objeto nos correios em 2 passos:
 
@@ -56,9 +60,11 @@ O código completo fica como o a seguir:
 	}
 ```
 
-Note que usamos uma [Fluent Interface](https://en.wikipedia.org/wiki/Fluent_interface) que já indica pra você quais métodos devem ser invocados e nem deixa você errar! E o resto fazemos internamente pra você! Demais né? \o/
+Simples assim!
 
-## Buscando mais de um Objeto
+Note que usamos uma [Fluent Interface](https://en.wikipedia.org/wiki/Fluent_interface) que já indica pra você quais métodos devem ser invocados e nem deixa você errar!
+
+### Buscando Uma Lista de Objetos
 
 Também é possível buscar mais de um Objeto através de uma **lista de Códigos**, como é mostrado a seguir:
 
@@ -85,23 +91,23 @@ Também é possível buscar mais de um Objeto através de uma **lista de Código
 
 Note que agora temos o objeto DetalhesRastreio, que por sua vez contém uma lista com todas as informações que você precisa! Awesome!
 
-## Informações de Retorno
+### Informações de Retorno
 
 Os Correios enviam diversas informações relacionadas ao objeto que está sendo pesquisado. 
 
-O objeto DetalhesRastreio é responsável por guardar essas informações. Dê uma olhadinha na documentação na Wiki ;)
+O objeto **DetalhesRastreio** é responsável por guardar essas informações. Dê uma olhadinha na documentação na Wiki ;)
 
-# Correios - Postagem de PLP e Etiquetas
+# Etiquetas dos Correios
 
-[Link](https://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/rastreamento-de-objetos/Manual_SROXML_28fev14.pdf) para o manual completo de integração com o WebService de Rastreio dos Correios
+O **SIGEP** Web, que é o sistema dos Correios, gera etiquetas de endereçamento padronizadas, com códigos de barra para o **número de rastreamento** e para o **CEP**, facilitando a leitura ótica destas informações nas máquinas de triagem dos Correios, que realizam o roteamento automatizado das encomendas. 
 
-[WSDL](https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl) usado para acesso ao sistema Sigep dos Correios
+Você também pode inserir a logomarca de sua loja virtual nas etiquetas.
 
-## Solicitando Etiquetas dos Correios
+### Como funciona?
 
 Este método retorna numeração de registro(s) dos Correios para futura postagem de objeto(s). O número de registro é o identificador do objeto no fluxo postal da ECT, sendo utilizado como chave para rastreamento, conhecido também como **Tracking Code** ou **Código de Postagem**.
 
-Com o atendimento da solicitação, o número de registro fica reservada para o CNPJ informado. Quando da preparação do objeto para postagem, cada número poderá ser usado para geração do rótulo de postagem.
+Com o atendimento da solicitação, o número de registro fica reservada para o **CNPJ** informado. Quando da preparação do objeto para postagem, cada número poderá ser usado para geração do rótulo de postagem.
 
 O método contempla o pedido de um ou mais números, por exemplo:
 
@@ -112,8 +118,7 @@ Após a finalização de um processo (Ex: Compra de um produto na loja online
 Aguardar a finalização de uma lista com **N** objetos a ser postada, solicitando em seguida, uma faixa de numeração.
 
 - Situação 3: 
-
-Solicitar uma quantidade maior de etiquetas e gerenciá-la localmente de acordo com os serviços utilizados, com rotina de controle do estoque das etiquetas, consumindo a numeração deste estoque. 
+Solicitar uma quantidade maior de etiquetas e **gerenciá-la localmente** de acordo com os serviços utilizados, com rotina de controle do estoque das etiquetas, consumindo a numeração deste estoque. 
 
 Recomendamos solicitar uma faixa de etiquetas conforme previsão de postagem do dia por serviço (PAC, SEDEX, etc). Dessa forma quando se esgotar o estoque de etiquetas para o serviço, efetuar nova solicitação. 
 
@@ -123,9 +128,73 @@ Para cada tipo de serviço deverá ser solicitada uma faixa de numeração.
 
 Este método pode ser utilizado sob demanda, quantas vezes o cliente necessitar.
 
-## Solicitando Etiquetas usando o SDK
+### Solicitando Etiquetas usando o SDK
 
-Obs: Atualizar o README após a aprovação da história
+**Passo 1 - Criando a Credencial**
+
+Precisamos criar as credenciais para a API da seguinte forma:
+
+```java
+CorreiosCredenciais credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
+```
+
+**Passo 2 - Criando o Contrato da Empresa**
+
+Além das credenciais, você precisa ter o **número do seu contrato**, número do **cartão de postagem** e o seu cnpj:
+
+```java
+ContratoEmpresa contrato = new ContratoEmpresa(cnpj, numeroDoContrato, numeroDoCartaoDePostagem);
+```
+
+**Passo 3 - Solicitando a Etiqueta via SDK**
+
+Agora com as Credenciais e o Contrato em mãos, basta usar a classe **CorreiosApi**, solicitando:
+
+- A quantidade desejada de etiquetas
+- O serviço de entrega desejado
+
+```java
+CorreiosApi api = new CorreiosApi();
+List<Etiqueta> etiquetas = api
+	.etiquetas(credenciais)
+	.solicita(2)
+	.usandoServicoDeEntrega(SEDEX_COM_CONTRATO)
+	.comContrato(contrato);
+```
+
+O código completo de teste poderia ser o seguinte:
+
+```java
+public class CorreiosEtiquetaApiTest {
+
+	private CorreiosCredenciais credenciais;
+	private String cnpj = "123456789";
+	private String numeroDoContrato = "321564987";
+	private String numeroDoCartaoDePostagem = "654789123";
+
+	@Before
+	public void startUp() {
+		credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
+	}
+
+	@Test
+	public void deveriaSolicitarEtiquetasAosCorreios() throws Exception {
+		CorreiosApi api = new CorreiosApi();
+
+		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, numeroDoContrato, numeroDoCartaoDePostagem);
+
+		List<Etiqueta> etiquetas = api
+			.etiquetas(credenciais)
+			.solicita(2)
+			.usandoServicoDeEntrega(SEDEX_COM_CONTRATO)
+			.comContrato(contrato);
+
+		assertThat(etiquetas.size()).isGreaterThan(1);
+	}
+
+}
+```
+
 
 # Autores
 
