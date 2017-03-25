@@ -16,47 +16,50 @@ import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.credentials.CorreiosCredenciais;
 
-public class CorreiosEtiquetaApi implements EtiquetaApi {
+/**
+ * Classe que deve ser usada para as chamadas a API de etiqueta dos Correios
+ *
+ * @author Alexandre Gama
+ * @since 0.0.13-BETA
+ */
+public class CorrreiosEtiquetaApi {
 
-	private CorreiosCredenciais credenciais;
+	private final CorreiosCredenciais credenciais;
+	private final CorreiosClienteApi clienteApi;
 
-	private CorreiosClienteApi clienteApi;
-
-	public CorreiosEtiquetaApi(CorreiosCredenciais credenciais) {
-		this.credenciais = credenciais;
-		this.clienteApi = new CorreiosClienteWebService();
+	public CorrreiosEtiquetaApi(CorreiosCredenciais credenciais) {
+		this(credenciais, new CorreiosClienteWebService());
 	}
 
-	public CorreiosEtiquetaApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
+	public CorrreiosEtiquetaApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
 		this.credenciais = credenciais;
 		this.clienteApi = clienteApi;
 	}
 
-	@Override
-	public EtiquetaBuilder solicita(int quantidadeDeEtiquetas) {
-		return new EtiquetaBuilder(quantidadeDeEtiquetas);
+	public SolicitaEtiquetaBuilder solicita(int quantidadeDeEtiquetas) {
+		return new SolicitaEtiquetaBuilder(quantidadeDeEtiquetas);
 	}
 
-	public class EtiquetaBuilder {
+	public class SolicitaEtiquetaBuilder {
 
-		private int quantidadeDeEtiquetas;
+		private final int quantidadeDeEtiquetas;
 
-		public EtiquetaBuilder(int quantidadeDeEtiquetas) {
+		public SolicitaEtiquetaBuilder(int quantidadeDeEtiquetas) {
 			this.quantidadeDeEtiquetas = quantidadeDeEtiquetas;
 		}
 
-		public EtiquetaBuilderComIdentificador usandoCodigoDoServicoDeEntrega(String codigoDoServicoDeEntrega) {
-			return new EtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, codigoDoServicoDeEntrega);
+		public SolicitaEtiquetaBuilderComIdentificador usandoServicoDeEntrega(String codigoDoServicoDeEntrega) {
+			return new SolicitaEtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, codigoDoServicoDeEntrega);
 		}
 
 	}
 
-	public class EtiquetaBuilderComIdentificador {
+	public class SolicitaEtiquetaBuilderComIdentificador {
 
-		private Integer quantidade;
-		private String codigoDoServicoDeEntrega;
+		private final Integer quantidade;
+		private final String codigoDoServicoDeEntrega;
 
-		public EtiquetaBuilderComIdentificador(Integer quantidade, String codigoDoServicoDeEntrega) {
+		public SolicitaEtiquetaBuilderComIdentificador(Integer quantidade, String codigoDoServicoDeEntrega) {
 			this.quantidade = quantidade;
 			this.codigoDoServicoDeEntrega = codigoDoServicoDeEntrega;
 		}
@@ -87,9 +90,7 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 	private Optional<ClienteEmpresa> buscaClienteCom(ContratoEmpresa informacoesDeCadastro) {
 		CorreiosPostagemApi correiosPostagemApi = new CorreiosPostagemApi(credenciais);
 
-		Optional<ClienteEmpresa> empresa = correiosPostagemApi.buscaCliente(informacoesDeCadastro);
-
-		return empresa;
+		return correiosPostagemApi.buscaCliente(informacoesDeCadastro);
 	}
 
 }

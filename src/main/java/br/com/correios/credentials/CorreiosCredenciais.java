@@ -3,8 +3,9 @@ package br.com.correios.credentials;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 /**
+ * Responsavel pela autenticacao com a API dos correios.
+ * 
  * @author Alexandre Gama
- * Classe que deve ser usada para a autenticacao com a API dos correios.
  */
 public class CorreiosCredenciais {
 
@@ -13,14 +14,14 @@ public class CorreiosCredenciais {
 	 * Informado pela área comercial dos Correios na ativação do serviço.
 	 * Usuario é case sensitive
 	 */
-	private String usuario;
+	private final String usuario;
 
 	/**
 	 * Senha do cliente
 	 * Informado pela área comercial dos Correios na ativação do serviço.
 	 * Senha é case sensitive
 	 */
-	private String senha;
+	private final String senha;
 
 	public CorreiosCredenciais(String usuario, String senha) {
 		this.usuario = usuario;

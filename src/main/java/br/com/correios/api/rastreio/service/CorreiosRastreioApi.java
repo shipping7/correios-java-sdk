@@ -18,31 +18,30 @@ import br.com.correios.api.rastreio.model.ObjetoRastreio;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 /**
+ * Responsavel por chamar a API de rastreio dos Correios
+ *
  * @author Alexandre Gama
- *
- * @description Classe que deve ser usada para as chamadas a API dos Correios
- *
  * @since 0.0.1-BETA
  */
 public class CorreiosRastreioApi {
 
 	private CorreiosCredenciais credentials;
-	private String trackingCode;
 	private CorreiosIdioma idioma;
 	private CorreiosEscopoResultado resultado;
-	private List<String> trackingCodes;
+	private String codigoDeRastreio;
+	private List<String> codigosDeRastreio;
 
 	public CorreiosRastreioApi(CorreiosCredenciais credentials) {
 		this.credentials = credentials;
 	}
-
-	public CorreiosRastreioComIdioma buscaPacoteRastreadoUsandoOCodigo(String trackingCode) {
-		this.trackingCode = trackingCode;
+	
+	public CorreiosRastreioComIdioma buscaPacoteRastreadoUsandoOCodigo(String codigoDeRastreio) {
+		this.codigoDeRastreio = codigoDeRastreio;
 		return new CorreiosRastreioComIdioma();
 	}
-
-	public CorreiosRastreioComIdioma buscaPacotesRastreadosPelaListaDeTrackings(List<String> trackingCodes) {
-		this.trackingCodes = trackingCodes;
+	
+	public CorreiosRastreioComIdioma buscaPacotesRastreadosPelaListaDeTrackings(List<String> codigosDeRastreio) {
+		this.codigosDeRastreio = codigosDeRastreio;
 		return new CorreiosRastreioComIdioma();
 	}
 
@@ -61,34 +60,33 @@ public class CorreiosRastreioApi {
 		public class CorreiosRastreioComTipoDeIdentificador {
 
 			/**
-			 * Metodo para retornar todos os eventos associados a um Pacote Rastreado.
-			 * @return CorreiosRastreioTracker
+			 * @return todos os eventos associados a um Pacote rastreado.
 			 */
-			public CorreiosRastreioTracker comTodosOsEventos() {
+			public CorreiosRastreioComEventos comTodosOsEventos() {
 				resultado = TODOS_OS_EVENTOS;
-				return new CorreiosRastreioTracker();
+				return new CorreiosRastreioComEventos();
 			}
 
 			/**
-			 * Metodo para retornar somente o ultimo evento de um Pacote Rastreado.
-			 * Note que neste caso passamos para o correios um parametro diferenciado indicando que sera retornado somente o ultimo evento
+			 * Neste caso passamos para o correios um parametro diferenciado indicando que sera retornado somente o ultimo evento
 			 * Note tambem que neste caso a lista de eventos sera preenchida com somente 1 evento.
 			 * Para retornar somente o ultimo evento do Pacote rastreado basta usar o metodo {@link ObjetoRastreio#getUltimoEvento()}
 			 *
-			 * @return CorreiosRastreioTracker
+			 * @see {@link ObjetoRastreio#getUltimoEvento()}
+			 * @return somente o ultimo evento de um Pacote Rastreado.
 			 */
-			public CorreiosRastreioTracker somenteUltimoEvento() {
+			public CorreiosRastreioComEventos somenteUltimoEvento() {
 				resultado = ULTIMO_EVENTO;
-				return new CorreiosRastreioTracker();
+				return new CorreiosRastreioComEventos();
 			}
 
-			public class CorreiosRastreioTracker {
+			public class CorreiosRastreioComEventos {
 
 				public DetalhesRastreio getDetalhesRastreio() {
-					if (trackingCodes != null && !trackingCodes.isEmpty()) {
-						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(trackingCodes, idioma, resultado, LISTA_DE_OBJETOS);
-					} else if (StringUtils.isNotEmpty(trackingCode)) {
-						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(trackingCode, idioma, resultado, LISTA_DE_OBJETOS);
+					if (codigosDeRastreio != null && !codigosDeRastreio.isEmpty()) {
+						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(codigosDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
+					} else if (StringUtils.isNotEmpty(codigoDeRastreio)) {
+						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(codigoDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
 					} else {
 						throw new CorreiosCodigoRastreioInvalidoException("É necessário buscar os detalhes por pelo menos um código de rastreio");
 					}
