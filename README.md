@@ -2,7 +2,7 @@
 <img align="right"  src="https://raw.githubusercontent.com/shipping7/correios-java-sdk/images/correios-java-sdk-logo.png?raw=true" width="120" height="120"/>
 # Correios Java SDK
 
-Quer um resumo simples e prático? Visite a [página oficial](http://alexandregama.github.io/correios-java-sdk/) do SDK :)
+Quer um resumo simples e prático? Visite a [página oficial](http://shipping7.github.io/correios-java-sdk/) do SDK :)
 
 Se mantenha atualizado sobre as novas versões, features novas e possíveis bugs (raros : P) através do nosso Twitter [@correios_sdk](https://twitter.com/correios_sdk)
 
