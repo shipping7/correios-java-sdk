@@ -1,4 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/alexandregama/correios-java-sdk.png?label=ready&title=Ready)](https://waffle.io/alexandregama/correios-java-sdk)
+<img align="right"  src="https://raw.githubusercontent.com/shipping7/correios-java-sdk/images/correios-java-sdk-logo.png?raw=true" width="120" height="120"/>
 # Correios Java SDK
 
 Quer um resumo simples e prático? Visite a [página oficial](http://alexandregama.github.io/correios-java-sdk/) do SDK :)
