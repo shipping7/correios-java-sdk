@@ -138,7 +138,7 @@ public class Contrato {
 
     }
 
-	public Optional<ServicoCorreio> retornaServicoPelo(String codigoDoDestinatario) {
+	public Optional<ServicoCorreio> retornaServicoPelo(Integer codigoDoDestinatario) {
 		List<CartaoPostagem> cartoesDePostagem = getCartoesPostagem();
 		for (CartaoPostagem cartao: cartoesDePostagem) {
 			List<ServicoCorreio> servicos = cartao.getServicos();

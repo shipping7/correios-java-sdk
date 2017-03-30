@@ -42,7 +42,7 @@ public class ClienteEmpresaTest {
 			.possuindoOsContratos(asList(contrato))
 			.build();
 
-		Long servicoId = empresa.getServicoPeloCodigo("123").get().getId();
+		Long servicoId = empresa.getServicoPeloCodigo(123).get().getId();
 
 		assertThat(servicoId).isEqualTo(1);
 	}
@@ -75,7 +75,7 @@ public class ClienteEmpresaTest {
 			.possuindoOsContratos(asList(contrato))
 			.build();
 
-		Optional<ServicoCorreio> servicoid = empresa.getServicoPeloCodigo("999");
+		Optional<ServicoCorreio> servicoid = empresa.getServicoPeloCodigo(999);
 
 		assertThat(servicoid.isPresent()).isFalse();
 	}
