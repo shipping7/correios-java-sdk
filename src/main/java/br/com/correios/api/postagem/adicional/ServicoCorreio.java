@@ -137,13 +137,13 @@ public class ServicoCorreio {
 
     }
 
-	public boolean temMesmoCodigoDoDestinatario(Integer codigoDoDestinatario) {
-		boolean codigoDoDestinatarioEstaInvalido = codigoDoDestinatario == null;
+	public boolean temMesmoCodigoDoDestinatario(String codigoDoDestinatario) {
+		boolean codigoDoDestinatarioEstaInvalido = codigoDoDestinatario == null || codigoDoDestinatario.isEmpty();
 		boolean codigoEstaInvalido = codigo == null || codigo.isEmpty();
 		if (codigoDoDestinatarioEstaInvalido || codigoEstaInvalido) {
 			throw new CorreiosEtiquetaException("O código do destinatário e o código no serviço não podem ser nulos ou vazios");
 		}
-		return codigo.trim().equals(codigoDoDestinatario.toString());
+		return codigo.trim().equals(codigoDoDestinatario);
 	}
 
 }

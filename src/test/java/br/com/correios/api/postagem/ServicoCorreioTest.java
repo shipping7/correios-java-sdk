@@ -15,7 +15,7 @@ public class ServicoCorreioTest {
 			.comCodigo("123456")
 			.build();
 
-		boolean codigoIgual = servicoCorreio.temMesmoCodigoDoDestinatario(123456);
+		boolean codigoIgual = servicoCorreio.temMesmoCodigoDoDestinatario("123456");
 
 		assertThat(codigoIgual).isTrue();
 	}
@@ -27,7 +27,7 @@ public class ServicoCorreioTest {
 			.comCodigo("123456 ")
 			.build();
 
-		boolean codigoIgual = servicoCorreio.temMesmoCodigoDoDestinatario(123456);
+		boolean codigoIgual = servicoCorreio.temMesmoCodigoDoDestinatario("123456");
 
 		assertThat(codigoIgual).isTrue();
 	}
@@ -39,7 +39,7 @@ public class ServicoCorreioTest {
 			.comCodigo("654321")
 			.build();
 
-		boolean codigoIgual = servicoCorreio.temMesmoCodigoDoDestinatario(123456);
+		boolean codigoIgual = servicoCorreio.temMesmoCodigoDoDestinatario("123456");
 
 		assertThat(codigoIgual).isFalse();
 	}

@@ -17,7 +17,7 @@ public class CorreiosEtiquetaApiTest {
 	private String cnpj = "123456789";
 	private String numeroDoContrato = "321564987";
 	private String numeroDoCartaoDePostagem = "654789123";
-	private Integer codigoDoServico = 41068;
+	private String codigoDoServico = "41068";
 
 	@Before
 	public void startUp() {

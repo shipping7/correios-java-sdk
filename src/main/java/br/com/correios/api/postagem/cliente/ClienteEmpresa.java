@@ -133,7 +133,7 @@ public class ClienteEmpresa {
 		}
 	}
 
-	public Optional<ServicoCorreio> getServicoPeloCodigo(Integer codigoDoDestinatario) {
+	public Optional<ServicoCorreio> getServicoPeloCodigo(String codigoDoDestinatario) {
 		for (Contrato contrato: contratos) {
 			Optional<ServicoCorreio> servico = contrato.retornaServicoPelo(codigoDoDestinatario);
 			if (servico.isPresent()) {

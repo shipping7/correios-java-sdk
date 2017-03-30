@@ -45,7 +45,7 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 			this.quantidadeDeEtiquetas = quantidadeDeEtiquetas;
 		}
 
-		public EtiquetaBuilderComIdentificador usandoCodigoDoServicoDeEntrega(Integer codigoDoServicoDeEntrega) {
+		public EtiquetaBuilderComIdentificador usandoCodigoDoServicoDeEntrega(String codigoDoServicoDeEntrega) {
 			return new EtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, codigoDoServicoDeEntrega);
 		}
 
@@ -54,9 +54,9 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 	public class EtiquetaBuilderComIdentificador {
 
 		private Integer quantidade;
-		private Integer codigoDoServicoDeEntrega;
+		private String codigoDoServicoDeEntrega;
 
-		public EtiquetaBuilderComIdentificador(Integer quantidade, Integer codigoDoServicoDeEntrega) {
+		public EtiquetaBuilderComIdentificador(Integer quantidade, String codigoDoServicoDeEntrega) {
 			this.quantidade = quantidade;
 			this.codigoDoServicoDeEntrega = codigoDoServicoDeEntrega;
 		}
