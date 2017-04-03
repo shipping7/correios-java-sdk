@@ -7,7 +7,6 @@ import java.util.List;
 import com.google.common.base.Optional;
 
 import br.com.correios.api.postagem.CorreiosPostagemApi;
-import br.com.correios.api.postagem.TipoServicoDeEntrega;
 import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ContratoEmpresa;
@@ -46,8 +45,8 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 			this.quantidadeDeEtiquetas = quantidadeDeEtiquetas;
 		}
 
-		public EtiquetaBuilderComIdentificador usandoServicoDeEntrega(TipoServicoDeEntrega servicoDeEntrega) {
-			return new EtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, servicoDeEntrega);
+		public EtiquetaBuilderComIdentificador usandoCodigoDoServicoDeEntrega(String codigoDoServicoDeEntrega) {
+			return new EtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, codigoDoServicoDeEntrega);
 		}
 
 	}
@@ -55,11 +54,11 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 	public class EtiquetaBuilderComIdentificador {
 
 		private Integer quantidade;
-		private TipoServicoDeEntrega servicoDeEntrega;
+		private String codigoDoServicoDeEntrega;
 
-		public EtiquetaBuilderComIdentificador(Integer quantidade, TipoServicoDeEntrega servicoDeEntrega) {
+		public EtiquetaBuilderComIdentificador(Integer quantidade, String codigoDoServicoDeEntrega) {
 			this.quantidade = quantidade;
-			this.servicoDeEntrega = servicoDeEntrega;
+			this.codigoDoServicoDeEntrega = codigoDoServicoDeEntrega;
 		}
 
 		public List<Etiqueta> comContrato(ContratoEmpresa contrato) {
@@ -68,7 +67,7 @@ public class CorreiosEtiquetaApi implements EtiquetaApi {
 				if (!clienteOptional.isPresent()) {
 					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um cliente dos Correios");
 				}
-				Optional<ServicoCorreio> servicoOptional = clienteOptional.get().getServicoPeloCodigo(servicoDeEntrega.getCodigoDoContrato());
+				Optional<ServicoCorreio> servicoOptional = clienteOptional.get().getServicoPeloCodigo(codigoDoServicoDeEntrega);
 				if (!servicoOptional.isPresent()) {
 					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um servico válido dos Correios");
 				}
