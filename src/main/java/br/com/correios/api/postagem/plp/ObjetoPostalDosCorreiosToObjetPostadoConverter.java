@@ -25,7 +25,7 @@ public class ObjetoPostalDosCorreiosToObjetPostadoConverter {
 		DimensoesDoObjeto dimensoesDoObjeto = new DimensaoDoObjetoToDimensoesDoObjetoConverter().convert(objeto.getDimensaoObjeto());
 
 		byte statusDeProcessamento = objeto.getStatusProcessamento();
-		boolean processado = statusDeProcessamento == '0'? false: true;
+		boolean processado = statusDeProcessamento == 1;
 
 		ObjetoPostado objetoPostado = new ObjetoPostado(objeto.getNumeroEtiqueta(), objeto.getCodigoObjetoCliente(), objeto.getCodigoServicoPostagem(), medidasDoObjeto,
 				observacoesDoCliente, destinatario, dadosDeEntrega, servicoAdicional, dimensoesDoObjeto, objeto.getDataPostagemSara(),
