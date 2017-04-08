@@ -31,8 +31,8 @@ eclipse {
 }
 
 bintray {
-    user = "${bintray_user}"
-    key = "${bintray_key}"
+    user = System.getProperty("bintray_user")
+    key = System.getProperty("bintray_key")
     configurations = ['archives']
     pkg {
         repo = 'correios-java-sdk'
