@@ -19,10 +19,7 @@ import br.com.correios.webservice.rastreio.Service;
 
 
 /**
- * @author Alexandre Gama
- *
  * Classe que encapsula a chamada SOAP para os correios atraves do WSDL dos Correios
- *
  */
 class SoapCorreiosServicoRastreioApi implements CorreiosServicoRastreioApi {
 

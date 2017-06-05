@@ -19,19 +19,18 @@ import br.com.correios.credentials.CorreiosCredenciais;
 /**
  * Classe que deve ser usada para as chamadas a API de etiqueta dos Correios
  *
- * @author Alexandre Gama
  * @since 0.0.13-BETA
  */
-public class CorrreiosEtiquetaApi {
+public class CorreiosEtiquetaApi {
 
 	private final CorreiosCredenciais credenciais;
 	private final CorreiosClienteApi clienteApi;
 
-	public CorrreiosEtiquetaApi(CorreiosCredenciais credenciais) {
+	public CorreiosEtiquetaApi(CorreiosCredenciais credenciais) {
 		this(credenciais, new CorreiosClienteWebService());
 	}
 
-	public CorrreiosEtiquetaApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
+	public CorreiosEtiquetaApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
 		this.credenciais = credenciais;
 		this.clienteApi = clienteApi;
 	}
@@ -48,7 +47,7 @@ public class CorrreiosEtiquetaApi {
 			this.quantidadeDeEtiquetas = quantidadeDeEtiquetas;
 		}
 
-		public SolicitaEtiquetaBuilderComIdentificador usandoServicoDeEntrega(String codigoDoServicoDeEntrega) {
+		public SolicitaEtiquetaBuilderComIdentificador usandoCodigoDoServicoDeEntrega(String codigoDoServicoDeEntrega) {
 			return new SolicitaEtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, codigoDoServicoDeEntrega);
 		}
 

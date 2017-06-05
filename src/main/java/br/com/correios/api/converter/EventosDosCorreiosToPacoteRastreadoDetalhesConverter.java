@@ -17,8 +17,6 @@ import br.com.correios.webservice.rastreio.Objeto;
 
 
 /**
- * @author Alexandre Gama
- *
  * Classe responsavel por converter o objeto de Eventos que sao retornado pelos Correios
  *
  * @see DetalhesRastreio

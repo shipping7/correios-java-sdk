@@ -23,7 +23,6 @@ import br.com.correios.webservice.postagem.SigepClienteException;
 /**
  * Responsavel por chamar a API de postagem dos Correios
  *
- * @author Alexandre Gama
  * @since 0.0.13-BETA
  */
 public class CorreiosPostagemApi {

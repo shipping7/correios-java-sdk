@@ -20,7 +20,6 @@ import br.com.correios.credentials.CorreiosCredenciais;
 /**
  * Responsavel por chamar a API de rastreio dos Correios
  *
- * @author Alexandre Gama
  * @since 0.0.1-BETA
  */
 public class CorreiosRastreioApi {
@@ -34,12 +33,12 @@ public class CorreiosRastreioApi {
 	public CorreiosRastreioApi(CorreiosCredenciais credentials) {
 		this.credentials = credentials;
 	}
-	
+
 	public CorreiosRastreioComIdioma buscaPacoteRastreadoUsandoOCodigo(String codigoDeRastreio) {
 		this.codigoDeRastreio = codigoDeRastreio;
 		return new CorreiosRastreioComIdioma();
 	}
-	
+
 	public CorreiosRastreioComIdioma buscaPacotesRastreadosPelaListaDeTrackings(List<String> codigosDeRastreio) {
 		this.codigosDeRastreio = codigosDeRastreio;
 		return new CorreiosRastreioComIdioma();

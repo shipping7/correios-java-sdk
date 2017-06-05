@@ -4,8 +4,6 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 
 /**
  * Responsavel pela autenticacao com a API dos correios.
- * 
- * @author Alexandre Gama
  */
 public class CorreiosCredenciais {
 

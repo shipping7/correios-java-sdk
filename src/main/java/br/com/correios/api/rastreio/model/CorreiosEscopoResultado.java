@@ -1,9 +1,7 @@
 package br.com.correios.api.rastreio.model;
 
 /**
- * @author Alexandre Gama
- *
- * @description Delimitacao do escopo da resposta a ser dada a consulta do rastreamento de cada objeto
+ * Delimitacao do escopo da resposta a ser dada a consulta do rastreamento de cada objeto
  * T: Serao retornados todos os eventos do objeto
  * U: Sera retornado apenas o ultimo evento do objeto
  *
