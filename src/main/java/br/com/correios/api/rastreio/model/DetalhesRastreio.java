@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Alexandre Gama
- * 
- * @description Classe que contem todas as informacoes de um Objeto Rastreado, inclusive os eventos associados ao Objeto em questao
- * 
+ * Classe que contem todas as informacoes de um Objeto Rastreado, inclusive os eventos associados ao Objeto em questao
+ *
  * @since 0.0.1-BETA
  */
 public class DetalhesRastreio {
@@ -16,17 +14,17 @@ public class DetalhesRastreio {
 	 * Versão do SRO XML
 	 */
 	private String versao;
-	
+
 	/**
 	 * Quantidade de objetos consultados
 	 */
 	private Integer quantidade;
-	
+
 	/**
 	 * Lista de objetos rastreados
 	 */
-	private List<ObjetoRastreio> objetosRastreio = new ArrayList<ObjetoRastreio>();
-	
+	private List<ObjetoRastreio> objetosRastreio = new ArrayList<>();
+
 	public String getVersao() {
 		return versao;
 	}
@@ -42,11 +40,11 @@ public class DetalhesRastreio {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-	
+
 	public void adicionaObjetoRastreio(ObjetoRastreio objetoRastreio) {
 		this.objetosRastreio.add(objetoRastreio);
 	}
-	
+
 	public List<ObjetoRastreio> getObjetosRastreio() {
 		return objetosRastreio;
 	}

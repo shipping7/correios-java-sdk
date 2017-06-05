@@ -16,16 +16,16 @@ import br.com.correios.credentials.CorreiosCredenciais;
 public class CorreiosPostagemApiTest {
 
 	private CorreiosCredenciais credenciais;
+	private CorreiosPostagemApi postagemApi;
 
 	@Before
 	public void startUp() {
 		credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
+		postagemApi = new CorreiosPostagemApi(credenciais);
 	}
-
+	
 	@Test
 	public void deveriaBuscarOClienteDosCorreiosAPartirDasInformacoesDoCadastroDoCliente() throws Exception {
-		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
-
 		String cnpj = "123456878";
 		ContratoEmpresa informacoesDeCadastro = new ContratoEmpresa(cnpj, "123456878", "123456878");
 
@@ -36,8 +36,6 @@ public class CorreiosPostagemApiTest {
 
 	@Test
 	public void deveriaBuscarOsDadosDaPlpViaPlpId() throws Exception {
-		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
-
 		Optional<DocumentoPlp> cliente = postagemApi.buscaDocumentoPlp(67488374L);
 
 		assertThat(cliente.isPresent()).isTrue();
@@ -45,8 +43,6 @@ public class CorreiosPostagemApiTest {
 
 	@Test
 	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlp() throws Exception {
-		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
-
 		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(67488374L);
 
 		Optional<ObjetoPostado> objetoPostado = plp.get().getObjetoPostadoComEtiqueta("PN578673520BR");
@@ -56,8 +52,6 @@ public class CorreiosPostagemApiTest {
 
 	@Test
 	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlp2() throws Exception {
-		PostagemApi postagemApi = new CorreiosPostagemApi(credenciais);
-
 		long plpIdInextistente = 250045L;
 		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(plpIdInextistente);
 

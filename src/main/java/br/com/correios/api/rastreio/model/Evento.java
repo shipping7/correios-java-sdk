@@ -8,8 +8,6 @@ import java.util.List;
 import com.google.common.base.Optional;
 
 /**
- * @author Alexandre Gama
- *
  * Classe que contem os dados de um determinado evento ocorrido no objeto desejado
  */
 public class Evento {
@@ -46,7 +44,7 @@ public class Evento {
 
 	private LocalDoPacote local;
 
-	private List<Destino> destinos = new ArrayList<Destino>();
+	private List<Destino> destinos = new ArrayList<>();
 
 	public Evento(String tipo, String status, Calendar data, String hora, String descricao, String codigo,
 			LocalDoPacote local) {

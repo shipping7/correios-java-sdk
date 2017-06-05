@@ -20,15 +20,18 @@ import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.SigepClienteException;
 
-public class CorreiosPostagemApi implements PostagemApi {
+/**
+ * Responsavel por chamar a API de postagem dos Correios
+ *
+ * @since 0.0.13-BETA
+ */
+public class CorreiosPostagemApi {
 
-	private CorreiosCredenciais credenciais;
-
-	private CorreiosClienteApi clienteApi;
+	private final CorreiosCredenciais credenciais;
+	private final CorreiosClienteApi clienteApi;
 
 	public CorreiosPostagemApi(CorreiosCredenciais credenciais) {
-		this.credenciais = credenciais;
-		this.clienteApi = new CorreiosClienteWebService();
+		this(credenciais, new CorreiosClienteWebService());
 	}
 
 	public CorreiosPostagemApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
@@ -37,14 +40,13 @@ public class CorreiosPostagemApi implements PostagemApi {
 	}
 
 	/**
-	 * Este método retorna os serviços disponíveis no contrato para um determinado Cartão de Postagem.
+	 * @return os serviços disponíveis no contrato para um determinado {@link ContratoEmpresa} caso haja.
 	 */
-	@Override
-	public Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa informacao) {
+	public Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa informacoesDeCadastro) {
 		try {
 			ClienteERP clienteRetornadoDosCorreios = clienteApi
 					.getCorreiosWebService()
-					.buscaCliente(informacao.getContrato(), informacao.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
+					.buscaCliente(informacoesDeCadastro.getContrato(), informacoesDeCadastro.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
 
 			if (clienteRetornadoDosCorreios != null) {
  				ClienteEmpresa cliente = new ClienteRetornadoDosCorreiosToClienteConverter().convert(clienteRetornadoDosCorreios);
@@ -53,14 +55,13 @@ public class CorreiosPostagemApi implements PostagemApi {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacao), e);
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacoesDeCadastro), e);
 		} catch (Exception e) {
 			return Optional.absent();
 		}
 		return Optional.absent();
 	}
 
-	@Override
 	public Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId) {
 		try {
 			String xmlPlp = clienteApi

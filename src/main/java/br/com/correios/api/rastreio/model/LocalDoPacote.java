@@ -1,32 +1,27 @@
 package br.com.correios.api.rastreio.model;
 
-/**
- * 
- * @author Alexandre Gama
- *
- */
 public class LocalDoPacote {
 
 	/**
 	 * Nome do local do objeto
 	 */
 	private String nome;
-	
+
 	/**
 	 * CEP da unidade ECT
 	 */
 	private String codigo;
-	
+
 	/**
 	 * Cidade onde ocorreu o evento
 	 */
 	private String cidade;
-	
+
 	/**
 	 * Bairro onde ocorreu o evento
 	 */
 	private String bairro;
-	
+
 	/**
 	 * Unidade da Federação onde ocorreu o evento
 	 */
@@ -85,5 +80,5 @@ public class LocalDoPacote {
 		return "LocalDoPacote [nome=" + nome + ", codigo=" + codigo + ", cidade=" + cidade + ", bairro=" + bairro
 				+ ", uf=" + uf + "]";
 	}
-	
+
 }
