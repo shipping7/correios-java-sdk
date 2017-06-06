@@ -77,17 +77,23 @@ public class DimensoesDoObjeto {
     private int diametro;
 
     public enum TipoDoObjetoSendoEnviado {
-    	ENVELOPE("1"), PACOTE_OU_CAIXA("2"), ROLO_OU_CILINDRO("3");
+    	ENVELOPE("1", 3), PACOTE_OU_CAIXA("2", 1), ROLO_OU_CILINDRO("3", 2);
 
     	private String codigoInternoDosCorreios;
+		private int codigoInternoParaEstimativa;
 
-    	TipoDoObjetoSendoEnviado(String codigoInternoDosCorreios) {
+    	TipoDoObjetoSendoEnviado(String codigoInternoDosCorreios, int codigoInternoParaEstimativa) {
     		this.codigoInternoDosCorreios = codigoInternoDosCorreios;
+			this.codigoInternoParaEstimativa = codigoInternoParaEstimativa;
     	}
 
     	public String getCodigoInternoDosCorreios() {
 			return codigoInternoDosCorreios;
 		}
+
+    	public int getCodigoInternoParaEstimativa() {
+    		return codigoInternoParaEstimativa;
+    	}
 
     	public static TipoDoObjetoSendoEnviado getTipoDoObjetoAPartirDoCodigo(String codigoInternoDosCorreios) {
     		if (ENVELOPE.codigoInternoDosCorreios.equals(codigoInternoDosCorreios)) {
