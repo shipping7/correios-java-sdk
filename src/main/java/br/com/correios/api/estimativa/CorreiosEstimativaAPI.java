@@ -8,6 +8,12 @@ import br.com.correios.estimativa.EstimativaComPrazo;
 import br.com.correios.estimativa.EstimativaComPrecoEPrazo;
 import br.com.correios.webservice.estimativa.CalcPrecoPrazoWS;
 
+/**
+ * Responsavel por chamar a API de estimativa do Correios para calcular
+ * precos e prazos
+ *
+ * @since 0.0.17-BETA
+ */
 public class CorreiosEstimativaAPI {
 
 	private CorreiosServicoEstimativaAPI correiosServicoEstimativaAPI;
@@ -19,10 +25,16 @@ public class CorreiosEstimativaAPI {
 		this.correiosServicoEstimativaAPI = new SoapCorreiosServicoEstimativaAPI(new CalcPrecoPrazoWS(), correiosCredenciais, precoEPrazoConverter, prazoConverter);
 	}
 
+	/**
+	 * @return Um builder para montar a requisicao para calcular preco e prazo
+	 */
 	public RequisicaoEstimativaDePrecoEPrazoBuilder estimaPrecoEPrazo() {
 		return new RequisicaoEstimativaDePrecoEPrazoBuilder(correiosServicoEstimativaAPI);
 	}
 
+	/**
+	 * @return Um builder para montar a requisicao para calcular somente prazo
+	 */
 	public RequisicaoEstimativaDePrazoBuilder estimaPrazo() {
 		return new RequisicaoEstimativaDePrazoBuilder(correiosServicoEstimativaAPI);
 	}

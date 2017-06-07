@@ -4,13 +4,46 @@ import java.math.BigDecimal;
 
 import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto.TipoDoObjetoSendoEnviado;
 
+/**
+ * Classe que representa as dimensoes de um pacote a ser estimado
+ *
+ * @since 0.0.17-BETA
+ */
 public class DimensoesPacoteEstimado {
 
+	/**
+	 * Formato da encomenda (incluindo embalagem)
+	 */
 	private TipoDoObjetoSendoEnviado tipoDoObjetoSendoEnviado;
+
+	/**
+	 * Peso da encomenda, incluindo sua embalagem.
+	 * O peso deve ser informado em quilogramas.
+	 * Se o formato for Envelope, o valor maximo permitido sera 1 kg.
+	 *
+	 * @see {@link TipoDoObjetoSendoEnviado}
+	 */
 	private BigDecimal peso;
+
+	/**
+	 * Comprimento da encomenda (incluindo embalagem), em centimetros.
+	 */
 	private BigDecimal comprimento;
+
+	/**
+	 * Altura da encomenda (incluindo embalagem), em centimetros.
+	 * Se o formato for envelope, informar zero (0).
+	 */
 	private BigDecimal altura;
+
+	/**
+	 * Largura da encomenda (incluindo embalagem), em centimetros.
+	 */
 	private BigDecimal largura;
+
+	/**
+	 * Diametro da encomenda (incluindo embalagem), em centimetros.
+	 */
 	private BigDecimal diametro;
 
 	// Construtor privado para obrigar o uso do builder

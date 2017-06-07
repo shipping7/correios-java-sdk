@@ -4,17 +4,66 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * Classe que representa uma estimativa calculada pelo servico do Correios
+ * que possui o <b>preco e prazo</b> da encomenda
+ *
+ * @since 0.0.17-BETA
+ */
 public class EstimativaComPrecoEPrazo {
 
+	/**
+	 * Codigo do Servico de Entrega.
+	 */
 	private String codigoServico;
+
+	/**
+	 * Preco total da encomenda, em Reais, incluindo os precos dos servicos opcionais
+	 */
 	private String valor;
+
+	/**
+	 * Prazo estimado em dias para entrega do produto.
+	 * Se o valor retornado for 0 (zero), indica que o prazo nao foi retornado corretamente.
+	 * Mas nesso modelo use {@link #isEstimativaValida()} para validar se a estimativa esta valida
+	 */
 	private Integer prazoEntrega;
+
+	/**
+	 * Preco do servico adicional Mao Propria
+	 */
 	private String valorServicoMaoPropria;
+
+	/**
+	 * Preco do servico adicional Aviso de Recebimento
+	 */
 	private String valorServicoAvisoDeRecebimento;
+
+	/**
+	 * Informa se a localidade informada possui entrega domiciliaria.
+	 * Se o prazo nao for retornado corretamente, o retorno deste parametro sera vazio.
+	 */
 	private boolean entregaDomiciliar;
+
+	/**
+	 * Informa se a localidade informada possui entrega domiciliaria aos sabados.
+	 * Se o prazo nao for retornado corretamente, o retorno deste parametro sera vazio.
+	 */
 	private boolean entregaAosSabados;
+
+	/**
+	 * Preco da encomenda, sem adicionar os servicos adicionais como {@link #entregaDomiciliar} e {@link #entregaAosSabados}
+	 */
 	private String valorSemAdicionais;
+
+	/**
+	 * Codigo do Erro retornado pelo calculador
+	 */
 	private String codigoErro;
+
+	/**
+	 * Descricao do erro gerado.
+	 */
 	private String mensagemErro;
 
 	public String getCodigoServico() {
@@ -97,6 +146,10 @@ public class EstimativaComPrecoEPrazo {
 		this.mensagemErro = mensagemErro;
 	}
 
+	/**
+	 * @return se uma estimativa esta valida, ou seja, nao possui nenhum erro
+	 * retornado pelo calculador
+	 */
 	public boolean isEstimativaValida() {
 		return StringUtils.isBlank(codigoErro) || "0".equals(codigoErro);
 	}

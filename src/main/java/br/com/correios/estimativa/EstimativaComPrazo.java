@@ -4,13 +4,46 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ * Classe que representa uma estimativa calculada pelo servico do Correios
+ * que possui <b>somente o prazo</b> da encomenda
+ *
+ * @since 0.0.17-BETA
+ */
 public class EstimativaComPrazo {
 
+	/**
+	 * Codigo do Servico de Entrega.
+	 */
 	private String codigoServico;
+
+	/**
+	 * Prazo estimado em dias para entrega do produto.
+	 * Se o valor retornado for 0 (zero), indica que o prazo nao foi retornado corretamente.
+	 * Mas nesso modelo use {@link #isEstimativaValida()} para validar se a estimativa esta valida
+	 */
 	private Integer prazoEntrega;
+
+	/**
+	 * Informa se a localidade informada possui entrega domiciliaria.
+	 * Se o prazo nao for retornado corretamente, o retorno deste parametro sera vazio.
+	 */
 	private boolean entregaDomiciliar;
+
+	/**
+	 * Informa se a localidade informada possui entrega domiciliaria aos sabados.
+	 * Se o prazo nao for retornado corretamente, o retorno deste parametro sera vazio.
+	 */
 	private boolean entregaAosSabados;
+
+	/**
+	 * Codigo do Erro retornado pelo calculador
+	 */
 	private String codigoErro;
+
+	/**
+	 * Descricao do erro gerado.
+	 */
 	private String mensagemErro;
 
 	public String getCodigoServico() {
@@ -61,6 +94,10 @@ public class EstimativaComPrazo {
 		this.mensagemErro = mensagemErro;
 	}
 
+	/**
+	 * @return se uma estimativa esta valida, ou seja, nao possui nenhum erro
+	 * retornado pelo calculador
+	 */
 	public boolean isEstimativaValida() {
 		return StringUtils.isBlank(codigoErro) || "0".equals(codigoErro);
 	}

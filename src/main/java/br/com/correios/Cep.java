@@ -2,6 +2,12 @@ package br.com.correios;
 
 import java.util.regex.Pattern;
 
+/**
+ * Classe que representa o <b>CEP</b><br>
+ * Sua formatacao deve ser de apenas 8 numeros. Ex: 99999999
+ *
+ * @since 0.0.17-BETA
+ */
 public class Cep {
 
 	private final String value;
