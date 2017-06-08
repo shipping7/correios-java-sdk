@@ -18,6 +18,7 @@ import br.com.correios.api.postagem.xml.XmlPlpParser;
 import br.com.correios.credentials.CorreiosCredenciais;
 import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
+import br.com.correios.webservice.postagem.Exception_Exception;
 import br.com.correios.webservice.postagem.SigepClienteException;
 
 /**
@@ -85,6 +86,18 @@ public class CorreiosPostagemApi {
 			return Optional.absent();
 		}
 		return Optional.absent();
+	}
+
+	public boolean cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) {
+		try {
+			return clienteApi.getCorreiosWebService().cancelarObjeto(plpId, numeroEtiqueta, credenciais.getUsuario(), credenciais.getSenha());
+		} catch (AutenticacaoException e) {
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
+		} catch (Exception_Exception e) {
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
+		} catch (SigepClienteException e) {
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
+		}
 	}
 
 }

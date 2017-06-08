@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Optional;
 
+import br.com.correios.api.converter.Converter;
 import br.com.correios.api.postagem.remetente.RemetenteDaPostagem;
 import br.com.correios.api.postagem.remetente.RemetenteDosCorreiosToRemetenteConverter;
 import br.com.correios.api.postagem.xml.Correioslog;
@@ -12,8 +13,9 @@ import br.com.correios.api.postagem.xml.DadosPlp;
 import br.com.correios.api.postagem.xml.ObjetoPostal;
 import br.com.correios.api.postagem.xml.Remetente;
 
-public class CorreiosLogToPlpDocumentoConverter {
+public class CorreiosLogToPlpDocumentoConverter implements Converter<Correioslog, Optional<DocumentoPlp>> {
 
+	@Override
 	public Optional<DocumentoPlp> convert(Correioslog correioslog) {
 		DadosPlp plpDosCorreios = correioslog.getPlp();
 		if (plpDosCorreios == null) {

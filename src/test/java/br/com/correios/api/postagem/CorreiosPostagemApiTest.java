@@ -23,7 +23,7 @@ public class CorreiosPostagemApiTest {
 		credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
 		postagemApi = new CorreiosPostagemApi(credenciais);
 	}
-	
+
 	@Test
 	public void deveriaBuscarOClienteDosCorreiosAPartirDasInformacoesDoCadastroDoCliente() throws Exception {
 		String cnpj = "123456878";
@@ -56,6 +56,13 @@ public class CorreiosPostagemApiTest {
 		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(plpIdInextistente);
 
 		assertThat(plp.isPresent()).isFalse();
+	}
+
+	@Test
+	public void deveriaCancelarUmObjetoDePlp() {
+		boolean cancelado = postagemApi.cancelaObjetoDaPlp(67488374L, "PN578673520BR");
+
+		assertThat(cancelado).isFalse();
 	}
 
 }

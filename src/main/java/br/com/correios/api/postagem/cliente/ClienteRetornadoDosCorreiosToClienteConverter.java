@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import br.com.correios.api.converter.Converter;
 import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
 import br.com.correios.api.postagem.contrato.Contrato;
 import br.com.correios.api.postagem.contrato.ContratoWebServiceToContratoCorreiosConverter;
@@ -15,8 +16,9 @@ import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.ContratoERP;
 import br.com.correios.webservice.postagem.GerenteConta;
 
-public class ClienteRetornadoDosCorreiosToClienteConverter {
+public class ClienteRetornadoDosCorreiosToClienteConverter implements Converter<ClienteERP, ClienteEmpresa> {
 
+	@Override
 	public ClienteEmpresa convert(ClienteERP clienteRetornadoDosCorreios) {
 		XMLGregorianCalendar dataDeAtualizacaoNosCorreios = clienteRetornadoDosCorreios.getDataAtualizacao();
 		Calendar dataDeAtualizacaoDoCliente = null;
