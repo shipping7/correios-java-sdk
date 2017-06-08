@@ -1,25 +1,19 @@
 package br.com.correios.api.postagem;
 
-import static java.lang.String.format;
-
 import com.google.common.base.Optional;
 
 import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.cliente.ContratoEmpresa;
-import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
+import br.com.correios.api.postagem.exception.ObjetoPlpFoiPostadoException;
+import br.com.correios.api.postagem.exception.ObjetoPlpJaFoiCanceladoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
-import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
+import br.com.correios.api.postagem.plp.ObjetoPostado;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
-import br.com.correios.api.postagem.xml.Correioslog;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
 import br.com.correios.credentials.CorreiosCredenciais;
-import br.com.correios.webservice.postagem.AutenticacaoException;
-import br.com.correios.webservice.postagem.ClienteERP;
-import br.com.correios.webservice.postagem.Exception_Exception;
-import br.com.correios.webservice.postagem.SigepClienteException;
 
 /**
  * Responsavel por chamar a API de postagem dos Correios
@@ -28,64 +22,21 @@ import br.com.correios.webservice.postagem.SigepClienteException;
  */
 public class CorreiosPostagemApi {
 
-	private final CorreiosCredenciais credenciais;
-	private final CorreiosClienteApi clienteApi;
+	private final CorreiosServicoPostagemAPI correiosServicoPostagemAPI;
 
 	public CorreiosPostagemApi(CorreiosCredenciais credenciais) {
-		this(credenciais, new CorreiosClienteWebService());
-	}
-
-	public CorreiosPostagemApi(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi) {
-		this.credenciais = credenciais;
-		this.clienteApi = clienteApi;
+		this.correiosServicoPostagemAPI = new SoapCorreiosServicoPostagemAPI(credenciais, new CorreiosClienteWebService(), new ClienteRetornadoDosCorreiosToClienteConverter(), new XmlPlpParser(), new CorreiosLogToPlpDocumentoConverter());
 	}
 
 	/**
 	 * @return os serviços disponíveis no contrato para um determinado {@link ContratoEmpresa} caso haja.
 	 */
 	public Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa informacoesDeCadastro) {
-		try {
-			ClienteERP clienteRetornadoDosCorreios = clienteApi
-					.getCorreiosWebService()
-					.buscaCliente(informacoesDeCadastro.getContrato(), informacoesDeCadastro.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
-
-			if (clienteRetornadoDosCorreios != null) {
- 				ClienteEmpresa cliente = new ClienteRetornadoDosCorreiosToClienteConverter().convert(clienteRetornadoDosCorreios);
-				return Optional.of(cliente);
-			}
-		} catch (AutenticacaoException e) {
-			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
-		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com as informações de cliente %s", informacoesDeCadastro), e);
-		} catch (Exception e) {
-			return Optional.absent();
-		}
-		return Optional.absent();
+		return correiosServicoPostagemAPI.buscaCliente(informacoesDeCadastro);
 	}
 
 	public Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId) {
-		try {
-			String xmlPlp = clienteApi
-				.getCorreiosWebService()
-				.solicitaXmlPlp(plpId, credenciais.getUsuario(), credenciais.getSenha());
-
-			boolean xmlPlpDosCorreiosEstaValido = xmlPlp != null && !xmlPlp.isEmpty();
-
-			if (xmlPlpDosCorreiosEstaValido) {
-				Optional<Correioslog> correiosPlp = new XmlPlpParser().convert(xmlPlp);
-
-				if (correiosPlp.isPresent()) {
-					return new CorreiosLogToPlpDocumentoConverter().convert(correiosPlp.get());
-				}
-			}
-		} catch (AutenticacaoException e) {
-			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
-		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o serviço com o PLP de id %d", plpId), e);
-		} catch (Exception e) {
-			return Optional.absent();
-		}
-		return Optional.absent();
+		return correiosServicoPostagemAPI.buscaDocumentoPlp(plpId);
 	}
 
 	/**
@@ -93,17 +44,27 @@ public class CorreiosPostagemApi {
 	 * do objeto
 	 * @param plpId da PLP que possui o objeto a ser cancelado
 	 * @param numeroEtiqueta relacionada ao objeto a ser cancelado
-	 * @return Se o objeto da PLP foi cancelado
+	 * @throws ObjetoPlpFoiPostadoException se o objeto foi postado, por isso o mesmo nao pode ser cancelado
+	 * @throws ObjetoPlpJaFoiCanceladoException se o objeto ja foi cancelado
 	 */
-	public boolean cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) {
+	public void cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) throws ObjetoPlpFoiPostadoException, ObjetoPlpJaFoiCanceladoException {
 		try {
-			return clienteApi.getCorreiosWebService().cancelarObjeto(plpId, numeroEtiqueta, credenciais.getUsuario(), credenciais.getSenha());
-		} catch (AutenticacaoException e) {
-			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
-		} catch (Exception_Exception e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
-		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
+			correiosServicoPostagemAPI.cancelaObjetoDaPlp(plpId, numeroEtiqueta);
+		} catch (CorreiosServicoSoapException exceptionCancelamento) {
+
+			try {
+				Optional<ObjetoPostado> objeto = correiosServicoPostagemAPI.buscaDocumentoPlp(plpId)
+									  .transform(documentoPlp -> documentoPlp.getObjetoPostadoComEtiqueta(numeroEtiqueta))
+									  .or(Optional.<ObjetoPostado>absent());
+
+				if (objeto.isPresent() && objeto.get().isPostado()) {
+					throw new ObjetoPlpFoiPostadoException(String.format("objeto com etiqueta %s da PLP %d nao pode ser cancelado porque este foi postado", numeroEtiqueta, plpId), exceptionCancelamento);
+				}
+				throw exceptionCancelamento;
+
+			} catch (CorreiosServicoSoapException exceptionBusca) {
+				throw new ObjetoPlpJaFoiCanceladoException(String.format("objeto com etiqueta %s da PLP %d ja foi cancelado", numeroEtiqueta, plpId), exceptionCancelamento);
+			}
 		}
 	}
 

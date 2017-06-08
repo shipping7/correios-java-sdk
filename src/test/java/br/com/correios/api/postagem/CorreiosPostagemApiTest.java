@@ -43,9 +43,9 @@ public class CorreiosPostagemApiTest {
 
 	@Test
 	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlp() throws Exception {
-		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(67488374L);
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(48925409L);
 
-		Optional<ObjetoPostado> objetoPostado = plp.get().getObjetoPostadoComEtiqueta("PN578673520BR");
+		Optional<ObjetoPostado> objetoPostado = plp.get().getObjetoPostadoComEtiqueta("PJ938918208BR");
 
 		assertThat(objetoPostado.isPresent()).isTrue();
 	}
@@ -60,9 +60,7 @@ public class CorreiosPostagemApiTest {
 
 	@Test
 	public void deveriaCancelarUmObjetoDePlp() {
-		boolean cancelado = postagemApi.cancelaObjetoDaPlp(67488374L, "PN578673520BR");
-
-		assertThat(cancelado).isFalse();
+		postagemApi.cancelaObjetoDaPlp(48925409L, "PJ938918208BR");
 	}
 
 }
