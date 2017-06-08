@@ -88,6 +88,13 @@ public class CorreiosPostagemApi {
 		return Optional.absent();
 	}
 
+	/**
+	 * Cancela um objeto de uma PLP atraves do ID do PLP e o numero da etiqueta
+	 * do objeto
+	 * @param plpId da PLP que possui o objeto a ser cancelado
+	 * @param numeroEtiqueta relacionada ao objeto a ser cancelado
+	 * @return Se o objeto da PLP foi cancelado
+	 */
 	public boolean cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) {
 		try {
 			return clienteApi.getCorreiosWebService().cancelarObjeto(plpId, numeroEtiqueta, credenciais.getUsuario(), credenciais.getSenha());
