@@ -24,12 +24,11 @@ public class ObjetoPostalDosCorreiosToObjetPostadoConverter {
 
 		DimensoesDoObjeto dimensoesDoObjeto = new DimensaoDoObjetoToDimensoesDoObjetoConverter().convert(objeto.getDimensaoObjeto());
 
-		byte statusDeProcessamento = objeto.getStatusProcessamento();
-		boolean processado = statusDeProcessamento == 1;
+		StatusProcessamento statusDeProcessamento = StatusProcessamento.aPartirDo(objeto.getStatusProcessamento());
 
 		ObjetoPostado objetoPostado = new ObjetoPostado(objeto.getNumeroEtiqueta(), objeto.getCodigoObjetoCliente(), objeto.getCodigoServicoPostagem(), medidasDoObjeto,
 				observacoesDoCliente, destinatario, dadosDeEntrega, servicoAdicional, dimensoesDoObjeto, objeto.getDataPostagemSara(),
-				processado, objeto.getNumeroComprovantePostagem(), objeto.getValorCobrado());
+				statusDeProcessamento, objeto.getNumeroComprovantePostagem(), objeto.getValorCobrado());
 
 		return objetoPostado;
 	}
