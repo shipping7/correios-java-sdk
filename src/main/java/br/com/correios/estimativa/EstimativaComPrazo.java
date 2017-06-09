@@ -95,15 +95,26 @@ public class EstimativaComPrazo {
 	}
 
 	/**
-	 * @return se uma estimativa esta valida, ou seja, nao possui nenhum erro
-	 * retornado pelo calculador
+	 * @return se uma estimativa esta valida, ou seja, possui um prazo de entrega valido
 	 */
 	public boolean isEstimativaValida() {
-		return StringUtils.isBlank(codigoErro) || "0".equals(codigoErro);
+		return !temMensagemErro() || prazoEntrega != 0;
+	}
+
+	/**
+	 * @return Se uma estimativa possui uma mensagem de atencao,
+	 * porem <b>ainda esta valida</b>
+	 */
+	public boolean possuiMensagemAtencao() {
+		return temMensagemErro() && prazoEntrega != 0;
 	}
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
+
+	private boolean temMensagemErro() {
+		return StringUtils.isNotBlank(codigoErro) && !"0".equals(codigoErro);
 	}
 }
