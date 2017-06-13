@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import br.com.correios.api.estimativa.RequisicaoEstimativaDePrecoEPrazoBuilder.RequisicaoEstimativaDePrecoEPrazoComDimensoesDoPacote;
+
 /**
  * Classe que representa uma estimativa calculada pelo servico do Correios
  * que possui o <b>preco e prazo</b> da encomenda
@@ -38,6 +40,12 @@ public class EstimativaComPrecoEPrazo {
 	 * Preco do servico adicional Aviso de Recebimento
 	 */
 	private String valorServicoAvisoDeRecebimento;
+
+	/**
+	 * Preco cobrado pelo Correios para assegurar o produto encomendado.
+	 * Esse valor esta baseado no valor {@link RequisicaoEstimativaDePrecoEPrazoComDimensoesDoPacote#comValorDeclarado(java.math.BigDecimal)}
+	 */
+	private String valorSeguro;
 
 	/**
 	 * Informa se a localidade informada possui entrega domiciliaria.
@@ -104,6 +112,14 @@ public class EstimativaComPrecoEPrazo {
 
 	public void setValorServicoAvisoDeRecebimento(String valorServicoAvisoDeRecebimento) {
 		this.valorServicoAvisoDeRecebimento = valorServicoAvisoDeRecebimento;
+	}
+
+	public String getValorSeguro() {
+		return valorSeguro;
+	}
+
+	public void setValorSeguro(String valorSeguro) {
+		this.valorSeguro = valorSeguro;
 	}
 
 	public boolean isEntregaDomiciliar() {

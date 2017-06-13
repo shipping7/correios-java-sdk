@@ -30,6 +30,7 @@ public class CServicoToEstimativaComPrecoEPrazoConverterTest {
 		servico.setValor("7,50");
 		servico.setValorAvisoRecebimento("0,00");
 		servico.setValorMaoPropria("0,00");
+		servico.setValorValorDeclarado("1,50");
 		servico.setValorSemAdicionais("7,50");
 		servico.setErro("0");
 		servico.setMsgErro(null);
@@ -40,6 +41,7 @@ public class CServicoToEstimativaComPrecoEPrazoConverterTest {
 		assertEquals(Integer.valueOf(5), estimativa.getPrazoEntrega());
 		assertEquals("7,50", estimativa.getValor());
 		assertEquals("0,00", estimativa.getValorServicoAvisoDeRecebimento());
+		assertEquals("1,50", estimativa.getValorSeguro());
 		assertEquals("0,00", estimativa.getValorServicoMaoPropria());
 		assertEquals("7,50", estimativa.getValorSemAdicionais());
 		assertTrue(estimativa.isEntregaDomiciliar());
@@ -56,6 +58,7 @@ public class CServicoToEstimativaComPrecoEPrazoConverterTest {
 		servico.setPrazoEntrega("0");
 		servico.setValor("0,00");
 		servico.setValorAvisoRecebimento("0,00");
+		servico.setValorValorDeclarado("0,00");
 		servico.setValorMaoPropria("0,00");
 		servico.setValorSemAdicionais("0,00");
 		servico.setErro("-20");
@@ -67,6 +70,7 @@ public class CServicoToEstimativaComPrecoEPrazoConverterTest {
 		assertEquals(Integer.valueOf(0), estimativa.getPrazoEntrega());
 		assertEquals("0,00", estimativa.getValor());
 		assertEquals("0,00", estimativa.getValorServicoAvisoDeRecebimento());
+		assertEquals("0,00", estimativa.getValorSeguro());
 		assertEquals("0,00", estimativa.getValorServicoMaoPropria());
 		assertEquals("0,00", estimativa.getValorSemAdicionais());
 		assertFalse(estimativa.isEntregaDomiciliar());

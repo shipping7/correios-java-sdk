@@ -20,6 +20,7 @@ public class CServicoToEstimativaComPrecoEPrazoConverter implements Converter<CS
 		estimativa.setPrazoEntrega(Integer.valueOf(servico.getPrazoEntrega()));
 		estimativa.setValor(servico.getValor());
 		estimativa.setValorServicoAvisoDeRecebimento(servico.getValorAvisoRecebimento());
+		estimativa.setValorSeguro(servico.getValorValorDeclarado());
 		estimativa.setValorServicoMaoPropria(servico.getValorMaoPropria());
 		estimativa.setValorSemAdicionais(servico.getValorSemAdicionais());
 		estimativa.setEntregaDomiciliar(booleanStringfier.convertToBoolean(servico.getEntregaDomiciliar()));
