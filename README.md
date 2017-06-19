@@ -45,20 +45,20 @@ O código do seu objeto deve ser algo parecido com **DU500853238BR**.
 O código completo fica como o a seguir:
 
 ```java
-	@Test
-	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() throws Exception {
-		CorreiosCredenciais credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
+@Test
+public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() throws Exception {
+	CorreiosCredenciais credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
+	
+	CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
+	
+	DetalhesRastreio pacoteRastreado =  correiosApi
+		.buscaPacoteRastreadoUsandoOCodigo("codigo_do_seu_objeto")
+		.emPortugues()
+		.comTodosOsEventos()
+		.getDetalhesRastreio();
 		
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
-
-		DetalhesRastreio pacoteRastreado =  correiosApi
-			.buscaPacoteRastreadoUsandoOCodigo("codigo_do_seu_objeto")
-			.emPortugues()
-			.comTodosOsEventos()
-			.getDetalhesRastreio();
-		
-		System.out.println(pacoteTraqueado);
-	}
+	System.out.println(pacoteTraqueado);
+}
 ```
 
 Simples assim!
@@ -71,23 +71,23 @@ Também é possível buscar mais de um Objeto através de uma **lista de Código
 
 ```java
 @Test
-	public void deveriaRetornarOsEventosAPartirDeUmaListaDeTrackingCodes() throws Exception {
-		CorreiosCredenciais credenciais = new CorreiosCredenciais("username", "password");
+public void deveriaRetornarOsEventosAPartirDeUmaListaDeTrackingCodes() throws Exception {
+	CorreiosCredenciais credenciais = new CorreiosCredenciais("username", "password");
 		
-		CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
+	CorreiosRastreioApi correiosApi = new CorreiosRastreioClientApi(credenciais);
 		
-		List<String> trackingCodes = new ArrayList<>();
-		trackingCodes.add("DU500853237BR");
-		trackingCodes.add("DU496842125BR");
+	List<String> trackingCodes = new ArrayList<>();
+	trackingCodes.add("DU500853237BR");
+	trackingCodes.add("DU496842125BR");
 		
-		DetalhesRastreio detalhesComLista = correiosApi
-			.buscaPacotesRastreadosPelaListaDeTrackings(trackingCodes)
-			.emPortugues()
-			.comTodosOsEventos()
-			.getDetalhesRastreio();
+	DetalhesRastreio detalhesComLista = correiosApi
+		.buscaPacotesRastreadosPelaListaDeTrackings(trackingCodes)
+		.emPortugues()
+		.comTodosOsEventos()
+		.getDetalhesRastreio();
 		
-		System.out.println(detalhesComLista);
-	}
+	System.out.println(detalhesComLista);
+}
 ```
 
 Note que agora temos o objeto DetalhesRastreio, que por sua vez contém uma lista com todas as informações que você precisa! Awesome!
