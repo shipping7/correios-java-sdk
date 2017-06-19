@@ -196,6 +196,22 @@ public class CorreiosEtiquetaApiTest {
 }
 ```
 
+# Baixando a dependência
+
+_Maven_
+```xml
+<dependency>
+  <groupId>br.com.correios</groupId>
+  <artifactId>correios-java-sdk</artifactId>
+  <version>{última-versão-desejada}</version>
+  <type>pom</type>
+</dependency>
+```
+
+_Gradle_
+```groovy
+compile 'br.com.correios:correios-java-sdk:{{última-versão-desejada}}'
+```
 
 # Autores
 
