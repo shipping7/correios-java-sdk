@@ -54,8 +54,6 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
 			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com as informacoes de cliente %s", contratoEmpresa), e);
-		} catch (Exception e) {
-			return Optional.absent(); //FIXME Esconder excecao e passar absent??
 		}
 	}
 
@@ -75,8 +73,6 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
 			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
-		} catch (Exception e) {
-			return Optional.absent(); //FIXME Esconder excecao e passar absent??
 		}
 
 		return Optional.absent();
@@ -88,9 +84,7 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 			return clienteApi.getCorreiosWebService().cancelarObjeto(plpId, numeroEtiqueta, credenciais.getUsuario(), credenciais.getSenha());
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
-		} catch (Exception_Exception e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d, etiqueta %s", plpId, numeroEtiqueta), e);
-		} catch (SigepClienteException e) {
+		} catch (Exception_Exception | SigepClienteException e) {
 			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d, etiqueta %s", plpId, numeroEtiqueta), e);
 		}
 	}

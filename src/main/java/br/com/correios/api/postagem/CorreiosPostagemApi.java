@@ -40,7 +40,7 @@ public class CorreiosPostagemApi {
 	}
 
 	/**
-	 * Cancela um objeto de uma PLP atraves do ID do PLP e o numero da etiqueta
+	 * Cancela um objeto de uma PLP atraves do ID da PLP e o numero da etiqueta
 	 * do objeto
 	 * @param plpId da PLP que possui o objeto a ser cancelado
 	 * @param numeroEtiqueta relacionada ao objeto a ser cancelado

@@ -10,7 +10,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,7 +61,7 @@ public class SoapCorreiosServicoPostagemAPITest {
 	private SoapCorreiosServicoPostagemAPI servicoPostagemAPI;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setup() throws Exception {
 		servicoPostagemAPI = new SoapCorreiosServicoPostagemAPI(credenciais, clienteAPI, clienteEmpresaConverter, xmlPlpParser, documentoPlpConverter);
 		when(clienteAPI.getCorreiosWebService().buscaCliente(anyString(), anyString(), anyString(), anyString())).thenReturn(clienteERP);
 		when(clienteEmpresaConverter.convert(clienteERP)).thenReturn(clienteEmpresa);
@@ -107,19 +106,12 @@ public class SoapCorreiosServicoPostagemAPITest {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Test
-	public void deveriaNaosei() {
+	@Test(expected=RuntimeException.class)
+	public void deveriaLancarExcecaoParaClienteCasoHajaUmProblemaParaBuscarClienteNoSdk() {
 		when(clienteEmpresaConverter.convert(any())).thenThrow(RuntimeException.class);
 
 		servicoPostagemAPI.buscaCliente(contratoEmpresa);
-
-		Assert.fail(); // O que fazer?
 	}
-
-
-
-
-
 
 	@Test
 	public void deveriaBuscarXmlPlpEConverterParaDocumentoPlp() throws Exception {
@@ -176,22 +168,12 @@ public class SoapCorreiosServicoPostagemAPITest {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Test
-	public void deveriaNaosei2() {
+	@Test(expected=RuntimeException.class)
+	public void deveriaLancarExcecaoParaClienteCasoHajaUmProblemaParaBuscarDocumentoPlpNoSdk() {
 		when(documentoPlpConverter.convert(any())).thenThrow(RuntimeException.class);
 
 		servicoPostagemAPI.buscaDocumentoPlp(123L);
-
-		Assert.fail(); // O que fazer?
 	}
-
-
-
-
-
-
-
-
 
 	@Test
 	public void deveriaCancelarObjetoDaPlp() {
