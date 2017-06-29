@@ -79,6 +79,27 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 	}
 
 	@Override
+	public Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId, String etiqueta) {
+		try {
+			String xmlPlp = clienteApi.getCorreiosWebService().solicitaPLP(plpId, etiqueta, credenciais.getUsuario(), credenciais.getSenha());
+
+			boolean xmlPlpDosCorreiosEstaValido = xmlPlp != null && !xmlPlp.isEmpty();
+
+			if (xmlPlpDosCorreiosEstaValido) {
+				return xmlPlpParser.convert(xmlPlp)
+								   .transform(documentoPlpConverter::convert)
+								   .or(Optional.<DocumentoPlp>absent());
+			}
+		} catch (AutenticacaoException e) {
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
+		} catch (SigepClienteException e) {
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
+		}
+
+		return Optional.absent();
+	}
+
+	@Override
 	public boolean cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) {
 		try {
 			return clienteApi.getCorreiosWebService().cancelarObjeto(plpId, numeroEtiqueta, credenciais.getUsuario(), credenciais.getSenha());

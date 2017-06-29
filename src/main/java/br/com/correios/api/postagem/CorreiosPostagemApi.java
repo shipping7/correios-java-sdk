@@ -7,6 +7,7 @@ import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.ObjetoPlpFoiPostadoException;
+import br.com.correios.api.postagem.exception.ObjetoPlpInexistenteOuJaFoiCanceladoException;
 import br.com.correios.api.postagem.exception.ObjetoPlpJaFoiCanceladoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
@@ -46,25 +47,34 @@ public class CorreiosPostagemApi {
 	 * @param numeroEtiqueta relacionada ao objeto a ser cancelado
 	 * @throws ObjetoPlpFoiPostadoException se o objeto foi postado, por isso o mesmo nao pode ser cancelado
 	 * @throws ObjetoPlpJaFoiCanceladoException se o objeto ja foi cancelado
+	 * @throws ObjetoPlpInexistenteOuJaFoiCanceladoException se o objeto nao existe ou ja esta expirado ou ja foi cancelado, os detalhes vao vir na causa dessa exception
 	 */
-	public void cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) throws ObjetoPlpFoiPostadoException, ObjetoPlpJaFoiCanceladoException {
+	public void cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta) throws ObjetoPlpFoiPostadoException, ObjetoPlpJaFoiCanceladoException, ObjetoPlpInexistenteOuJaFoiCanceladoException {
 		try {
 			correiosServicoPostagemAPI.cancelaObjetoDaPlp(plpId, numeroEtiqueta);
 		} catch (CorreiosServicoSoapException exceptionCancelamento) {
 
 			try {
-				Optional<ObjetoPostado> objeto = correiosServicoPostagemAPI.buscaDocumentoPlp(plpId)
+				Optional<ObjetoPostado> objeto = correiosServicoPostagemAPI.buscaDocumentoPlp(plpId, numeroEtiqueta)
 									  .transform(documentoPlp -> documentoPlp.getObjetoPostadoComEtiqueta(numeroEtiqueta))
 									  .or(Optional.<ObjetoPostado>absent());
 
-				if (objeto.isPresent() && objeto.get().isPostado()) {
-					throw new ObjetoPlpFoiPostadoException(String.format("objeto com etiqueta %s da PLP %d nao pode ser cancelado porque este foi postado", numeroEtiqueta, plpId), exceptionCancelamento);
+				if (objeto.isPresent()) {
+
+					if (objeto.get().isPostado()) {
+						throw new ObjetoPlpFoiPostadoException(String.format("objeto com etiqueta %s da PLP %d nao pode ser cancelado porque este foi postado", numeroEtiqueta, plpId), exceptionCancelamento);
+					}
+
+					if (objeto.get().isCancelado()) {
+						throw new ObjetoPlpJaFoiCanceladoException(String.format("objeto com etiqueta %s da PLP %d ja foi cancelado", numeroEtiqueta, plpId), exceptionCancelamento);
+					}
 				}
-				throw exceptionCancelamento;
 
 			} catch (CorreiosServicoSoapException exceptionBusca) {
-				throw new ObjetoPlpJaFoiCanceladoException(String.format("objeto com etiqueta %s da PLP %d ja foi cancelado", numeroEtiqueta, plpId), exceptionCancelamento);
+				throw new ObjetoPlpInexistenteOuJaFoiCanceladoException(String.format("objeto com etiqueta %s da PLP %d não foi encontrado ou ja foi cancelado", numeroEtiqueta, plpId), exceptionBusca);
 			}
+
+			throw exceptionCancelamento;
 		}
 	}
 
