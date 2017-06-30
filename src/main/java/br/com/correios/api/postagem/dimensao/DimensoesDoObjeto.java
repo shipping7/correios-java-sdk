@@ -4,13 +4,12 @@ import static java.lang.String.format;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Locale;
 
 import br.com.correios.api.postagem.exception.CorreiosUnsupportedTipoObjetoException;
 
 public class DimensoesDoObjeto {
 
-	private final static NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+	private final static NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance();
 
 	/**
 	 * Contém o código do tipo de objeto que foi postado (embalagem)
