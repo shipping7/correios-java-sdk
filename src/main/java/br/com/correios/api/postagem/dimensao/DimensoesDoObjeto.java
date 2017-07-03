@@ -6,11 +6,15 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
+import br.com.correios.api.exception.FormatacaoNumericaIncorretaException;
 import br.com.correios.api.postagem.exception.CorreiosUnsupportedTipoObjetoException;
 
 public class DimensoesDoObjeto {
 
-	private final static NumberFormat NUMBER_FORMAT = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+	private final static NumberFormat FORMATADOR_COM_PONTO = NumberFormat.getNumberInstance();
+	private final static NumberFormat FORMATADOR_COM_VIRGULA = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
 
 	/**
 	 * Contém o código do tipo de objeto que foi postado (embalagem)
@@ -138,22 +142,32 @@ public class DimensoesDoObjeto {
 		return diametro;
 	}
 
-	public Integer getComprimentoNumerico() throws ParseException {
+	public Integer getComprimentoNumerico() {
 		return parseNumber(comprimento);
 	}
 
-	public Integer getAlturaNumerico() throws ParseException {
+	public Integer getAlturaNumerico() {
 		return parseNumber(altura);
 	}
 
-	public Integer getLarguraNumerico() throws ParseException {
+	public Integer getLarguraNumerico() {
 		return parseNumber(largura);
 	}
 
-	private Integer parseNumber(String number) throws ParseException {
-		if (this.comprimento != null && !comprimento.isEmpty()) {
-			return NUMBER_FORMAT.parse(number).intValue();
+	private Integer parseNumber(String number) {
+		if (StringUtils.isNotEmpty(number)) {
+
+			try {
+				if (number.contains(",")) {
+					return FORMATADOR_COM_VIRGULA.parse(number).intValue();
+				} else {
+					return FORMATADOR_COM_PONTO.parse(number).intValue();
+				}
+			} catch (ParseException e) {
+				throw new FormatacaoNumericaIncorretaException(e);
+			}
 		}
+
 		return null;
 	}
 
