@@ -71,7 +71,7 @@ public class CorreiosPostagemApi {
 				}
 
 			} catch (CorreiosServicoSoapException exceptionBusca) {
-				throw new ObjetoPlpInexistenteOuJaFoiCanceladoException(String.format("objeto com etiqueta %s da PLP %d não foi encontrado ou ja foi cancelado", numeroEtiqueta, plpId), exceptionBusca);
+				throw new ObjetoPlpInexistenteOuJaFoiCanceladoException(String.format("objeto com etiqueta %s da PLP %d nao foi encontrado ou ja foi cancelado", numeroEtiqueta, plpId), exceptionBusca);
 			}
 
 			throw exceptionCancelamento;
