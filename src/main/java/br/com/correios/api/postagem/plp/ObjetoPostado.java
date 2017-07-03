@@ -74,11 +74,11 @@ public class ObjetoPostado {
 	private String dataDaPostagemNoSistemaSara;
 
 	/**
-	 * Contém o STATUS do processamento do objeto, deverá ser enviado a informação com valor igual a "0" pelos Correios.
+	 * Contem o status do processamento do objeto
 	 *
 	 * Preenchimento não obrigatório.
 	 */
-	private boolean processado;
+	private StatusProcessamento statusProcessamento;
 
 	/**
 	 * Contém o numero de comprovante de postagem.
@@ -97,7 +97,7 @@ public class ObjetoPostado {
 	public ObjetoPostado(String numeroEtiqueta, String codigoDeControleDoObjetoDoCliente,
 			String codigoDoServicoDePostagem, MedidasDoObjetoPostado medidas, ObservacoesDoCliente observacoesDoCliente,
 			DestinatarioDoObjeto destinatario, DadosDeEntrega dadosDeEntrega, ServicoAdicionalDoObjeto servicoAdicional,
-			DimensoesDoObjeto dimensaoObjeto, String dataDaPostagemNoSistemaSara, boolean processado,
+			DimensoesDoObjeto dimensaoObjeto, String dataDaPostagemNoSistemaSara, StatusProcessamento statusProcessamento,
 			String numeroDoComprovanteDePostagem, String valorCobrado) {
 		this.numeroEtiqueta = numeroEtiqueta;
 		this.codigoDeControleDoObjetoDoCliente = codigoDeControleDoObjetoDoCliente;
@@ -109,7 +109,7 @@ public class ObjetoPostado {
 		this.servicoAdicional = servicoAdicional;
 		this.dimensaoObjeto = dimensaoObjeto;
 		this.dataDaPostagemNoSistemaSara = dataDaPostagemNoSistemaSara;
-		this.processado = processado;
+		this.statusProcessamento = statusProcessamento;
 		this.numeroDoComprovanteDePostagem = numeroDoComprovanteDePostagem;
 		this.valorCobrado = valorCobrado;
 	}
@@ -154,8 +154,12 @@ public class ObjetoPostado {
 		return dataDaPostagemNoSistemaSara;
 	}
 
-	public boolean isProcessado() {
-		return processado;
+	public boolean isPostado() {
+		return statusProcessamento == StatusProcessamento.POSTADO;
+	}
+
+	public boolean isCancelado() {
+		return statusProcessamento == StatusProcessamento.CANCELADO;
 	}
 
 	public String getNumeroDoComprovanteDePostagem() {
