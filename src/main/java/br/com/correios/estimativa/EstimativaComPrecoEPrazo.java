@@ -1,9 +1,12 @@
 package br.com.correios.estimativa;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import br.com.correios.api.converter.ConversorPreco;
 import br.com.correios.api.estimativa.RequisicaoEstimativaDePrecoEPrazoBuilder.RequisicaoEstimativaDePrecoEPrazoComDimensoesDoPacote;
 
 /**
@@ -86,6 +89,10 @@ public class EstimativaComPrecoEPrazo {
 		return valor;
 	}
 
+	public BigDecimal getValorNumerico() {
+		return ConversorPreco.converterDe(valor);
+	}
+
 	public void setValor(String valor) {
 		this.valor = valor;
 	}
@@ -102,6 +109,10 @@ public class EstimativaComPrecoEPrazo {
 		return valorServicoMaoPropria;
 	}
 
+	public BigDecimal getValorServicoMaoPropriaNumerico() {
+		return ConversorPreco.converterDe(valorServicoMaoPropria);
+	}
+
 	public void setValorServicoMaoPropria(String valorServicoMaoPropria) {
 		this.valorServicoMaoPropria = valorServicoMaoPropria;
 	}
@@ -110,10 +121,17 @@ public class EstimativaComPrecoEPrazo {
 		return valorServicoAvisoDeRecebimento;
 	}
 
+	public BigDecimal getValorServicoAvisoDeRecebimentoNumerico() {
+		return ConversorPreco.converterDe(valorServicoAvisoDeRecebimento);
+	}
+
 	public void setValorServicoAvisoDeRecebimento(String valorServicoAvisoDeRecebimento) {
 		this.valorServicoAvisoDeRecebimento = valorServicoAvisoDeRecebimento;
 	}
 
+	public BigDecimal getValorSeguroNumerico() {
+		return ConversorPreco.converterDe(valorSeguro);
+	}
 	public String getValorSeguro() {
 		return valorSeguro;
 	}
@@ -136,6 +154,10 @@ public class EstimativaComPrecoEPrazo {
 
 	public void setEntregaAosSabados(boolean entregaAosSabados) {
 		this.entregaAosSabados = entregaAosSabados;
+	}
+
+	public BigDecimal getValorSemAdicionaisNumerico() {
+		return ConversorPreco.converterDe(valorSemAdicionais);
 	}
 
 	public String getValorSemAdicionais() {
