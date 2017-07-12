@@ -89,9 +89,8 @@ public class EstimativaComPrecoEPrazo {
 		return valor;
 	}
 
-	public BigDecimal getValorComoBigDecimal() {
-		return ConversorPreco.obterPrecoComoBigDecimalDe(valor)
-				.orElse(null);
+	public BigDecimal getValorNumerico() {
+		return ConversorPreco.converterDe(valor);
 	}
 
 	public void setValor(String valor) {
@@ -110,9 +109,8 @@ public class EstimativaComPrecoEPrazo {
 		return valorServicoMaoPropria;
 	}
 
-	public BigDecimal getValorServicoMaoPropriaComoBigDecimal() {
-		return ConversorPreco.obterPrecoComoBigDecimalDe(valorServicoMaoPropria)
-				.orElse(null);
+	public BigDecimal getValorServicoMaoPropriaNumerico() {
+		return ConversorPreco.converterDe(valorServicoMaoPropria);
 	}
 
 	public void setValorServicoMaoPropria(String valorServicoMaoPropria) {
@@ -123,18 +121,16 @@ public class EstimativaComPrecoEPrazo {
 		return valorServicoAvisoDeRecebimento;
 	}
 
-	public BigDecimal getValorServicoAvisoDeRecebimentoComoBigDecimal() {
-		return ConversorPreco.obterPrecoComoBigDecimalDe(valorServicoAvisoDeRecebimento)
-				.orElse(null);
+	public BigDecimal getValorServicoAvisoDeRecebimentoNumerico() {
+		return ConversorPreco.converterDe(valorServicoAvisoDeRecebimento);
 	}
 
 	public void setValorServicoAvisoDeRecebimento(String valorServicoAvisoDeRecebimento) {
 		this.valorServicoAvisoDeRecebimento = valorServicoAvisoDeRecebimento;
 	}
 
-	public BigDecimal getValorSeguroComoBigDecimal() {
-		return ConversorPreco.obterPrecoComoBigDecimalDe(valorSeguro)
-				.orElse(null);
+	public BigDecimal getValorSeguroNumerico() {
+		return ConversorPreco.converterDe(valorSeguro);
 	}
 	public String getValorSeguro() {
 		return valorSeguro;
@@ -160,9 +156,8 @@ public class EstimativaComPrecoEPrazo {
 		this.entregaAosSabados = entregaAosSabados;
 	}
 
-	public BigDecimal getValorSemAdicionaisComoBigDecimal() {
-		return ConversorPreco.obterPrecoComoBigDecimalDe(valorSemAdicionais)
-				.orElse(null);
+	public BigDecimal getValorSemAdicionaisNumerico() {
+		return ConversorPreco.converterDe(valorSemAdicionais);
 	}
 
 	public String getValorSemAdicionais() {
@@ -212,4 +207,5 @@ public class EstimativaComPrecoEPrazo {
 	private boolean temMensagemErro() {
 		return StringUtils.isNotBlank(codigoErro) && !"0".equals(codigoErro);
 	}
+
 }

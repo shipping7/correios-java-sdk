@@ -10,4 +10,8 @@ public class FormatacaoNumericaIncorretaException extends RuntimeException {
 		super(e);
 	}
 
+	public FormatacaoNumericaIncorretaException(String mensagem) {
+		super(mensagem);
+	}
+
 }
