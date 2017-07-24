@@ -22,6 +22,8 @@ public class CServicoToEstimativaComPrazoConverter implements Converter<CServico
 		estimativa.setEntregaAosSabados(booleanStringfier.convertToBoolean(servico.getEntregaSabado()));
 		estimativa.setCodigoErro(servico.getErro());
 		estimativa.setMensagemErro(servico.getMsgErro());
+		estimativa.setDataMaximaEntrega(servico.getDataMaxEntrega());
+		estimativa.setHoraMaximaEntrega(servico.getHoraMaxEntrega());
 
 		return estimativa;
 	}
