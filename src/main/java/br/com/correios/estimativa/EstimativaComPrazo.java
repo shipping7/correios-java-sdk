@@ -46,6 +46,16 @@ public class EstimativaComPrazo {
 	 */
 	private String mensagemErro;
 
+	/**
+	 * Data maxima que a entrega pode chegar.
+	 */
+	private String dataMaximaEntrega;
+
+	/**
+	 * Hora maxima que a entrega pode chegar.
+	 */
+	private String horaMaximaEntrega;
+
 	public String getCodigoServico() {
 		return codigoServico;
 	}
@@ -92,6 +102,22 @@ public class EstimativaComPrazo {
 
 	public void setMensagemErro(String mensagemErro) {
 		this.mensagemErro = mensagemErro;
+	}
+
+	public String getDataMaximaEntrega() {
+		return dataMaximaEntrega;
+	}
+
+	public void setDataMaximaEntrega(String dataMaximaEntrega) {
+		this.dataMaximaEntrega = dataMaximaEntrega;
+	}
+
+	public String getHoraMaximaEntrega() {
+		return horaMaximaEntrega;
+	}
+
+	public void setHoraMaximaEntrega(String horaMaximaEntrega) {
+		this.horaMaximaEntrega = horaMaximaEntrega;
 	}
 
 	/**

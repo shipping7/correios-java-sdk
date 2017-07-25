@@ -29,6 +29,8 @@ public class CServicoToEstimativaComPrazoConverterTest {
 		servico.setPrazoEntrega("5");
 		servico.setErro("0");
 		servico.setMsgErro(null);
+		servico.setDataMaxEntrega("20/10/2017");
+		servico.setHoraMaxEntrega("10:30:00");
 
 		EstimativaComPrazo estimativa = converter.convert(servico);
 
@@ -38,6 +40,8 @@ public class CServicoToEstimativaComPrazoConverterTest {
 		assertFalse(estimativa.isEntregaAosSabados());
 		assertEquals("0", estimativa.getCodigoErro());
 		assertNull(estimativa.getMensagemErro());
+		assertEquals("20/10/2017", estimativa.getDataMaximaEntrega());
+		assertEquals("10:30:00", estimativa.getHoraMaximaEntrega());
 	}
 
 	@Test

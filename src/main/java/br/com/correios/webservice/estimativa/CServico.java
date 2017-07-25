@@ -29,6 +29,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="MsgErro" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ValorSemAdicionais" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="obsFim" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="DataMaxEntrega" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="HoraMaxEntrega" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -50,7 +52,9 @@ import javax.xml.bind.annotation.XmlType;
     "erro",
     "msgErro",
     "valorSemAdicionais",
-    "obsFim"
+    "obsFim",
+    "dataMaxEntrega",
+    "horaMaxEntrega"
 })
 public class CServico {
 
@@ -77,6 +81,10 @@ public class CServico {
     @XmlElement(name = "ValorSemAdicionais")
     protected String valorSemAdicionais;
     protected String obsFim;
+    @XmlElement(name = "DataMaxEntrega")
+    protected String dataMaxEntrega;
+    @XmlElement(name = "HoraMaxEntrega")
+    protected String horaMaxEntrega;
 
     /**
      * Gets the value of the codigo property.
@@ -356,6 +364,54 @@ public class CServico {
      */
     public void setObsFim(String value) {
         this.obsFim = value;
+    }
+
+    /**
+     * Gets the value of the dataMaxEntrega property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDataMaxEntrega() {
+        return dataMaxEntrega;
+    }
+
+    /**
+     * Sets the value of the dataMaxEntrega property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDataMaxEntrega(String value) {
+        this.dataMaxEntrega = value;
+    }
+
+    /**
+     * Gets the value of the horaMaxEntrega property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getHoraMaxEntrega() {
+        return horaMaxEntrega;
+    }
+
+    /**
+     * Sets the value of the horaMaxEntrega property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHoraMaxEntrega(String value) {
+        this.horaMaxEntrega = value;
     }
 
 }
