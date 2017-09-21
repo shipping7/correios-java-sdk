@@ -9,7 +9,7 @@ public class MedidasDoObjetoPostado {
 	 *
 	 * Preenchimento não obrigatório.
 	 */
-	private String cubagem;
+	private BigDecimal cubagem;
 
 	/**
 	 * Peso do objeto (em gramas)
@@ -18,12 +18,12 @@ public class MedidasDoObjetoPostado {
 	 */
 	private BigDecimal peso;
 
-	public MedidasDoObjetoPostado(String cubagem, BigDecimal peso) {
+	public MedidasDoObjetoPostado(BigDecimal cubagem, BigDecimal peso) {
 		this.cubagem = cubagem;
 		this.peso = peso;
 	}
 
-	public String getCubagem() {
+	public BigDecimal getCubagem() {
 		return cubagem;
 	}
 
