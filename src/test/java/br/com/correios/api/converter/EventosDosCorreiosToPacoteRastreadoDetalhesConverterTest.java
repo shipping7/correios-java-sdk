@@ -71,6 +71,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		eventos.setStatus("01");
 		eventos.setHora("02:30");
 		eventos.setDescricao("Objeto entregue ao destinatário");
+		eventos.setDetalhe("Detalhe do evento");
 		String dataNoFormatoDosCorreios = "15/06/2016";
 		eventos.setData(dataNoFormatoDosCorreios);
 		objetoRastreado.getEvento().add(eventos);
@@ -89,6 +90,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		assertThat(eventoConvertido.getStatus()).isEqualTo("01");
 		assertThat(eventoConvertido.getHora()).isEqualTo("02:30");
 		assertThat(eventoConvertido.getDescricao()).isEqualTo("Objeto entregue ao destinatário");
+		assertThat(eventoConvertido.getDetalhe()).isEqualTo("Detalhe do evento");
 		assertThat(eventoConvertido.getData()).isEqualTo(dataEsperada);
 	}
 
@@ -109,6 +111,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		eventos.setStatus("01");
 		eventos.setHora("02:30");
 		eventos.setDescricao("Objeto entregue ao destinatário");
+		eventos.setDetalhe("Detalhe do evento");
 		eventos.setData("15/06/2016");
 
 		Destinos destinoDosCorreios = new Destinos();
@@ -152,6 +155,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		primeiroEvento.setStatus("01");
 		primeiroEvento.setHora("02:30");
 		primeiroEvento.setDescricao("Objeto entregue ao destinatário");
+		primeiroEvento.setDetalhe("Detalhe do evento");
 		primeiroEvento.setData("15/06/2016");
 
 		Eventos segundoEvento = new Eventos();
@@ -159,6 +163,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		segundoEvento.setStatus("01");
 		segundoEvento.setHora("02:30");
 		segundoEvento.setDescricao("Objeto entregue ao destinatário");
+		segundoEvento.setDetalhe("Detalhe do evento");
 		segundoEvento.setData("15/06/2016");
 
 		objetoRastreado.getEvento().add(primeiroEvento);
