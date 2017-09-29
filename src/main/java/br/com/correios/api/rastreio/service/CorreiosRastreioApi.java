@@ -10,12 +10,14 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import br.com.correios.api.converter.EventosDosCorreiosToPacoteRastreadoDetalhesConverter;
 import br.com.correios.api.exception.CorreiosCodigoRastreioInvalidoException;
 import br.com.correios.api.rastreio.model.CorreiosEscopoResultado;
 import br.com.correios.api.rastreio.model.CorreiosIdioma;
 import br.com.correios.api.rastreio.model.DetalhesRastreio;
 import br.com.correios.api.rastreio.model.ObjetoRastreio;
 import br.com.correios.credentials.CorreiosCredenciais;
+import br.com.correios.webservice.rastreio.Rastro;
 
 /**
  * Responsavel por chamar a API de rastreio dos Correios
@@ -29,9 +31,11 @@ public class CorreiosRastreioApi {
 	private CorreiosEscopoResultado resultado;
 	private String codigoDeRastreio;
 	private List<String> codigosDeRastreio;
+	private EventosDosCorreiosToPacoteRastreadoDetalhesConverter converter;
 
 	public CorreiosRastreioApi(CorreiosCredenciais credentials) {
 		this.credentials = credentials;
+		this.converter = new EventosDosCorreiosToPacoteRastreadoDetalhesConverter();
 	}
 
 	public CorreiosRastreioComIdioma buscaPacoteRastreadoUsandoOCodigo(String codigoDeRastreio) {
@@ -83,9 +87,9 @@ public class CorreiosRastreioApi {
 
 				public DetalhesRastreio getDetalhesRastreio() {
 					if (codigosDeRastreio != null && !codigosDeRastreio.isEmpty()) {
-						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(codigosDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
+						return new SoapCorreiosServicoRastreioApi(credentials, new Rastro().getServicePort(), converter).buscaDetalhesRastreio(codigosDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
 					} else if (StringUtils.isNotEmpty(codigoDeRastreio)) {
-						return new SoapCorreiosServicoRastreioApi(credentials).buscaDetalhesRastreio(codigoDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
+						return new SoapCorreiosServicoRastreioApi(credentials, new Rastro().getServicePort(), converter).buscaDetalhesRastreio(codigoDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
 					} else {
 						throw new CorreiosCodigoRastreioInvalidoException("É necessário buscar os detalhes por pelo menos um código de rastreio");
 					}

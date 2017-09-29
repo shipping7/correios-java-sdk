@@ -1,12 +1,14 @@
 package br.com.correios.api.rastreio.model;
 
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Optional;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import br.com.correios.api.rastreio.model.Evento;
+import com.google.common.base.Optional;
 
 public class ObjetoRastreio {
 
@@ -29,6 +31,11 @@ public class ObjetoRastreio {
 	 * Categoria do objeto solicitado
 	 */
 	private String categoria;
+
+	/**
+	 * Descricao do erro, caso exista algum problema
+	 */
+	private String descricaoErro;
 
 	/**
 	 * Lista dos eventos que ocorreram com o objeto desejado
@@ -75,6 +82,14 @@ public class ObjetoRastreio {
 		this.categoria = categoria;
 	}
 
+	public String getDescricaoErro() {
+		return descricaoErro;
+	}
+
+	public void setDescricaoErro(String descricaoErro) {
+		this.descricaoErro = descricaoErro;
+	}
+
 	public int getQuantidadeDeEventosOcorridos() {
 		return eventos.size() > 0 ? eventos.size(): 0;
 	}
@@ -95,7 +110,7 @@ public class ObjetoRastreio {
 
 	@Override
 	public String toString() {
-		return "ObjetoRastreio [numero=" + numero + ", sigla=" + sigla + ", nome=" + nome + ", categoria=" + categoria + ", eventos=" + eventos + "]";
+		return ToStringBuilder.reflectionToString(this, SHORT_PREFIX_STYLE);
 	}
 
 }

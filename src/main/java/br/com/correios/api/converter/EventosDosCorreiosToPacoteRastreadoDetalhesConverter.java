@@ -54,6 +54,8 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Con
 		objetoRastreio.setSigla(objeto.getSigla());
 		objetoRastreio.setNome(objeto.getNome());
 		objetoRastreio.setCategoria(objeto.getCategoria());
+		objetoRastreio.setDescricaoErro(objeto.getErro());
+
 		return objetoRastreio;
 	}
 
