@@ -54,6 +54,8 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Con
 		objetoRastreio.setSigla(objeto.getSigla());
 		objetoRastreio.setNome(objeto.getNome());
 		objetoRastreio.setCategoria(objeto.getCategoria());
+		objetoRastreio.setDescricaoErro(objeto.getErro());
+
 		return objetoRastreio;
 	}
 
@@ -68,6 +70,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverter implements Con
 		evento.setStatus(eventoDoCorreios.getStatus());
 		evento.setHora(eventoDoCorreios.getHora());
 		evento.setDescricao(eventoDoCorreios.getDescricao());
+		evento.setDetalhe(eventoDoCorreios.getDetalhe());
 
 		if (isNotBlank(eventoDoCorreios.getData())) {
 			Calendar data = FormatadorData.formataComPadraoDosCorreios(eventoDoCorreios.getData());

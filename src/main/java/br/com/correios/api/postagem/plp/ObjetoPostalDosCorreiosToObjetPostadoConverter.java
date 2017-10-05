@@ -12,7 +12,7 @@ import br.com.correios.api.postagem.xml.ObjetoPostal;
 public class ObjetoPostalDosCorreiosToObjetPostadoConverter {
 
 	public ObjetoPostado convert(ObjetoPostal objeto) {
-		MedidasDoObjetoPostado medidasDoObjeto = new MedidasDoObjetoPostado(objeto.getCubagem(), new BigDecimal(objeto.getPeso()));
+		MedidasDoObjetoPostado medidasDoObjeto = new MedidasDoObjetoPostado(new BigDecimal(objeto.getCubagem()), new BigDecimal(objeto.getPeso()));
 
 		ObservacoesDoCliente observacoesDoCliente = new ObservacoesDoCliente(objeto.getRt1(), objeto.getRt2());
 

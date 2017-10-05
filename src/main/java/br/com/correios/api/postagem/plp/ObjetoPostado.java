@@ -162,6 +162,10 @@ public class ObjetoPostado {
 		return statusProcessamento == StatusProcessamento.CANCELADO;
 	}
 
+	public StatusProcessamento getStatusProcessamento() {
+		return statusProcessamento;
+	}
+
 	public String getNumeroDoComprovanteDePostagem() {
 		return numeroDoComprovanteDePostagem;
 	}

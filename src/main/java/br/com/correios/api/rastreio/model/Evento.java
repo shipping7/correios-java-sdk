@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.google.common.base.Optional;
 
 /**
@@ -38,6 +41,11 @@ public class Evento {
 	private String descricao;
 
 	/**
+	 * Detalhe do evento ocorrido
+	 */
+	private String detalhe;
+
+	/**
 	 * CEP da unidade ECT
 	 */
 	private String codigo;
@@ -46,8 +54,7 @@ public class Evento {
 
 	private List<Destino> destinos = new ArrayList<>();
 
-	public Evento(String tipo, String status, Calendar data, String hora, String descricao, String codigo,
-			LocalDoPacote local) {
+	public Evento(String tipo, String status, Calendar data, String hora, String descricao, String codigo, LocalDoPacote local) {
 		this.tipo = tipo;
 		this.status = status;
 		this.data = data;
@@ -92,6 +99,14 @@ public class Evento {
 		this.descricao = descricao;
 	}
 
+	public String getDetalhe() {
+		return detalhe;
+	}
+
+	public void setDetalhe(String detalhe) {
+		this.detalhe = detalhe;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -126,8 +141,12 @@ public class Evento {
 		return Optional.absent();
 	}
 
-	public boolean isFinalStatus() {
+	public boolean isStatusFinal() {
 		return CorreiosStatusFinal.isFinal(tipo, status);
+	}
+
+	public boolean isEntregaRealizada() {
+		return CorreiosStatusDeEntrega.isEntregaRealizada(tipo, status);
 	}
 
 	public String getHora() {
@@ -144,7 +163,6 @@ public class Evento {
 
 	@Override
 	public String toString() {
-		return "Evento [tipo=" + tipo + ", status=" + status + ", descricao="
-				+ descricao + ", codigo=" + codigo + ", local=" + local + ", destino=" + destinos + "]";
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 }
