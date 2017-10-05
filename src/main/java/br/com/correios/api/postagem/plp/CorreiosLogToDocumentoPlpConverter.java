@@ -3,8 +3,6 @@ package br.com.correios.api.postagem.plp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Optional;
-
 import br.com.correios.api.converter.Converter;
 import br.com.correios.api.postagem.remetente.RemetenteDaPostagem;
 import br.com.correios.api.postagem.remetente.RemetenteDosCorreiosToRemetenteConverter;
@@ -13,14 +11,12 @@ import br.com.correios.api.postagem.xml.DadosPlp;
 import br.com.correios.api.postagem.xml.ObjetoPostal;
 import br.com.correios.api.postagem.xml.Remetente;
 
-public class CorreiosLogToPlpDocumentoConverter implements Converter<Correioslog, Optional<DocumentoPlp>> {
+public class CorreiosLogToDocumentoPlpConverter implements Converter<Correioslog, DocumentoPlp> {
 
 	@Override
-	public Optional<DocumentoPlp> convert(Correioslog correioslog) {
+	public DocumentoPlp convert(Correioslog correioslog) {
 		DadosPlp plpDosCorreios = correioslog.getPlp();
-		if (plpDosCorreios == null) {
-			return Optional.absent();
-		}
+
 		InformacoesPlp plp = new PlpDosCorreiosToPlpConverter().convert(plpDosCorreios);
 
 		Remetente remetenteDosCorreios = correioslog.getRemetente();
@@ -36,9 +32,7 @@ public class CorreiosLogToPlpDocumentoConverter implements Converter<Correioslog
 			listaDeObjetosPostados.add(objetoPostado);
 		}
 
-		DocumentoPlp documentoPlp = new DocumentoPlp(correioslog.getTipoArquivo(), correioslog.getVersaoArquivo(), plp, remetente, correioslog.getFormaPagamento(), listaDeObjetosPostados);
-
-		return Optional.of(documentoPlp);
+		return new DocumentoPlp(correioslog.getTipoArquivo(), correioslog.getVersaoArquivo(), plp, remetente, correioslog.getFormaPagamento(), listaDeObjetosPostados);
 	}
 
 }

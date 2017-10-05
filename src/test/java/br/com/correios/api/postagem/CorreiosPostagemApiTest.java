@@ -1,6 +1,7 @@
 package br.com.correios.api.postagem;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,6 +62,11 @@ public class CorreiosPostagemApiTest {
 	@Test
 	public void deveriaCancelarUmObjetoDePlp() {
 		postagemApi.cancelaObjetoDaPlp(48925409L, "PJ938918208BR");
+	}
+
+	@Test
+	public void testName() {
+		postagemApi.
 	}
 
 }

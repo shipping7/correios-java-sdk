@@ -19,12 +19,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.google.common.base.Optional;
 
-import br.com.correios.api.converter.Converter;
 import br.com.correios.api.exception.CorreiosServicoSoapException;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
+import br.com.correios.api.postagem.cliente.ClienteRetornadoDosCorreiosToClienteConverter;
 import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
+import br.com.correios.api.postagem.plp.CorreiosLogToDocumentoPlpConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
+import br.com.correios.api.postagem.plp.DocumentoPlpToCorreiosLogConverter;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.xml.Correioslog;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
@@ -42,11 +44,13 @@ public class SoapCorreiosServicoPostagemAPITest {
 	@Mock(answer=Answers.RETURNS_DEEP_STUBS)
 	private CorreiosClienteApi clienteAPI;
 	@Mock
-	private Converter<ClienteERP, ClienteEmpresa> clienteEmpresaConverter;
+	private ClienteRetornadoDosCorreiosToClienteConverter clienteEmpresaConverter;
 	@Mock
 	private XmlPlpParser xmlPlpParser;
 	@Mock
-	private Converter<Correioslog, Optional<DocumentoPlp>> documentoPlpConverter;
+	private CorreiosLogToDocumentoPlpConverter documentoPlpConverter;
+	@Mock
+	private DocumentoPlpToCorreiosLogConverter correiosPlpConverter;
 	@Mock
 	private ContratoEmpresa contratoEmpresa;
 	@Mock
@@ -62,17 +66,17 @@ public class SoapCorreiosServicoPostagemAPITest {
 
 	@Before
 	public void setup() throws Exception {
-		servicoPostagemAPI = new SoapCorreiosServicoPostagemAPI(credenciais, clienteAPI, clienteEmpresaConverter, xmlPlpParser, documentoPlpConverter);
+		servicoPostagemAPI = new SoapCorreiosServicoPostagemAPI(credenciais, clienteAPI, clienteEmpresaConverter, xmlPlpParser, documentoPlpConverter, correiosPlpConverter);
 		when(clienteAPI.getCorreiosWebService().buscaCliente(anyString(), anyString(), anyString(), anyString())).thenReturn(clienteERP);
 		when(clienteEmpresaConverter.convert(clienteERP)).thenReturn(clienteEmpresa);
 		when(clienteAPI.getCorreiosWebService().solicitaXmlPlp(anyLong(), anyString(), anyString())).thenReturn("xml");
-		when(xmlPlpParser.convert(anyString())).thenReturn(Optional.of(correiosLog));
-		when(documentoPlpConverter.convert(correiosLog)).thenReturn(Optional.of(documentoPlp));
+		when(xmlPlpParser.getObjectFrom(anyString())).thenReturn(Optional.of(correiosLog));
+		when(documentoPlpConverter.convert(correiosLog)).thenReturn(documentoPlp);
 		when(clienteAPI.getCorreiosWebService().cancelarObjeto(anyLong(), anyString(), anyString(), anyString())).thenReturn(true);
 	}
 
 	@Test
-	public void deveriaBuscarCliente() throws Exception {
+	public void deveriaBuscarCliente() {
 		Optional<ClienteEmpresa> cliente = servicoPostagemAPI.buscaCliente(contratoEmpresa);
 
 		assertEquals(clienteEmpresa, cliente.get());
@@ -114,12 +118,12 @@ public class SoapCorreiosServicoPostagemAPITest {
 	}
 
 	@Test
-	public void deveriaBuscarXmlPlpEConverterParaDocumentoPlp() throws Exception {
+	public void deveriaBuscarXmlPlpEConverterParaDocumentoPlp() {
 		Optional<DocumentoPlp> documentoPlpBuscado = servicoPostagemAPI.buscaDocumentoPlp(123L);
 
 		assertEquals(documentoPlp, documentoPlpBuscado.get());
 		verify(documentoPlpConverter).convert(any());
-		verify(xmlPlpParser).convert(any());
+		verify(xmlPlpParser).getObjectFrom(any());
 	}
 
 	@Test
@@ -130,12 +134,12 @@ public class SoapCorreiosServicoPostagemAPITest {
 
 		assertFalse(documentoPlpBuscado.isPresent());
 		verify(documentoPlpConverter, never()).convert(any());
-		verify(xmlPlpParser, never()).convert(any());
+		verify(xmlPlpParser, never()).getObjectFrom(any());
 	}
 
 	@Test
-	public void deveriaRetornarVazioQuandoNaoForPossivelConverterXml() throws Exception {
-		when(xmlPlpParser.convert(anyString())).thenReturn(Optional.absent());
+	public void deveriaRetornarVazioQuandoNaoForPossivelConverterXml() {
+		when(xmlPlpParser.getObjectFrom(anyString())).thenReturn(Optional.absent());
 
 		Optional<DocumentoPlp> documentoPlpBuscado = servicoPostagemAPI.buscaDocumentoPlp(123L);
 
@@ -143,8 +147,8 @@ public class SoapCorreiosServicoPostagemAPITest {
 	}
 
 	@Test
-	public void deveriaRetornarVazioQuandoNaoForPossivelConverterCorreiosLogEmDocumentoPlp() throws Exception {
-		when(documentoPlpConverter.convert(correiosLog)).thenReturn(Optional.absent());
+	public void deveriaRetornarVazioQuandoNaoNaoHouverPlpNoCorreiosLog() {
+		when(correiosLog.getPlp()).thenReturn(null);
 
 		Optional<DocumentoPlp> documentoPlpBuscado = servicoPostagemAPI.buscaDocumentoPlp(123L);
 

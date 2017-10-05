@@ -78,4 +78,7 @@ public class CorreiosPostagemApi {
 		}
 	}
 
+	public Long fechaPlp() {
+		return correiosServicoPostagemAPI.fechaPlp(documentoPlp, codigoPlpCliente);
+	}
 }

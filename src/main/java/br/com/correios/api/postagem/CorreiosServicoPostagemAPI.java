@@ -15,4 +15,6 @@ public interface CorreiosServicoPostagemAPI {
 	Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId, String etiqueta);
 
 	boolean cancelaObjetoDaPlp(Long plpId, String numeroEtiqueta);
+
+	Long fechaPlp(DocumentoPlp documentoPlp, Long codigoPlpCliente);
 }
