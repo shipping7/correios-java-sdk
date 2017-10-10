@@ -1,5 +1,6 @@
 package br.com.correios.api.rastreio.model;
 
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.util.ArrayList;
@@ -82,8 +83,8 @@ public class ObjetoRastreio {
 		this.categoria = categoria;
 	}
 
-	public String getDescricaoErro() {
-		return descricaoErro;
+	public Optional<String> getDescricaoErro() {
+		return Optional.fromNullable(defaultIfBlank(descricaoErro, null));
 	}
 
 	public void setDescricaoErro(String descricaoErro) {

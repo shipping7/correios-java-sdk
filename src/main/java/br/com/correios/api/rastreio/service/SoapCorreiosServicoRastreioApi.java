@@ -66,11 +66,15 @@ class SoapCorreiosServicoRastreioApi implements CorreiosServicoRastreioApi {
 		}
 
 		List<ObjetoRastreio> objetosRastreio = detalhesRastreio.getObjetosRastreio();
-		if (!objetosRastreio.isEmpty() && StringUtils.isNotBlank(objetosRastreio.get(0).getDescricaoErro())) {
-			throw new CorreiosServicoSoapException(String.format("Ocorreu um erro ao fazer a chamada SOAP para os correios: %s", objetosRastreio.get(0).getDescricaoErro()));
+		if (temErroGenerico(objetosRastreio)) {
+			throw new CorreiosServicoSoapException(String.format("Ocorreu um erro ao fazer a chamada SOAP para os correios: %s", objetosRastreio.get(0).getDescricaoErro().get()));
 		}
 
 		return detalhesRastreio;
+	}
+
+	private boolean temErroGenerico(List<ObjetoRastreio> objetosRastreio) {
+		return objetosRastreio.size() == 1 && StringUtils.equals(objetosRastreio.get(0).getNumero(), "Erro");
 	}
 
 }
