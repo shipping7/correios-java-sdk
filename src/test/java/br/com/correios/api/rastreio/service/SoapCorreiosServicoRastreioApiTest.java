@@ -4,15 +4,19 @@ import static br.com.correios.api.rastreio.model.CorreiosEscopoResultado.ULTIMO_
 import static br.com.correios.api.rastreio.model.CorreiosIdioma.PORTUGUES;
 import static br.com.correios.api.rastreio.model.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.endsWith;
 import static org.mockito.Mockito.when;
 
-import org.junit.Assert;
+import java.util.Arrays;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -35,6 +39,9 @@ public class SoapCorreiosServicoRastreioApiTest {
 	private EventosDosCorreiosToPacoteRastreadoDetalhesConverter converter;
 	@Mock
 	private EventosDosCorreios eventosDosCorreios;
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 
 	private SoapCorreiosServicoRastreioApi soapApi;
 	private DetalhesRastreio detalhesRastreioConvertido;
@@ -81,16 +88,48 @@ public class SoapCorreiosServicoRastreioApiTest {
 	}
 
 	@Test
-	public void deveriaLancarExcecaoQuandoServicoRetornarUmaDescricaoDeErro() {
-		objetoRastreio.setDescricaoErro("Erro maroto");
+	public void deveriaMostrarOErroDeCadaObjeto() {
+		ObjetoRastreio objetoRastreio1 = new ObjetoRastreio();
+		ObjetoRastreio objetoRastreio2 = new ObjetoRastreio();
+		ObjetoRastreio objetoRastreio3 = new ObjetoRastreio();
 
-		try {
-			soapApi.buscaDetalhesRastreio("DW123456BR", PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
+		objetoRastreio2.setDescricaoErro("Erro maroto");
 
-			Assert.fail();
-		} catch (CorreiosServicoSoapException e) {
-			assertTrue(e.getMessage().contains("Erro maroto"));
-		}
+		detalhesRastreioConvertido = new DetalhesRastreio();
+		detalhesRastreioConvertido.adicionaObjetoRastreio(objetoRastreio1);
+		detalhesRastreioConvertido.adicionaObjetoRastreio(objetoRastreio2);
+		detalhesRastreioConvertido.adicionaObjetoRastreio(objetoRastreio3);
+
+		when(servicoApi.buscaEventosLista(anyString(), anyString(), anyString(), anyString(), anyString(), anyListOf(String.class))).thenReturn(eventosDosCorreios);
+		when(converter.convert(eventosDosCorreios)).thenReturn(detalhesRastreioConvertido);
+
+		DetalhesRastreio detalhesRastreio = soapApi.buscaDetalhesRastreio(Arrays.asList("DW123456BR", "DW456789BR", "DW123789BR"), PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
+
+		assertThat(detalhesRastreio.getObjetosRastreio().get(0).getDescricaoErro().isPresent()).isFalse();
+		assertThat(detalhesRastreio.getObjetosRastreio().get(1).getDescricaoErro().get()).isEqualTo("Erro maroto");
+		assertThat(detalhesRastreio.getObjetosRastreio().get(2).getDescricaoErro().isPresent()).isFalse();
+	}
+
+	@Test
+	public void naoDeveriaLancarExcecaoQuandoSoTiverUmObjetoComErroEspecifico() {
+		objetoRastreio.setNumero("DW123456BR");
+		objetoRastreio.setDescricaoErro("Objeto nao encontrado");
+
+		DetalhesRastreio detalhesRastreio = soapApi.buscaDetalhesRastreio(Arrays.asList("DW123456BR"), PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
+
+		assertThat(detalhesRastreio.getObjetosRastreio().get(0).getNumero()).isEqualTo("DW123456BR");
+		assertThat(detalhesRastreio.getObjetosRastreio().get(0).getDescricaoErro().get()).isEqualTo("Objeto nao encontrado");
+	}
+
+	@Test
+	public void deveriaLancarExcecaoQuandoAcontecerAlgumErroGenerico() {
+		objetoRastreio.setNumero("Erro");
+		objetoRastreio.setDescricaoErro("Usuario e/ou senha invalidos.");
+
+		expectedException.expect(CorreiosServicoSoapException.class);
+		expectedException.expectMessage(endsWith("Usuario e/ou senha invalidos."));
+
+		soapApi.buscaDetalhesRastreio(Arrays.asList("DW123456BR", "DW456789BR", "DW123789BR"), PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
 	}
 
 }

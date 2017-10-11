@@ -53,7 +53,7 @@ public class EventosDosCorreiosToPacoteRastreadoDetalhesConverterTest {
 		assertThat(objetoRastreio.getNome()).isEqualTo("Encomenda E-SEDEX");
 		assertThat(objetoRastreio.getNumero()).isEqualTo("123456789");
 		assertThat(objetoRastreio.getSigla()).isEqualTo("DU");
-		assertThat(objetoRastreio.getDescricaoErro()).isEqualTo("Erro aqui");
+		assertThat(objetoRastreio.getDescricaoErro().get()).isEqualTo("Erro aqui");
 	}
 
 	@Test
