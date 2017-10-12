@@ -11,6 +11,7 @@ import br.com.correios.api.postagem.exception.ObjetoPlpInexistenteOuJaFoiCancela
 import br.com.correios.api.postagem.exception.ObjetoPlpJaFoiCanceladoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
+import br.com.correios.api.postagem.plp.NovoPlpBuilder;
 import br.com.correios.api.postagem.plp.ObjetoPostado;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
@@ -77,8 +78,14 @@ public class CorreiosPostagemApi {
 			throw exceptionCancelamento;
 		}
 	}
+	
+	
 
 	public Long fechaPlp() {
 		return correiosServicoPostagemAPI.fechaPlp(documentoPlp, codigoPlpCliente);
+	}
+
+	public NovoPlpBuilder novaPlp() {
+		return new NovoPlpBuilder();
 	}
 }

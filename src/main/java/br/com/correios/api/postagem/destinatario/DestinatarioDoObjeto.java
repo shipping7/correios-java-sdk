@@ -23,13 +23,12 @@ public class DestinatarioDoObjeto {
      *
      * Somente o Complemento não é obrigatório
      */
-    private EnderecoDoDestinatario enderedo;
+    private EnderecoDoDestinatario endereco;
 
-	public DestinatarioDoObjeto(String nome, DadosDeContatoDoDestinatario dadosDeContato,
-			EnderecoDoDestinatario enderedo) {
+	public DestinatarioDoObjeto(String nome, DadosDeContatoDoDestinatario dadosDeContato, EnderecoDoDestinatario endereco) {
 		this.nome = nome;
 		this.dadosDeContato = dadosDeContato;
-		this.enderedo = enderedo;
+		this.endereco = endereco;
 	}
 
 	public String getNome() {
@@ -40,8 +39,8 @@ public class DestinatarioDoObjeto {
 		return dadosDeContato;
 	}
 
-	public EnderecoDoDestinatario getEnderedo() {
-		return enderedo;
+	public EnderecoDoDestinatario getEndereco() {
+		return endereco;
 	}
 
 }

@@ -1,17 +1,33 @@
 package br.com.correios.api.postagem;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.base.Optional;
 
+import br.com.correios.Cep;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
 import br.com.correios.api.postagem.cliente.ContratoEmpresa;
+import br.com.correios.api.postagem.destinatario.DestinatarioDoObjeto;
+import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto;
+import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto.TipoDoObjetoSendoEnviado;
+import br.com.correios.api.postagem.plp.DestinatarioDoObjetoPlpBuilder;
+import br.com.correios.api.postagem.plp.DestinatarioDoObjetoPlp;
+import br.com.correios.api.postagem.plp.DimensoesDoObjetoPlpBuilder;
+import br.com.correios.api.postagem.plp.DimensoesDoObjetoPlp;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
+import br.com.correios.api.postagem.plp.Endereco;
+import br.com.correios.api.postagem.plp.EnderecoBuilder;
+import br.com.correios.api.postagem.plp.ObjetoPlp;
+import br.com.correios.api.postagem.plp.ObjetoPlpBuilder;
 import br.com.correios.api.postagem.plp.ObjetoPostado;
+import br.com.correios.api.postagem.plp.PesoDoObjetoPlp;
+import br.com.correios.api.postagem.plp.RemetentePlp;
+import br.com.correios.api.postagem.plp.RemetentePlpBuilder;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 public class CorreiosPostagemApiTest {
@@ -66,7 +82,53 @@ public class CorreiosPostagemApiTest {
 
 	@Test
 	public void testName() {
-		postagemApi.
+		Endereco endereco = new EnderecoBuilder()
+			.cep(new Cep("11045530"))
+			.logradouro("Rua Pindorama")
+			.numero(15)
+			.complemento("apto 31")
+			.bairro("Boqueirão")
+			.cidade("Santos")
+			.uf("SP")
+			.build();
+		
+		RemetentePlp remetente = new RemetentePlpBuilder()
+			.comNome("gabriel")
+			.comEmail("gabriel.lima.ads@gmail.com")
+			.comNumeroDeContrato("123")
+			.comNumeroDeDiretoria("456")
+			.comCodigoAdministrativo("")
+			.comEndereco(endereco)
+			.build();
+		
+		DestinatarioDoObjetoPlp destinatario = new DestinatarioDoObjetoPlpBuilder()
+			.comNome("Greg")
+			.ComEndereco(endereco)
+			.build();
+		
+		PesoDoObjetoPlp peso = PesoDoObjetoPlp.emGramas(BigDecimal.valueOf(1000));
+		
+		DimensoesDoObjetoPlp dimensoes = new DimensoesDoObjetoPlpBuilder()
+			.doTipoEnvelope()
+			.build();
+		
+		ObjetoPlp objetoPlp = new ObjetoPlpBuilder()
+			.comDimensoes(dimensoes)
+			.comPeso(peso)
+			.usandoCodigoDeServico("04669")
+			.comNumeroDaEtiqueta("DW123456BR")
+			.paraDestinatario(destinatario)
+			.adicionandoServicoAdicionalComCodigo("025")
+			.adicionandoServicoAdicionalComCodigo("069")
+			.comValorDeclarado(BigDecimal.TEN)
+			.build();
+		
+		
+		postagemApi.novaPlp()
+					.deRemetente(remetente)
+					.adicionandoObjeto(objetoPlp)
+					.adicionandoObjeto(objetoPlp)
+					.fechaPlp();
 	}
 
 }
