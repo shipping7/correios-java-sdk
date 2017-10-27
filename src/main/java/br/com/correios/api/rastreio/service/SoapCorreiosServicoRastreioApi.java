@@ -1,7 +1,5 @@
 package br.com.correios.api.rastreio.service;
 
-import static java.util.Arrays.asList;
-
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,17 +34,7 @@ class SoapCorreiosServicoRastreioApi implements CorreiosServicoRastreioApi {
 	}
 
 	@Override
-	public DetalhesRastreio buscaDetalhesRastreio(String codigoDeRastreio, CorreiosIdioma idioma, CorreiosEscopoResultado resultado, CorreiosTipoIdentificador tipoIdentificador) {
-		return buscaDetalhes(idioma, resultado, tipoIdentificador, asList(codigoDeRastreio));
-	}
-
-
-	@Override
 	public DetalhesRastreio buscaDetalhesRastreio(List<String> codigosDeRastreio, CorreiosIdioma idioma, CorreiosEscopoResultado resultado, CorreiosTipoIdentificador tipoIdentificador) {
-		return buscaDetalhes(idioma, resultado, tipoIdentificador, codigosDeRastreio);
-	}
-
-	private DetalhesRastreio buscaDetalhes(CorreiosIdioma idioma, CorreiosEscopoResultado resultado, CorreiosTipoIdentificador tipoIdentificador, List<String> codigosDeRastreio) {
 		EventosDosCorreios eventos = null;
 		try {
 			eventos = servicoApi.buscaEventosLista(credenciais.getUsuario(), credenciais.getSenha(),

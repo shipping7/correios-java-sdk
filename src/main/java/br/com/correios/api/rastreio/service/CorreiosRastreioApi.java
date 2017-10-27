@@ -6,6 +6,7 @@ import static br.com.correios.api.rastreio.model.CorreiosIdioma.INGLES;
 import static br.com.correios.api.rastreio.model.CorreiosIdioma.PORTUGUES;
 import static br.com.correios.api.rastreio.model.CorreiosTipoIdentificador.LISTA_DE_OBJETOS;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +30,6 @@ public class CorreiosRastreioApi {
 	private CorreiosCredenciais credentials;
 	private CorreiosIdioma idioma;
 	private CorreiosEscopoResultado resultado;
-	private String codigoDeRastreio;
 	private List<String> codigosDeRastreio;
 	private EventosDosCorreiosToPacoteRastreadoDetalhesConverter converter;
 
@@ -39,7 +39,8 @@ public class CorreiosRastreioApi {
 	}
 
 	public CorreiosRastreioComIdioma buscaPacoteRastreadoUsandoOCodigo(String codigoDeRastreio) {
-		this.codigoDeRastreio = codigoDeRastreio;
+		this.codigosDeRastreio = new LinkedList<>();
+		this.codigosDeRastreio.add(codigoDeRastreio);
 		return new CorreiosRastreioComIdioma();
 	}
 
@@ -86,13 +87,17 @@ public class CorreiosRastreioApi {
 			public class CorreiosRastreioComEventos {
 
 				public DetalhesRastreio getDetalhesRastreio() {
-					if (codigosDeRastreio != null && !codigosDeRastreio.isEmpty()) {
+					if (codigosDeRastreio != null && !codigosDeRastreio.isEmpty() && todosOsCodigosEstaoPreenchidos(codigosDeRastreio)) {
 						return new SoapCorreiosServicoRastreioApi(credentials, new Rastro().getServicePort(), converter).buscaDetalhesRastreio(codigosDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
-					} else if (StringUtils.isNotEmpty(codigoDeRastreio)) {
-						return new SoapCorreiosServicoRastreioApi(credentials, new Rastro().getServicePort(), converter).buscaDetalhesRastreio(codigoDeRastreio, idioma, resultado, LISTA_DE_OBJETOS);
 					} else {
 						throw new CorreiosCodigoRastreioInvalidoException("É necessário buscar os detalhes por pelo menos um código de rastreio");
 					}
+				}
+
+				private boolean todosOsCodigosEstaoPreenchidos(List<String> codigosDeRastreio) {
+					String[] arrayDeCodigosDeRastreio = codigosDeRastreio.toArray(new String[codigosDeRastreio.size()]);
+
+					return StringUtils.isNoneBlank(arrayDeCodigosDeRastreio);
 				}
 
 			}

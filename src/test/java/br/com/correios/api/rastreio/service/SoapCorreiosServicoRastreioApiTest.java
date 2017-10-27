@@ -61,7 +61,7 @@ public class SoapCorreiosServicoRastreioApiTest {
 
 	@Test
 	public void deveriaBuscarDetalhesRastreioDeUmCodigoDeRastreio() {
-		DetalhesRastreio detalhesRastreio = soapApi.buscaDetalhesRastreio("DW123456BR", PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
+		DetalhesRastreio detalhesRastreio = soapApi.buscaDetalhesRastreio(asList("DW123456BR"), PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
 
 		assertEquals(detalhesRastreioConvertido, detalhesRastreio);
 	}
@@ -77,14 +77,14 @@ public class SoapCorreiosServicoRastreioApiTest {
 	@SuppressWarnings("unchecked")
 	public void deveriaLancarExcecaoQuandoApiLancarExcecao() {
 		when(servicoApi.buscaEventosLista(anyString(), anyString(), anyString(), anyString(), anyString(), anyListOf(String.class))).thenThrow(RuntimeException.class);
-		soapApi.buscaDetalhesRastreio("DW123456BR", PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
+		soapApi.buscaDetalhesRastreio(asList("DW123456BR"), PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
 	}
 
 	@Test(expected=CorreiosEventosConverterException.class)
 	@SuppressWarnings("unchecked")
 	public void deveriaLancarExcecaoQuandoHouverAlgumProblemaParaConverter() {
 		when(converter.convert(eventosDosCorreios)).thenThrow(RuntimeException.class);
-		soapApi.buscaDetalhesRastreio("DW123456BR", PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
+		soapApi.buscaDetalhesRastreio(asList("DW123456BR"), PORTUGUES, ULTIMO_EVENTO,  LISTA_DE_OBJETOS);
 	}
 
 	@Test
