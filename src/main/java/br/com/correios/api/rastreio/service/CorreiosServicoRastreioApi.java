@@ -9,7 +9,5 @@ import br.com.correios.api.rastreio.model.DetalhesRastreio;
 
 public interface CorreiosServicoRastreioApi {
 
-	DetalhesRastreio buscaDetalhesRastreio(String codigoDeRastreio, CorreiosIdioma idioma, CorreiosEscopoResultado resultado, CorreiosTipoIdentificador tipoIdentificador);
-
 	DetalhesRastreio buscaDetalhesRastreio(List<String> codigosDeRastreio, CorreiosIdioma idioma, CorreiosEscopoResultado resultado, CorreiosTipoIdentificador tipoIdentificador);
 }
