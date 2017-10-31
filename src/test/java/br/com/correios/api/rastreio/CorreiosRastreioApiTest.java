@@ -1,4 +1,4 @@
-package br.com.correios.api.rastreio.service;
+package br.com.correios.api.rastreio;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,29 +25,29 @@ public class CorreiosRastreioApiTest {
 
 	@Test(expected=CorreiosCodigoRastreioInvalidoException.class)
 	public void deveriaLancarExcecaoQuandoNaoPassarCodigoDeRastreio() {
-		correiosApi.buscaPacoteRastreadoUsandoOCodigo("").comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
+		correiosApi.buscaRastreio().peloCodigoDeRastreio("").comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 	}
 
 	@Test(expected=CorreiosCodigoRastreioInvalidoException.class)
 	public void deveriaLancarExcecaoQuandoNaoPassarCodigosDeRastreio() {
-		correiosApi.buscaPacotesRastreadosPelaListaDeTrackings(null).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
+		correiosApi.buscaRastreio().peloCodigoDeRastreio(null).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 	}
 
 	@Test(expected=CorreiosCodigoRastreioInvalidoException.class)
 	public void deveriaLancarExcecaoQuandoPassarListaDeCodigosDeRastreioVazia() {
-		correiosApi.buscaPacotesRastreadosPelaListaDeTrackings(Collections.emptyList()).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
+		correiosApi.buscaRastreio().pelosCodigosDeRastreio(Collections.emptyList()).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 	}
 
 	@Test
 	public void deveriaRetornarOsEventosAPartirDeUmTrackingCode() {
-		DetalhesRastreio pacoteTracker = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
+		DetalhesRastreio pacoteTracker = correiosApi.buscaRastreio().peloCodigoDeRastreio("PN601598269BR").comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 
 		System.out.println(pacoteTracker);
 	}
 
 	@Test
 	public void deveriaRetornarSomenteOUltimoEventoAPartirDeUmTrackingCode() {
-		DetalhesRastreio detalhesRastreio = correiosApi.buscaPacoteRastreadoUsandoOCodigo("DU500853237BR").comRetornoEmPortugues().somenteUltimoEvento().getDetalhesRastreio();
+		DetalhesRastreio detalhesRastreio = correiosApi.buscaRastreio().peloCodigoDeRastreio("DU500853237BR").comRetornoEmPortugues().somenteComUltimoEvento().getDetalhesRastreio();
 
 		System.out.println(detalhesRastreio);
 	}
@@ -58,18 +58,19 @@ public class CorreiosRastreioApiTest {
 		trackingCodes.add("DU500853237BR");
 		trackingCodes.add("DU496842125BR");
 
-		DetalhesRastreio detalhesRastreio = correiosApi.buscaPacotesRastreadosPelaListaDeTrackings(trackingCodes).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
+		DetalhesRastreio detalhesRastreio = correiosApi.buscaRastreio().pelosCodigosDeRastreio(trackingCodes).comRetornoEmPortugues().comTodosOsEventos().getDetalhesRastreio();
 
 		System.out.println(detalhesRastreio);
 	}
 
 	@Test
 	public void deveriaUsarOCodigoDeRastreioPassadoENaoUsarDeOutrasChamadas() {
-		correiosApi.buscaPacotesRastreadosPelaListaDeTrackings(Arrays.asList("PO885187892BR","PN210491273BR","DU698173525BR")).comRetornoEmPortugues().somenteUltimoEvento().getDetalhesRastreio();
+		correiosApi.buscaRastreio().pelosCodigosDeRastreio(Arrays.asList("PO885187892BR","PN210491273BR","DU698173525BR")).comRetornoEmPortugues().somenteComUltimoEvento().getDetalhesRastreio();
 
-		DetalhesRastreio detalhesRastreio2 = correiosApi.buscaPacoteRastreadoUsandoOCodigo("PN123456789BR").comRetornoEmPortugues().somenteUltimoEvento().getDetalhesRastreio();
+		DetalhesRastreio detalhesRastreio2 = correiosApi.buscaRastreio().peloCodigoDeRastreio("PO895327210BR").comRetornoEmPortugues().somenteComUltimoEvento().getDetalhesRastreio();
 
 		Assertions.assertThat(detalhesRastreio2.getObjetosRastreio()).hasSize(1);
-		Assertions.assertThat(detalhesRastreio2.getObjetosRastreio().get(0).getNumero()).isEqualTo("PN123456789BR");
+		Assertions.assertThat(detalhesRastreio2.getObjetosRastreio().get(0).getNumero()).isEqualTo("PO895327210BR");
 	}
+
 }
