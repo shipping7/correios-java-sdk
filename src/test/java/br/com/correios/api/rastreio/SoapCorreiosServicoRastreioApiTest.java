@@ -1,4 +1,4 @@
-package br.com.correios.api.rastreio.service;
+package br.com.correios.api.rastreio;
 
 import static br.com.correios.api.rastreio.model.CorreiosEscopoResultado.ULTIMO_EVENTO;
 import static br.com.correios.api.rastreio.model.CorreiosIdioma.PORTUGUES;

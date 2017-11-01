@@ -1,4 +1,4 @@
-package br.com.correios.api.rastreio.service;
+package br.com.correios.api.rastreio;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package br.com.correios.api;
 import br.com.correios.api.estimativa.CorreiosEstimativaAPI;
 import br.com.correios.api.etiqueta.CorreiosEtiquetaApi;
 import br.com.correios.api.postagem.CorreiosPostagemApi;
-import br.com.correios.api.rastreio.service.CorreiosRastreioApi;
+import br.com.correios.api.rastreio.CorreiosRastreioApi;
 import br.com.correios.credentials.CorreiosCredenciais;
 
 /**
