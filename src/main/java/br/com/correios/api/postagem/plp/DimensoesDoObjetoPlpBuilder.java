@@ -2,33 +2,31 @@ package br.com.correios.api.postagem.plp;
 
 import java.math.BigDecimal;
 
-import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto;
 import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto.TipoDoObjetoSendoEnviado;
-import br.com.correios.api.postagem.plp.EnderecoBuilder.EnderecoComUfBuilder;
 
 public class DimensoesDoObjetoPlpBuilder {
-	
+
 	private BigDecimal altura;
 	private BigDecimal comprimento;
 	private BigDecimal largura;
 	private BigDecimal diametro;
 	private TipoDoObjetoSendoEnviado tipoDoObjetoSendoEnviado;
-	
+
 	public DimensoesDoObjetoPlpDoTipoPacoteOuCaixaBuilder doTipoPacoteOuCaixa() {
 		this.tipoDoObjetoSendoEnviado = TipoDoObjetoSendoEnviado.PACOTE_OU_CAIXA;
 		return new DimensoesDoObjetoPlpDoTipoPacoteOuCaixaBuilder(this);
 	}
-	
+
 	public DimensoesDoObjetoPlpDoTipoRoloOuCilindroBuilder doTipoRoloOuCilindro() {
 		this.tipoDoObjetoSendoEnviado = TipoDoObjetoSendoEnviado.ROLO_OU_CILINDRO;
 		return new DimensoesDoObjetoPlpDoTipoRoloOuCilindroBuilder(this);
 	}
-	
+
 	public DimensoesDoObjetoPlpDoTipoEnvelopeBuilder doTipoEnvelope() {
 		this.tipoDoObjetoSendoEnviado = TipoDoObjetoSendoEnviado.ENVELOPE;
 		return new DimensoesDoObjetoPlpDoTipoEnvelopeBuilder(this);
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoPacoteOuCaixaBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -42,7 +40,7 @@ public class DimensoesDoObjetoPlpBuilder {
 			return new DimensoesDoObjetoPlpDoTipoPacoteOuCaixaComAlturaBuilder(builder);
 		}
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoPacoteOuCaixaComAlturaBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -56,7 +54,7 @@ public class DimensoesDoObjetoPlpBuilder {
 			return new DimensoesDoObjetoPlpDoTipoPacoteOuCaixaComComprimentoBuilder(builder);
 		}
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoPacoteOuCaixaComComprimentoBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -70,7 +68,7 @@ public class DimensoesDoObjetoPlpBuilder {
 			return new DimensoesDoObjetoPlpDoTipoPacoteOuCaixaComLarguraBuilder(builder);
 		}
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoPacoteOuCaixaComLarguraBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -83,7 +81,7 @@ public class DimensoesDoObjetoPlpBuilder {
 			return new DimensoesDoObjetoPlp(builder.tipoDoObjetoSendoEnviado, builder.altura, builder.comprimento, builder.largura, builder.diametro);
 		}
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoRoloOuCilindroBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -97,7 +95,7 @@ public class DimensoesDoObjetoPlpBuilder {
 			return new DimensoesDoObjetoPlpDoTipoRoloOuCilindroComComprimentoBuilder(builder);
 		}
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoRoloOuCilindroComComprimentoBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -111,7 +109,7 @@ public class DimensoesDoObjetoPlpBuilder {
 			return new DimensoesDoObjetoPlpDoTipoRoloOuCilindroComDiametroBuilder(builder);
 		}
 	}
-	
+
 	public class DimensoesDoObjetoPlpDoTipoRoloOuCilindroComDiametroBuilder {
 
 		private DimensoesDoObjetoPlpBuilder builder;
@@ -136,7 +134,7 @@ public class DimensoesDoObjetoPlpBuilder {
 		public DimensoesDoObjetoPlp build() {
 			return new DimensoesDoObjetoPlp(builder.tipoDoObjetoSendoEnviado, builder.altura, builder.comprimento, builder.largura, builder.diametro);
 		}
-		
+
 	}
 
 }

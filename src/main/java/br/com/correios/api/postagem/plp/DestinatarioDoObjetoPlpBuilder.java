@@ -18,7 +18,7 @@ public class DestinatarioDoObjetoPlpBuilder {
 			this.builder = builder;
 		}
 
-		public DestinatarioDoObjetoPlpComEnderecoBuilder ComEndereco(Endereco enderecoDoDestinatario) {
+		public DestinatarioDoObjetoPlpComEnderecoBuilder comEndereco(Endereco enderecoDoDestinatario) {
 			builder.endereco = enderecoDoDestinatario;
 			return new DestinatarioDoObjetoPlpComEnderecoBuilder(builder);
 		}

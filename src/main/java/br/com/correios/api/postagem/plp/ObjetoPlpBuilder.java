@@ -1,81 +1,113 @@
 package br.com.correios.api.postagem.plp;
 
-import java.math.BigDecimal;
+import static com.google.common.collect.Sets.newHashSet;
 
-import br.com.correios.api.postagem.destinatario.DestinatarioDoObjeto;
-import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto;
-import br.com.correios.api.postagem.plp.EnderecoBuilder.EnderecoComUfBuilder;
-import br.com.correios.api.postagem.plp.ObjetoPlpBuilder.ObjetoPlpComServicoAdicionalBuilder;
+import java.math.BigDecimal;
+import java.util.Set;
 
 public class ObjetoPlpBuilder {
 
+	private final static String CODIGO_DE_SERVICO_ADICIONAL_SEGURO = "019";
+	private final static String CODIGO_DE_SERVICO_REGISTRO_NACIONAL = "025";
+
+	private DimensoesDoObjetoPlp dimensoesDoObjeto;
+	private PesoDoObjetoPlp pesoDoObjeto;
+	private String codigoDeServico;
+	private String numeroDaEtiqueta;
+	private DestinatarioDoObjetoPlp destinatarioDoObjeto;
+	private Set<String> codigoServicosAdicionais = newHashSet(CODIGO_DE_SERVICO_REGISTRO_NACIONAL);
+	private BigDecimal valorAdicionalDoSeguro;
+
 	public ObjetoPlpComDimensoesDoObjetoBuilder comDimensoes(DimensoesDoObjetoPlp dimensoesDoObjeto) {
-		return null;
+		this.dimensoesDoObjeto = dimensoesDoObjeto;
+		return new ObjetoPlpComDimensoesDoObjetoBuilder(this);
 	}
-	
+
 	public class ObjetoPlpComDimensoesDoObjetoBuilder {
 
-		public ObjetoPlpComPesoDoObjetoPlpBuilder comPeso(PesoDoObjetoPlp pesoDoObjeto) {
-			return null;
+		private ObjetoPlpBuilder builder;
+
+		private ObjetoPlpComDimensoesDoObjetoBuilder(ObjetoPlpBuilder builder) {
+			this.builder = builder;
 		}
-		
+
+		public ObjetoPlpComPesoDoObjetoPlpBuilder comPeso(PesoDoObjetoPlp pesoDoObjeto) {
+			builder.pesoDoObjeto = pesoDoObjeto;
+			return new ObjetoPlpComPesoDoObjetoPlpBuilder(builder);
+		}
+
 	}
-	
+
 	public class ObjetoPlpComPesoDoObjetoPlpBuilder {
 
-		public ObjetoPlpComCodigoDeServicoBuilder usandoCodigoDeServico(String codigoDeServico) {
-			return null;
+		private ObjetoPlpBuilder builder;
+
+		private ObjetoPlpComPesoDoObjetoPlpBuilder(ObjetoPlpBuilder builder) {
+			this.builder = builder;
 		}
-		
+
+		public ObjetoPlpComCodigoDeServicoBuilder usandoCodigoDeServico(String codigoDeServico) {
+			builder.codigoDeServico = codigoDeServico;
+			return new ObjetoPlpComCodigoDeServicoBuilder(builder);
+		}
+
 	}
-	
+
 	public class ObjetoPlpComCodigoDeServicoBuilder {
 
-		public ObjetoPlpComNumeroDaEtiquetaBuilder comNumeroDaEtiqueta(String numeroDaEtiqueta) {
-			// TODO Auto-generated method stub
-			return null;
+		private ObjetoPlpBuilder builder;
+
+		private ObjetoPlpComCodigoDeServicoBuilder(ObjetoPlpBuilder builder) {
+			this.builder = builder;
 		}
-		
+
+		public ObjetoPlpComNumeroDaEtiquetaBuilder comNumeroDaEtiqueta(String numeroDaEtiqueta) {
+			builder.numeroDaEtiqueta = numeroDaEtiqueta;
+			return new ObjetoPlpComNumeroDaEtiquetaBuilder(builder);
+		}
+
 	}
-	
+
 	public class ObjetoPlpComNumeroDaEtiquetaBuilder {
 
-		public ObjetoPlpComDestinatarioBuilder paraDestinatario(DestinatarioDoObjetoPlp destinatarioDoObjetoPlp) {
-			return null;
+		private ObjetoPlpBuilder builder;
+
+		private ObjetoPlpComNumeroDaEtiquetaBuilder(ObjetoPlpBuilder builder) {
+			this.builder = builder;
 		}
-		
+
+		public ObjetoPlpComDestinatarioBuilder paraDestinatario(DestinatarioDoObjetoPlp destinatarioDoObjetoPlp) {
+			builder.destinatarioDoObjeto = destinatarioDoObjetoPlp;
+			return new ObjetoPlpComDestinatarioBuilder(builder);
+		}
+
 	}
-	
+
 	public class ObjetoPlpComDestinatarioBuilder {
 
-		public ObjetoPlp build() {
-			return null;
+		private ObjetoPlpBuilder builder;
+
+		private ObjetoPlpComDestinatarioBuilder(ObjetoPlpBuilder builder) {
+			this.builder = builder;
 		}
 
-		public ObjetoPlpComServicoAdicionalBuilder adicionandoServicoAdicionalComCodigo(String codigoServicoAdicional) {
-			return null;
-		} 
-		
-	}
-	
-	public class ObjetoPlpComServicoAdicionalBuilder {
-
-		public ObjetoPlpComValorDeclaradoDoServicoAdicionalBuilder comValorDeclarado(BigDecimal valorDeclaradoDoServicoAdicional) {
-			return null;
+		public ObjetoPlpComDestinatarioBuilder adicionandoServicoAdicionalComCodigo(String codigoServicoAdicional) {
+			builder.codigoServicosAdicionais.add(codigoServicoAdicional);
+			return new ObjetoPlpComDestinatarioBuilder(builder);
 		}
 
-		public ObjetoPlpComServicoAdicionalBuilder adicionandoServicoAdicionalComCodigo(String string) {
-			return null;
+		public ObjetoPlpComDestinatarioBuilder comValorAdicionalDoSeguro(BigDecimal valorAdicionalDoSeguro) {
+			builder.codigoServicosAdicionais.add(CODIGO_DE_SERVICO_ADICIONAL_SEGURO);
+			builder.valorAdicionalDoSeguro = valorAdicionalDoSeguro;
+			return new ObjetoPlpComDestinatarioBuilder(builder);
 		}
-		
-	}
-	
-	public class ObjetoPlpComValorDeclaradoDoServicoAdicionalBuilder {
 
 		public ObjetoPlp build() {
-			return null;
+			return new ObjetoPlp(builder.dimensoesDoObjeto, builder.pesoDoObjeto, builder.codigoDeServico,
+					builder.numeroDaEtiqueta, builder.destinatarioDoObjeto, builder.codigoServicosAdicionais,
+					builder.valorAdicionalDoSeguro);
 		}
-		
+
 	}
 
 }

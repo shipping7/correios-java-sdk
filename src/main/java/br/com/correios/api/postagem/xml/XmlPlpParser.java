@@ -33,7 +33,7 @@ public class XmlPlpParser {
 			Marshaller marshaller = jaxbContext.createMarshaller();
 
 			StringWriter writer = new StringWriter();
-			marshaller.marshal(marshaller, writer);
+			marshaller.marshal(correiosLog, writer);
 
 			return writer.toString();
 

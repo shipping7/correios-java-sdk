@@ -14,8 +14,11 @@ import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToDocumentoPlpConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
-import br.com.correios.api.postagem.plp.DocumentoPlpToCorreiosLogConverter;
-import br.com.correios.api.postagem.plp.ObjetoPostado;
+import br.com.correios.api.postagem.plp.NovaPlp;
+import br.com.correios.api.postagem.plp.NovaPlpToCorreiosLogConverter;
+import br.com.correios.api.postagem.plp.ObjetoPlp;
+import br.com.correios.api.postagem.plp.Plp;
+import br.com.correios.api.postagem.plp.PlpNaoFechadaException;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.xml.Correioslog;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
@@ -32,14 +35,12 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 	private final ClienteRetornadoDosCorreiosToClienteConverter clienteEmpresaConverter;
 	private final XmlPlpParser xmlPlpParser;
 	private final CorreiosLogToDocumentoPlpConverter documentoPlpConverter;
-	private final DocumentoPlpToCorreiosLogConverter correiosPlpConverter;
+	private final NovaPlpToCorreiosLogConverter correiosPlpConverter;
 
-	SoapCorreiosServicoPostagemAPI(CorreiosCredenciais credenciais,
-									CorreiosClienteApi clienteApi,
-									ClienteRetornadoDosCorreiosToClienteConverter clienteEmpresaConverter,
-									XmlPlpParser xmlPlpParser,
-									CorreiosLogToDocumentoPlpConverter documentoPlpConverter,
-									DocumentoPlpToCorreiosLogConverter correiosPlpConverter) {
+	SoapCorreiosServicoPostagemAPI(CorreiosCredenciais credenciais, CorreiosClienteApi clienteApi,
+			ClienteRetornadoDosCorreiosToClienteConverter clienteEmpresaConverter, XmlPlpParser xmlPlpParser,
+			CorreiosLogToDocumentoPlpConverter documentoPlpConverter,
+			NovaPlpToCorreiosLogConverter correiosPlpConverter) {
 
 		this.credenciais = credenciais;
 		this.clienteApi = clienteApi;
@@ -54,10 +55,8 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 		try {
 			ClienteERP clienteRetornadoDosCorreios = clienteApi.getCorreiosWebService().buscaCliente(contratoEmpresa.getContrato(), contratoEmpresa.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
 
-			return Optional.fromNullable(clienteRetornadoDosCorreios)
-						   .transform(clienteEmpresaConverter::convert)
-						   .transform(Optional::of)
-						   .or(Optional.<ClienteEmpresa>absent());
+			return Optional.fromNullable(clienteRetornadoDosCorreios).transform(clienteEmpresaConverter::convert)
+						   .transform(Optional::of).or(Optional.<ClienteEmpresa>absent());
 
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
@@ -105,24 +104,6 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 		}
 	}
 
-	@Override
-	public Long fechaPlp(DocumentoPlp documentoPlp, Long codigoPlpCliente) {
-		try {
-			Correioslog correiosLog = correiosPlpConverter.convert(documentoPlp);
-
-			String numeroDoCartaoDePostagem = documentoPlp.getPlp().getNumeroDoCartaoDePostagem();
-			List<String> numerosDasEtiquetas = new LinkedList<>();
-			for (ObjetoPostado objetoPostado : documentoPlp.getObjetoPostado()) {
-				numerosDasEtiquetas.add(objetoPostado.getNumeroEtiqueta());
-			}
-
-			return clienteApi.getCorreiosWebService().fechaPlpVariosServicos(xmlPlpParser.getXmlFrom(correiosLog), codigoPlpCliente, numeroDoCartaoDePostagem, numerosDasEtiquetas, credenciais.getUsuario(), credenciais.getSenha());
-		} catch (Exception e) {
-			//TODO
-		}
-		return null; //TODO
-	}
-
 	private Optional<DocumentoPlp> getDocumentoPlpValidadoAPartirDo(String xmlPlp) {
 		boolean xmlPlpDosCorreiosEstaValido = xmlPlp != null && !xmlPlp.isEmpty();
 
@@ -135,6 +116,28 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 		}
 
 		return Optional.absent();
+	}
+
+	@Override
+	public Plp fechaPlp(String cartaoDePostagem, Long codigoPlpCliente, NovaPlp novaPlp) {
+		try {
+			Correioslog correiosLog = correiosPlpConverter.convert(novaPlp);
+
+			List<String> etiquetasSemDigitoVerificador = new LinkedList<>();
+
+			for (ObjetoPlp objetoPlp : novaPlp.getObjetosPlp()) {
+				etiquetasSemDigitoVerificador.add(objetoPlp.getNumeroDaEtiquetaSemDigitoVerificador());
+			}
+
+			String xmlFrom = xmlPlpParser.getXmlFrom(correiosLog);
+
+			Long plpId = clienteApi.getCorreiosWebService()
+					  		 	   .fechaPlpVariosServicos(xmlFrom, codigoPlpCliente, cartaoDePostagem, etiquetasSemDigitoVerificador, credenciais.getUsuario(), credenciais.getSenha());
+
+			return new Plp(plpId);
+		} catch (Exception e) {
+			throw new PlpNaoFechadaException(e);
+		}
 	}
 
 }

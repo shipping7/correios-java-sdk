@@ -26,7 +26,7 @@ import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.CorreiosPostagemAutenticacaoException;
 import br.com.correios.api.postagem.plp.CorreiosLogToDocumentoPlpConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
-import br.com.correios.api.postagem.plp.DocumentoPlpToCorreiosLogConverter;
+import br.com.correios.api.postagem.plp.NovaPlpToCorreiosLogConverter;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.xml.Correioslog;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
@@ -50,7 +50,7 @@ public class SoapCorreiosServicoPostagemAPITest {
 	@Mock
 	private CorreiosLogToDocumentoPlpConverter documentoPlpConverter;
 	@Mock
-	private DocumentoPlpToCorreiosLogConverter correiosPlpConverter;
+	private NovaPlpToCorreiosLogConverter correiosPlpConverter;
 	@Mock
 	private ContratoEmpresa contratoEmpresa;
 	@Mock

@@ -9,9 +9,10 @@ import br.com.correios.api.postagem.cliente.ContratoEmpresa;
 import br.com.correios.api.postagem.exception.ObjetoPlpFoiPostadoException;
 import br.com.correios.api.postagem.exception.ObjetoPlpInexistenteOuJaFoiCanceladoException;
 import br.com.correios.api.postagem.exception.ObjetoPlpJaFoiCanceladoException;
-import br.com.correios.api.postagem.plp.CorreiosLogToPlpDocumentoConverter;
+import br.com.correios.api.postagem.plp.CorreiosLogToDocumentoPlpConverter;
 import br.com.correios.api.postagem.plp.DocumentoPlp;
-import br.com.correios.api.postagem.plp.NovoPlpBuilder;
+import br.com.correios.api.postagem.plp.NovaPlpBuilder;
+import br.com.correios.api.postagem.plp.NovaPlpToCorreiosLogConverter;
 import br.com.correios.api.postagem.plp.ObjetoPostado;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
@@ -27,7 +28,7 @@ public class CorreiosPostagemApi {
 	private final CorreiosServicoPostagemAPI correiosServicoPostagemAPI;
 
 	public CorreiosPostagemApi(CorreiosCredenciais credenciais) {
-		this.correiosServicoPostagemAPI = new SoapCorreiosServicoPostagemAPI(credenciais, new CorreiosClienteWebService(), new ClienteRetornadoDosCorreiosToClienteConverter(), new XmlPlpParser(), new CorreiosLogToPlpDocumentoConverter());
+		this.correiosServicoPostagemAPI = new SoapCorreiosServicoPostagemAPI(credenciais, new CorreiosClienteWebService(), new ClienteRetornadoDosCorreiosToClienteConverter(), new XmlPlpParser(), new CorreiosLogToDocumentoPlpConverter(), new NovaPlpToCorreiosLogConverter());
 	}
 
 	/**
@@ -78,14 +79,11 @@ public class CorreiosPostagemApi {
 			throw exceptionCancelamento;
 		}
 	}
-	
-	
 
-	public Long fechaPlp() {
-		return correiosServicoPostagemAPI.fechaPlp(documentoPlp, codigoPlpCliente);
-	}
-
-	public NovoPlpBuilder novaPlp() {
-		return new NovoPlpBuilder();
+	/**
+	 * Cria uma nova PLP atraves dos dados do pacote, destinatario e remetente (metodo fechaPLP do WSDL do Correios)
+	 */
+	public NovaPlpBuilder novaPlp() {
+		return new NovaPlpBuilder(correiosServicoPostagemAPI);
 	}
 }
