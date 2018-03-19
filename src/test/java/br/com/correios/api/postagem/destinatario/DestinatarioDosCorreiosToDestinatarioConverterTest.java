@@ -26,9 +26,9 @@ public class DestinatarioDosCorreiosToDestinatarioConverterTest {
 		assertThat(destinatario.getDadosDeContato().getEmail()).isEqualTo("email@gmail.com");
 		assertThat(destinatario.getDadosDeContato().getTelefone()).isEqualTo("01211125589");
 		assertThat(destinatario.getDadosDeContato().getCelular()).isEqualTo("011995875580");
-		assertThat(destinatario.getEnderedo().getLogradouro()).isEqualTo("Rua Gregorio");
-		assertThat(destinatario.getEnderedo().getComplemento()).isEqualTo("Vila Sao Pedro");
-		assertThat(destinatario.getEnderedo().getNumero()).isEqualTo("60");
+		assertThat(destinatario.getEndereco().getLogradouro()).isEqualTo("Rua Gregorio");
+		assertThat(destinatario.getEndereco().getComplemento()).isEqualTo("Vila Sao Pedro");
+		assertThat(destinatario.getEndereco().getNumero()).isEqualTo("60");
 	}
 
 }

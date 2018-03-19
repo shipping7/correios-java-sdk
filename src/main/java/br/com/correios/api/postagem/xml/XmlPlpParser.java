@@ -1,14 +1,16 @@
 package br.com.correios.api.postagem.xml;
 
 import java.io.StringReader;
+import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import com.google.common.base.Optional;
 
-import br.com.correios.api.postagem.exception.PlpException;
+import br.com.correios.api.postagem.exception.ParseIncorretoNoXmlPlpException;
 
 public class XmlPlpParser {
 
@@ -18,14 +20,26 @@ public class XmlPlpParser {
 		try {
 			jaxbContext = JAXBContext.newInstance(Correioslog.class);
 		} catch (JAXBException e) {
-			throw new PlpException("Ocorreu um erro ao criar a instancia do JaxB Context com a classe Correioslog", e);
+			throw new ParseIncorretoNoXmlPlpException("Ocorreu um erro ao criar a instancia do JaxB Context com a classe Correioslog", e);
 		}
 	}
 
-	public Optional<Correioslog> convert(String xmlPlp) {
-		Correioslog correiosLog = parseFrom(xmlPlp);
+	public Optional<Correioslog> getObjectFrom(String xmlPlp) {
+		return Optional.fromNullable(parseFrom(xmlPlp));
+	}
 
-		return Optional.fromNullable(correiosLog);
+	public String getXmlFrom(Correioslog correiosLog) {
+		try {
+			Marshaller marshaller = jaxbContext.createMarshaller();
+
+			StringWriter writer = new StringWriter();
+			marshaller.marshal(correiosLog, writer);
+
+			return writer.toString();
+
+		} catch (JAXBException e) {
+			throw new ParseIncorretoNoXmlPlpException("Ocorreu um erro ao tentar fazer o marshal do XML da PLP: " + correiosLog, e);
+		}
 	}
 
 	private Correioslog parseFrom(String xml) {
@@ -37,7 +51,7 @@ public class XmlPlpParser {
 			return (Correioslog) unmarshaller.unmarshal(reader);
 
 		} catch (JAXBException e) {
-			throw new PlpException("Ocorreu um erro ao tentar fazer o Unmarshal do XML da PLP: " + xml, e);
+			throw new ParseIncorretoNoXmlPlpException("Ocorreu um erro ao tentar fazer o unmarshal do XML da PLP: " + xml, e);
 		}
 	}
 
