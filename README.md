@@ -227,6 +227,8 @@ Denis Schimidt ([@denis-schimidt](https://github.com/denis-schimidt))
 
 Douglas Campos ([@douglascampos](https://github.com/douglascampos))
 
+Lucas Nakano ([@lucasnakano](https://github.com/lucasnakano))
+
 # Suporte ou Contato
 
 Está tendo algum problema no uso do SDK? Basta abrir uma [issue](https://github.com/alexandregama/correios-java-sdk/issues) indicando os passos do seu problema e responderemos o mais breve possível :)
