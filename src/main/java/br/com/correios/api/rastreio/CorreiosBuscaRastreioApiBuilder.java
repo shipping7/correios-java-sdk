@@ -99,9 +99,8 @@ public class CorreiosBuscaRastreioApiBuilder {
 		public DetalhesRastreio getDetalhesRastreio() {
 			if (builder.codigosDeRastreio != null && !builder.codigosDeRastreio.isEmpty() && todosOsCodigosEstaoPreenchidos(builder.codigosDeRastreio)) {
 				return correiosServicoRastreioApi.buscaDetalhesRastreio(builder.codigosDeRastreio, builder.idioma, builder.escopoResultado, LISTA_DE_OBJETOS);
-			} else {
-				throw new CorreiosCodigoRastreioInvalidoException("É necessário buscar os detalhes por pelo menos um código de rastreio");
 			}
+			throw new CorreiosCodigoRastreioInvalidoException("É necessário buscar os detalhes por pelo menos um código de rastreio");
 		}
 
 		private boolean todosOsCodigosEstaoPreenchidos(List<String> codigosDeRastreio) {

@@ -3,6 +3,7 @@ package br.com.correios.webservice.rastreio;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -11,9 +12,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for objeto complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="objeto">
  *   &lt;complexContent>
@@ -30,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "objeto", propOrder = {
@@ -49,16 +50,16 @@ public class Objeto {
     protected String nome;
     protected String categoria;
     protected String erro;
-    @XmlElement(namespace = "http://resource.webservice.correios.com.br/")
+    @XmlElement
     protected List<Eventos> evento;
 
     /**
      * Gets the value of the numero property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getNumero() {
         return numero;
@@ -66,11 +67,11 @@ public class Objeto {
 
     /**
      * Sets the value of the numero property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setNumero(String value) {
         this.numero = value;
@@ -78,11 +79,11 @@ public class Objeto {
 
     /**
      * Gets the value of the sigla property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getSigla() {
         return sigla;
@@ -90,11 +91,11 @@ public class Objeto {
 
     /**
      * Sets the value of the sigla property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setSigla(String value) {
         this.sigla = value;
@@ -102,11 +103,11 @@ public class Objeto {
 
     /**
      * Gets the value of the nome property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getNome() {
         return nome;
@@ -114,11 +115,11 @@ public class Objeto {
 
     /**
      * Sets the value of the nome property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setNome(String value) {
         this.nome = value;
@@ -126,11 +127,11 @@ public class Objeto {
 
     /**
      * Gets the value of the categoria property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getCategoria() {
         return categoria;
@@ -138,11 +139,11 @@ public class Objeto {
 
     /**
      * Sets the value of the categoria property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setCategoria(String value) {
         this.categoria = value;
@@ -150,11 +151,11 @@ public class Objeto {
 
     /**
      * Gets the value of the erro property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getErro() {
         return erro;
@@ -162,11 +163,11 @@ public class Objeto {
 
     /**
      * Sets the value of the erro property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setErro(String value) {
         this.erro = value;
@@ -174,25 +175,25 @@ public class Objeto {
 
     /**
      * Gets the value of the evento property.
-     * 
+     *
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the evento property.
-     * 
+     *
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getEvento().add(newItem);
      * </pre>
-     * 
-     * 
+     *
+     *
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link Eventos }
-     * 
-     * 
+     *
+     *
      */
     public List<Eventos> getEvento() {
         if (evento == null) {
