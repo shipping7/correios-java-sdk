@@ -160,9 +160,8 @@ public class DimensoesDoObjeto {
 			try {
 				if (number.contains(",")) {
 					return FORMATADOR_COM_VIRGULA.parse(number).intValue();
-				} else {
-					return FORMATADOR_COM_PONTO.parse(number).intValue();
 				}
+				return FORMATADOR_COM_PONTO.parse(number).intValue();
 			} catch (ParseException e) {
 				throw new FormatacaoNumericaIncorretaException(e);
 			}
