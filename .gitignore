@@ -8,3 +8,7 @@
 target/
 build/
 bin/
+.idea/
+gradle/
+gradlew
+gradlew.bat
