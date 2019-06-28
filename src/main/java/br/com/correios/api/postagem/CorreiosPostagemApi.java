@@ -16,6 +16,8 @@ import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
 import br.com.correios.credentials.CorreiosCredenciais;
 
+import java.util.List;
+
 /**
  * Responsavel por chamar a API de postagem dos Correios
  *
@@ -78,4 +80,14 @@ public class CorreiosPostagemApi {
 		}
 	}
 
+	/**
+	 * Fechar uma Pré-lista de Postagem (PLP) com as informações dos objetos que serão postados
+	 * @param xml PLP (pré-lista de postagem) em formato XML
+	 * @param plpId gerado pelo cliente para identificação da PLP
+	 * @param cartaoPostagem que autoriza a postagem dos serviços no contrato
+	 * @param listaEtiquetas Lista de objetos enviados via parâmetro sem o dígito verificador
+	 */
+	public Long fechaPlpVariosServicos(String xml, Long plpId, String cartaoPostagem, List<String> listaEtiquetas) {
+		return correiosServicoPostagemAPI.fechaPlpVariosServicos(xml, plpId, cartaoPostagem, listaEtiquetas);
+	}
 }

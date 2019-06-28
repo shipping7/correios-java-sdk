@@ -64,4 +64,11 @@ public class CorreiosPostagemApiTest {
 		postagemApi.cancelaObjetoDaPlp(48925409L, "PJ938918208BR");
 	}
 
+	@Test
+	public void deveriaRetornarONumeroDaPlpAoFecharUmaPlp() {
+		Long idPlp = postagemApi.fechaPlpVariosServicos("xml", 123L, "0067599079", EMPTY_LIST);
+
+		assertThat(idPlp).isInstanceOf(Long.TYPE);
+	}
+
 }
