@@ -19,6 +19,8 @@ import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.Exception_Exception;
 import br.com.correios.webservice.postagem.SigepClienteException;
 
+import java.util.List;
+
 class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 
 	private final CorreiosClienteApi clienteApi;
@@ -107,6 +109,17 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (Exception_Exception | SigepClienteException e) {
 			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d, etiqueta %s", plpId, numeroEtiqueta), e);
+		}
+	}
+
+	@Override
+	public Long fechaPlpVariosServicos(String xml, Long plpId, String cartaoPostagem, List<String> listaEtiquetas) {
+		try {
+			return clienteApi.getCorreiosWebService().fechaPlpVariosServicos(xml, plpId, cartaoPostagem, listaEtiquetas, credenciais.getUsuario(), credenciais.getSenha());
+		} catch (AutenticacaoException e) {
+			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
+		} catch (SigepClienteException e) {
+			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com o PLP de id %d", plpId), e);
 		}
 	}
 

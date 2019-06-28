@@ -1,11 +1,10 @@
 package br.com.correios.api.postagem;
 
+import static java.util.Collections.EMPTY_LIST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,6 +32,8 @@ import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.Exception_Exception;
 import br.com.correios.webservice.postagem.SigepClienteException;
+
+import java.util.Collections;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SoapCorreiosServicoPostagemAPITest {
@@ -212,6 +213,33 @@ public class SoapCorreiosServicoPostagemAPITest {
 		when(clienteAPI.getCorreiosWebService().cancelarObjeto(anyLong(), anyString(), anyString(), anyString())).thenThrow(Exception_Exception.class);
 
 		servicoPostagemAPI.cancelaObjetoDaPlp(123L, "DW123456BR");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void deveriaFecharPlp() throws Exception {
+		Long expected = 42L;
+		when(clienteAPI.getCorreiosWebService().fechaPlpVariosServicos(anyString(), anyLong(), anyString(), anyList(), anyString(), anyString())).thenReturn(expected);
+
+		Long actual = servicoPostagemAPI.fechaPlpVariosServicos("xml", 123L, contratoEmpresa.getCartaoDePostagem(), EMPTY_LIST);
+
+		assertEquals(expected, actual);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test(expected=CorreiosPostagemAutenticacaoException.class)
+	public void deveriaLancarExcecaoDeAutenticacaoAoFecharPlpVariosServicosQuandoServicoLancarExcecaoDeAutenticaoDoCorreios() throws Exception {
+		when(clienteAPI.getCorreiosWebService().fechaPlpVariosServicos(anyString(), anyLong(), anyString(), anyList(), anyString(), anyString())).thenThrow(AutenticacaoException.class);
+
+		servicoPostagemAPI.fechaPlpVariosServicos("xml", 123L, contratoEmpresa.getCartaoDePostagem(), EMPTY_LIST);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test(expected=CorreiosServicoSoapException.class)
+	public void deveriaLancarExcecaoDeServicoSoapAoFecharPlpVariosServicosQuandoServicoLancarExcecaoDoServicoSigep() throws Exception {
+		when(clienteAPI.getCorreiosWebService().fechaPlpVariosServicos(anyString(), anyLong(), anyString(), anyList(), anyString(), anyString())).thenThrow(SigepClienteException.class);
+
+		servicoPostagemAPI.fechaPlpVariosServicos("xml", 123L, contratoEmpresa.getCartaoDePostagem(), EMPTY_LIST);
 	}
 
 }

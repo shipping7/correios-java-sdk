@@ -1,5 +1,6 @@
 package br.com.correios.api.postagem;
 
+import static java.util.Collections.EMPTY_LIST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
