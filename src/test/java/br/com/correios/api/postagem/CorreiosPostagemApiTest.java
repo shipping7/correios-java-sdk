@@ -65,7 +65,7 @@ public class CorreiosPostagemApiTest {
 	}
 
 	@Test
-	public void deveriaRetornarONumeroDaPlpAoFecharUmaPlp() {
+	public void deveriaRetornarONumeroDaPlpDoTipoLongAoFecharUmaPlp() {
 		Long idPlp = postagemApi.fechaPlpVariosServicos("xml", 123L, "0067599079", EMPTY_LIST);
 
 		assertThat(idPlp).isInstanceOf(Long.TYPE);
