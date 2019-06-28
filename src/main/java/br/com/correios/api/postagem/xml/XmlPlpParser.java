@@ -30,6 +30,10 @@ public class XmlPlpParser {
 		return Optional.fromNullable(correiosLog);
 	}
 
+	public String convert(Correioslog correioslog) {
+		return parseFrom(correioslog);
+	}
+
 	private Correioslog parseFrom(String xml) {
 		try {
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
