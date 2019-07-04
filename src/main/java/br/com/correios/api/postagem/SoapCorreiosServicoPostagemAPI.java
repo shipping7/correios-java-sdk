@@ -88,7 +88,9 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 			boolean xmlPlpDosCorreiosEstaValido = xmlPlp != null && !xmlPlp.isEmpty();
 
 			if (xmlPlpDosCorreiosEstaValido) {
-				return xmlPlpParser.convert(xmlPlp.replaceFirst("<\\?xml.*?\\?>", "")) //remove tag xml root
+				xmlPlp = xmlPlp.replaceFirst("<\\?xml.*?\\?>", "").trim(); //remove tag xml root
+
+				return xmlPlpParser.convert(xmlPlp)
 								   .transform(documentoPlpConverter::convert)
 								   .or(Optional.<DocumentoPlp>absent());
 			}
