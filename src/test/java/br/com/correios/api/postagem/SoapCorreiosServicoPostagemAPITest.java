@@ -120,7 +120,7 @@ public class SoapCorreiosServicoPostagemAPITest {
 
 		assertEquals(documentoPlp, documentoPlpBuscado.get());
 		verify(documentoPlpConverter).convert(any());
-		verify(xmlPlpParser).convert(any());
+		verify(xmlPlpParser).convert(anyString());
 	}
 
 	@Test
@@ -131,7 +131,7 @@ public class SoapCorreiosServicoPostagemAPITest {
 
 		assertFalse(documentoPlpBuscado.isPresent());
 		verify(documentoPlpConverter, never()).convert(any());
-		verify(xmlPlpParser, never()).convert(any());
+		verify(xmlPlpParser, never()).convert(anyString());
 	}
 
 	@Test

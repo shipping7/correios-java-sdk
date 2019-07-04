@@ -42,6 +42,10 @@ public class CorreiosPostagemApi {
 		return correiosServicoPostagemAPI.buscaDocumentoPlp(plpId);
 	}
 
+	public Optional<DocumentoPlp> buscaDocumentoPlp(Long plpId, String numeroEtiqueta) {
+		return correiosServicoPostagemAPI.buscaDocumentoPlp(plpId, numeroEtiqueta);
+	}
+
 	/**
 	 * Cancela um objeto de uma PLP atraves do ID da PLP e o numero da etiqueta
 	 * do objeto
