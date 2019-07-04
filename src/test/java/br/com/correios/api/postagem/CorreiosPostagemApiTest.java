@@ -60,6 +60,30 @@ public class CorreiosPostagemApiTest {
 	}
 
 	@Test
+	public void deveriaBuscarOsDadosDaPlpViaPlpIdENumeroEtiqueta() throws Exception {
+		Optional<DocumentoPlp> cliente = postagemApi.buscaDocumentoPlp(67488374L, "PJ938918208BR");
+
+		assertThat(cliente.isPresent()).isTrue();
+	}
+
+	@Test
+	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlpENumeroEtiqueta() throws Exception {
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(48925409L, "PJ938918208BR");
+
+		Optional<ObjetoPostado> objetoPostado = plp.get().getObjetoPostadoComEtiqueta("PJ938918208BR");
+
+		assertThat(objetoPostado.isPresent()).isTrue();
+	}
+
+	@Test
+	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlpENumeroEtiqueta2() throws Exception {
+		long plpIdInextistente = 250045L;
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(plpIdInextistente, "PJ938918208BR");
+
+		assertThat(plp.isPresent()).isFalse();
+	}
+
+	@Test
 	public void deveriaCancelarUmObjetoDePlp() {
 		postagemApi.cancelaObjetoDaPlp(48925409L, "PJ938918208BR");
 	}
