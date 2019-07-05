@@ -1,7 +1,5 @@
 package br.com.correios.api.postagem.plp;
 
-import java.math.BigDecimal;
-
 import br.com.correios.api.postagem.adicional.ServicoAdicionalDosCorreiosToServicoAdicionalConverter;
 import br.com.correios.api.postagem.destinatario.DestinatarioDoObjeto;
 import br.com.correios.api.postagem.destinatario.DestinatarioDosCorreiosToDestinatarioConverter;
@@ -9,10 +7,12 @@ import br.com.correios.api.postagem.dimensao.DimensaoDoObjetoToDimensoesDoObjeto
 import br.com.correios.api.postagem.dimensao.DimensoesDoObjeto;
 import br.com.correios.api.postagem.xml.ObjetoPostal;
 
+import java.math.BigDecimal;
+
 public class ObjetoPostalDosCorreiosToObjetPostadoConverter {
 
 	public ObjetoPostado convert(ObjetoPostal objeto) {
-		MedidasDoObjetoPostado medidasDoObjeto = new MedidasDoObjetoPostado(new BigDecimal(objeto.getCubagem()), new BigDecimal(objeto.getPeso()));
+		MedidasDoObjetoPostado medidasDoObjeto = new MedidasDoObjetoPostado(new BigDecimal(objeto.getCubagem().replace(',', '.')), new BigDecimal(objeto.getPeso()));
 
 		ObservacoesDoCliente observacoesDoCliente = new ObservacoesDoCliente(objeto.getRt1(), objeto.getRt2());
 

@@ -89,7 +89,7 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 
 			if (xmlPlpDosCorreiosEstaValido) {
 				//para corrigir xml prolog inconsistente do Correios
-				xmlPlp = xmlPlp.replaceFirst("<\\?xml.*?\\?>", "<?xml version=\"1.0\" encoding=\"UTF-8\"?> ").trim();
+				xmlPlp = xmlPlp.replaceFirst("<\\?xml.*?\\?>", "").trim();
 
 				return xmlPlpParser.convert(xmlPlp)
 								   .transform(documentoPlpConverter::convert)
