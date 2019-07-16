@@ -146,4 +146,13 @@ public class ServicoCorreio {
 		return codigo.trim().equals(codigoDoDestinatario);
 	}
 
+	public boolean temMesmoIdDoDestinatario(Long idDoDestinatario) {
+		boolean idDoDestinatarioEstaInvalido = idDoDestinatario == null || idDoDestinatario == 0L;
+		boolean idEstaInvalido = id == null || id == 0L;
+		if (idDoDestinatarioEstaInvalido || idEstaInvalido) {
+			throw new CorreiosEtiquetaException("O id do destinatário e o id no serviço não podem ser nulos ou vazios");
+		}
+		return id.equals(idDoDestinatario);
+	}
+
 }

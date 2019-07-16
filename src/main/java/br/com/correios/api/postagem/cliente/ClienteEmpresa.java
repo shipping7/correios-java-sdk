@@ -133,9 +133,9 @@ public class ClienteEmpresa {
 		}
 	}
 
-	public Optional<ServicoCorreio> getServicoPeloCodigo(String codigoDoDestinatario) {
+	public Optional<ServicoCorreio> getServicoPeloId(Long idDoDestinatario) {
 		for (Contrato contrato: contratos) {
-			Optional<ServicoCorreio> servico = contrato.retornaServicoPelo(codigoDoDestinatario);
+			Optional<ServicoCorreio> servico = contrato.retornaServicoPelo(idDoDestinatario);
 			if (servico.isPresent()) {
 				return servico;
 			}

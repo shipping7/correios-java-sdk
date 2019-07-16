@@ -1,11 +1,5 @@
 package br.com.correios.api.etiqueta;
 
-import static br.com.correios.api.etiqueta.TipoDestinatario.CLIENTE;
-
-import java.util.List;
-
-import com.google.common.base.Optional;
-
 import br.com.correios.api.postagem.CorreiosPostagemApi;
 import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.api.postagem.cliente.ClienteEmpresa;
@@ -15,6 +9,14 @@ import br.com.correios.api.postagem.exception.CorreiosEtiquetaException;
 import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.webservice.CorreiosClienteWebService;
 import br.com.correios.credentials.CorreiosCredenciais;
+import br.com.correios.webservice.postagem.AutenticacaoException;
+import br.com.correios.webservice.postagem.SigepClienteException;
+import com.google.common.base.Optional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static br.com.correios.api.etiqueta.TipoDestinatario.CLIENTE;
 
 /**
  * Classe que deve ser usada para as chamadas a API de etiqueta dos Correios
@@ -47,8 +49,8 @@ public class CorreiosEtiquetaApi {
 			this.quantidadeDeEtiquetas = quantidadeDeEtiquetas;
 		}
 
-		public SolicitaEtiquetaBuilderComIdentificador usandoCodigoDoServicoDeEntrega(String codigoDoServicoDeEntrega) {
-			return new SolicitaEtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, codigoDoServicoDeEntrega);
+		public SolicitaEtiquetaBuilderComIdentificador usandoIdDoServicoDeEntrega(Long idDoServicoDeEntrega) {
+			return new SolicitaEtiquetaBuilderComIdentificador(quantidadeDeEtiquetas, idDoServicoDeEntrega);
 		}
 
 	}
@@ -56,32 +58,43 @@ public class CorreiosEtiquetaApi {
 	public class SolicitaEtiquetaBuilderComIdentificador {
 
 		private final Integer quantidade;
-		private final String codigoDoServicoDeEntrega;
+		private final Long idDoServicoDeEntrega;
 
-		public SolicitaEtiquetaBuilderComIdentificador(Integer quantidade, String codigoDoServicoDeEntrega) {
+		private SolicitaEtiquetaBuilderComIdentificador(Integer quantidade, Long idDoServicoDeEntrega) {
 			this.quantidade = quantidade;
-			this.codigoDoServicoDeEntrega = codigoDoServicoDeEntrega;
+			this.idDoServicoDeEntrega = idDoServicoDeEntrega;
 		}
 
 		public List<Etiqueta> comContrato(ContratoEmpresa contrato) {
-			try {
-				Optional<ClienteEmpresa> clienteOptional = buscaClienteCom(contrato);
-				if (!clienteOptional.isPresent()) {
-					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um cliente dos Correios");
-				}
-				Optional<ServicoCorreio> servicoOptional = clienteOptional.get().getServicoPeloCodigo(codigoDoServicoDeEntrega);
-				if (!servicoOptional.isPresent()) {
-					throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um servico válido dos Correios");
-				}
+			List<Etiqueta> etiquetas;
+			String offsetDosCorreios;
 
-				String offsetDosCorreios = clienteApi
-					.getCorreiosWebService()
-					.solicitaEtiquetas(CLIENTE.getCodigoDoDestinatario(), contrato.getCnpj(), servicoOptional.get().getId(), quantidade, credenciais.getUsuario(), credenciais.getSenha());
-
-				return EtiquetaGenerator.geraEtiquetasDo(offsetDosCorreios);
-			} catch (Exception e) {
-				throw new CorreiosEtiquetaException("Ocorreu um erro ao solicitar Etiquetas para os Correios", e);
+			Optional<ClienteEmpresa> clienteOptional = buscaClienteCom(contrato);
+			if (!clienteOptional.isPresent()) {
+				throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um cliente dos Correios");
 			}
+			Optional<ServicoCorreio> servicoOptional = clienteOptional.get().getServicoPeloId(idDoServicoDeEntrega);
+			if (!servicoOptional.isPresent()) {
+				throw new CorreiosEtiquetaDadosInvalidosException("As informações enviadas de Contrato não retornaram um servico válido dos Correios");
+			}
+
+			try {
+				offsetDosCorreios = clienteApi
+						.getCorreiosWebService()
+						.solicitaEtiquetas(CLIENTE.getCodigoDoDestinatario(), contrato.getCnpj(), servicoOptional.get().getId(), quantidade, credenciais.getUsuario(), credenciais.getSenha());
+			} catch(AutenticacaoException e) {
+				throw new CorreiosEtiquetaException(e.getFaultInfo(), e);
+			} catch(SigepClienteException e) {
+				throw new CorreiosEtiquetaException(e.getFaultInfo(), e);
+			}
+
+			try {
+				etiquetas = EtiquetaGenerator.geraEtiquetasDo(offsetDosCorreios);
+			} catch (Exception e) {
+				throw new CorreiosEtiquetaException("Ocorreu um erro ao gerar Etiquetas para os Correios", e);
+			}
+
+			return etiquetas;
 		}
 
 	}

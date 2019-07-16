@@ -55,7 +55,7 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 		} catch (AutenticacaoException e) {
 			throw new CorreiosPostagemAutenticacaoException(format("Ocorreu um erro ao se autenticar nos correios com a seguinte credencial: %s", credenciais));
 		} catch (SigepClienteException e) {
-			throw new CorreiosServicoSoapException(format("Ocorreu um erro ao chamar o servico com as informacoes de cliente %s", contratoEmpresa), e);
+			throw new CorreiosServicoSoapException(e.getFaultInfo(), e);
 		}
 	}
 
