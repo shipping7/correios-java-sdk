@@ -17,11 +17,11 @@ public class CorreiosEtiquetaApiTest {
 	private String cnpj = "123456789";
 	private String numeroDoContrato = "321564987";
 	private String numeroDoCartaoDePostagem = "654789123";
-	private String codigoDoServico = "41068";
+	private Long idDoServico = 123456L;
 
 	@Before
 	public void startUp() {
-		credenciais = new CorreiosCredenciais("seu-usuario", "sua-senha");
+		credenciais = new CorreiosCredenciais("2709248000114", "29i7d6");
 	}
 
 	@Test
@@ -31,10 +31,10 @@ public class CorreiosEtiquetaApiTest {
 		ContratoEmpresa contrato = new ContratoEmpresa(cnpj, numeroDoContrato, numeroDoCartaoDePostagem);
 
 		List<Etiqueta> etiquetas = api
-			.etiquetas(credenciais)
-			.solicita(2)
-			.usandoCodigoDoServicoDeEntrega(codigoDoServico)
-			.comContrato(contrato);
+				.etiquetas(credenciais)
+				.solicita(2)
+				.usandoIdDoServicoDeEntrega(idDoServico)
+				.comContrato(contrato);
 
 		assertThat(etiquetas.size()).isGreaterThan(1);
 	}

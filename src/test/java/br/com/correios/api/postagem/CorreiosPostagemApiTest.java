@@ -1,5 +1,6 @@
 package br.com.correios.api.postagem;
 
+import static java.util.Collections.EMPTY_LIST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
@@ -59,8 +60,39 @@ public class CorreiosPostagemApiTest {
 	}
 
 	@Test
+	public void deveriaBuscarOsDadosDaPlpViaPlpIdENumeroEtiqueta() throws Exception {
+		Optional<DocumentoPlp> cliente = postagemApi.buscaDocumentoPlp(67488374L, "PJ938918208BR");
+
+		assertThat(cliente.isPresent()).isTrue();
+	}
+
+	@Test
+	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlpENumeroEtiqueta() throws Exception {
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(48925409L, "PJ938918208BR");
+
+		Optional<ObjetoPostado> objetoPostado = plp.get().getObjetoPostadoComEtiqueta("PJ938918208BR");
+
+		assertThat(objetoPostado.isPresent()).isTrue();
+	}
+
+	@Test
+	public void deveriaRetornasOsDadosDeUmaEtiquetaEspecificaDadaUmaPlpENumeroEtiqueta2() throws Exception {
+		long plpIdInextistente = 250045L;
+		Optional<DocumentoPlp> plp = postagemApi.buscaDocumentoPlp(plpIdInextistente, "PJ938918208BR");
+
+		assertThat(plp.isPresent()).isFalse();
+	}
+
+	@Test
 	public void deveriaCancelarUmObjetoDePlp() {
 		postagemApi.cancelaObjetoDaPlp(48925409L, "PJ938918208BR");
+	}
+
+	@Test
+	public void deveriaRetornarONumeroDaPlpDoTipoLongAoFecharUmaPlp() {
+		Long idPlp = postagemApi.fechaPlpVariosServicos("xml", 123L, "0067599079", EMPTY_LIST);
+
+		assertThat(idPlp).isInstanceOf(Long.TYPE);
 	}
 
 }

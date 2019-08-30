@@ -151,6 +151,19 @@ public class Contrato {
 		return Optional.absent();
 	}
 
+	public Optional<ServicoCorreio> retornaServicoPelo(Long idDoDestinatario) {
+		List<CartaoPostagem> cartoesDePostagem = getCartoesPostagem();
+		for (CartaoPostagem cartao: cartoesDePostagem) {
+			List<ServicoCorreio> servicos = cartao.getServicos();
+			for (ServicoCorreio servico: servicos) {
+				if (servico.temMesmoIdDoDestinatario(idDoDestinatario)) {
+					return Optional.of(servico);
+				}
+			}
+		}
+		return Optional.absent();
+	}
+
 	@Override
 	public String toString() {
 		return MoreObjects.toStringHelper(this)
