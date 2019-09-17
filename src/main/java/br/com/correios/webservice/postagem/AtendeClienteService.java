@@ -1,13 +1,12 @@
 
 package br.com.correios.webservice.postagem;
 
-import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
-import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 
 
@@ -17,25 +16,16 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "AtendeClienteService", targetNamespace = "http://cliente.bean.master.sigep.bsb.correios.com.br/", wsdlLocation = "file:/home/developer/dev/correios-java-sdk/src/main/resources/wsdl/AtendeCliente.wsdl")
+@WebServiceClient(name = "AtendeClienteService", targetNamespace = "http://cliente.bean.master.sigep.bsb.correios.com.br/", wsdlLocation = "classpath:wsdl/AtendeCliente.wsdl")
 public class AtendeClienteService
     extends Service
 {
 
     private final static URL ATENDECLIENTESERVICE_WSDL_LOCATION;
-    private final static WebServiceException ATENDECLIENTESERVICE_EXCEPTION;
     private final static QName ATENDECLIENTESERVICE_QNAME = new QName("http://cliente.bean.master.sigep.bsb.correios.com.br/", "AtendeClienteService");
 
     static {
-        URL url = null;
-        WebServiceException e = null;
-        try {
-            url = new URL("file:/home/developer/dev/correios-java-sdk/src/main/resources/wsdl/AtendeCliente.wsdl");
-        } catch (MalformedURLException ex) {
-            e = new WebServiceException(ex);
-        }
-        ATENDECLIENTESERVICE_WSDL_LOCATION = url;
-        ATENDECLIENTESERVICE_EXCEPTION = e;
+        ATENDECLIENTESERVICE_WSDL_LOCATION = AtendeClienteService.class.getClassLoader().getResource("wsdl/CalcPrecoPrazo.wsdl");
     }
 
     public AtendeClienteService() {
@@ -85,9 +75,6 @@ public class AtendeClienteService
     }
 
     private static URL __getWsdlLocation() {
-        if (ATENDECLIENTESERVICE_EXCEPTION!= null) {
-            throw ATENDECLIENTESERVICE_EXCEPTION;
-        }
         return ATENDECLIENTESERVICE_WSDL_LOCATION;
     }
 
