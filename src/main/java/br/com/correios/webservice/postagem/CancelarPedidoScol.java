@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="codAdministrativo" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="codAdministrativo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="idPostagem" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="tipo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="usuario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CancelarPedidoScol {
 
-    protected Integer codAdministrativo;
+    protected String codAdministrativo;
     protected String idPostagem;
     protected String tipo;
     protected String usuario;
@@ -50,10 +50,10 @@ public class CancelarPedidoScol {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getCodAdministrativo() {
+    public String getCodAdministrativo() {
         return codAdministrativo;
     }
 
@@ -62,10 +62,10 @@ public class CancelarPedidoScol {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setCodAdministrativo(Integer value) {
+    public void setCodAdministrativo(String value) {
         this.codAdministrativo = value;
     }
 

@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;enumeration value="SEM_CATEGORIA"/>
  *     &lt;enumeration value="PAC"/>
  *     &lt;enumeration value="SEDEX"/>
- *     &lt;enumeration value="CARTA_REGISTRADA"/>
- *     &lt;enumeration value="SERVICO_COM_RESTRICAO"/>
+ *     &lt;enumeration value="CARTA"/>
+ *     &lt;enumeration value="GRANDES_FORMATOS"/>
  *     &lt;enumeration value="REVERSO"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
@@ -31,8 +31,8 @@ public enum CategoriaServico {
     SEM_CATEGORIA,
     PAC,
     SEDEX,
-    CARTA_REGISTRADA,
-    SERVICO_COM_RESTRICAO,
+    CARTA,
+    GRANDES_FORMATOS,
     REVERSO;
 
     public String value() {

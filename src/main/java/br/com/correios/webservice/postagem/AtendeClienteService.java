@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "AtendeClienteService", targetNamespace = "http://cliente.bean.master.sigep.bsb.correios.com.br/", wsdlLocation = "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl")
+@WebServiceClient(name = "AtendeClienteService", targetNamespace = "http://cliente.bean.master.sigep.bsb.correios.com.br/", wsdlLocation = "file:/home/developer/dev/correios-java-sdk/src/main/resources/wsdl/AtendeCliente.wsdl")
 public class AtendeClienteService
     extends Service
 {
@@ -30,7 +30,7 @@ public class AtendeClienteService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl");
+            url = new URL("file:/home/developer/dev/correios-java-sdk/src/main/resources/wsdl/AtendeCliente.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

@@ -16,10 +16,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="codAdministrativo" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
- *         &lt;element name="codigoServico" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="codAdministrativo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="codigoServico" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="cepDestinatario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="coleta" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}coletaReversaTO" minOccurs="0"/>
+ *         &lt;element name="idCartaoPostagem" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="coleta" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}coletaReversa" minOccurs="0"/>
  *         &lt;element name="usuario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="senha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -35,16 +36,18 @@ import javax.xml.bind.annotation.XmlType;
     "codAdministrativo",
     "codigoServico",
     "cepDestinatario",
+    "idCartaoPostagem",
     "coleta",
     "usuario",
     "senha"
 })
 public class ValidarPostagemReversa {
 
-    protected Integer codAdministrativo;
-    protected Integer codigoServico;
+    protected String codAdministrativo;
+    protected String codigoServico;
     protected String cepDestinatario;
-    protected ColetaReversaTO coleta;
+    protected String idCartaoPostagem;
+    protected ColetaReversa coleta;
     protected String usuario;
     protected String senha;
 
@@ -53,10 +56,10 @@ public class ValidarPostagemReversa {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getCodAdministrativo() {
+    public String getCodAdministrativo() {
         return codAdministrativo;
     }
 
@@ -65,10 +68,10 @@ public class ValidarPostagemReversa {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setCodAdministrativo(Integer value) {
+    public void setCodAdministrativo(String value) {
         this.codAdministrativo = value;
     }
 
@@ -77,10 +80,10 @@ public class ValidarPostagemReversa {
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getCodigoServico() {
+    public String getCodigoServico() {
         return codigoServico;
     }
 
@@ -89,10 +92,10 @@ public class ValidarPostagemReversa {
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setCodigoServico(Integer value) {
+    public void setCodigoServico(String value) {
         this.codigoServico = value;
     }
 
@@ -121,14 +124,38 @@ public class ValidarPostagemReversa {
     }
 
     /**
+     * Gets the value of the idCartaoPostagem property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdCartaoPostagem() {
+        return idCartaoPostagem;
+    }
+
+    /**
+     * Sets the value of the idCartaoPostagem property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdCartaoPostagem(String value) {
+        this.idCartaoPostagem = value;
+    }
+
+    /**
      * Gets the value of the coleta property.
      * 
      * @return
      *     possible object is
-     *     {@link ColetaReversaTO }
+     *     {@link ColetaReversa }
      *     
      */
-    public ColetaReversaTO getColeta() {
+    public ColetaReversa getColeta() {
         return coleta;
     }
 
@@ -137,10 +164,10 @@ public class ValidarPostagemReversa {
      * 
      * @param value
      *     allowed object is
-     *     {@link ColetaReversaTO }
+     *     {@link ColetaReversa }
      *     
      */
-    public void setColeta(ColetaReversaTO value) {
+    public void setColeta(ColetaReversa value) {
         this.coleta = value;
     }
 

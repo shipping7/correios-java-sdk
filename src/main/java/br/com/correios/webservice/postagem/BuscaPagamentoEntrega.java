@@ -18,6 +18,10 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="usuario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="senha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="contrato" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="dataInicio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="dataFim" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="etiqueta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,12 +33,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "buscaPagamentoEntrega", propOrder = {
     "usuario",
-    "senha"
+    "senha",
+    "contrato",
+    "dataInicio",
+    "dataFim",
+    "etiqueta"
 })
 public class BuscaPagamentoEntrega {
 
     protected String usuario;
     protected String senha;
+    protected String contrato;
+    protected String dataInicio;
+    protected String dataFim;
+    protected String etiqueta;
 
     /**
      * Gets the value of the usuario property.
@@ -82,6 +94,102 @@ public class BuscaPagamentoEntrega {
      */
     public void setSenha(String value) {
         this.senha = value;
+    }
+
+    /**
+     * Gets the value of the contrato property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getContrato() {
+        return contrato;
+    }
+
+    /**
+     * Sets the value of the contrato property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setContrato(String value) {
+        this.contrato = value;
+    }
+
+    /**
+     * Gets the value of the dataInicio property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDataInicio() {
+        return dataInicio;
+    }
+
+    /**
+     * Sets the value of the dataInicio property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDataInicio(String value) {
+        this.dataInicio = value;
+    }
+
+    /**
+     * Gets the value of the dataFim property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDataFim() {
+        return dataFim;
+    }
+
+    /**
+     * Sets the value of the dataFim property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDataFim(String value) {
+        this.dataFim = value;
+    }
+
+    /**
+     * Gets the value of the etiqueta property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEtiqueta() {
+        return etiqueta;
+    }
+
+    /**
+     * Sets the value of the etiqueta property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEtiqueta(String value) {
+        this.etiqueta = value;
     }
 
 }

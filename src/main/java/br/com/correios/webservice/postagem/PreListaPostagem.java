@@ -22,6 +22,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="cartaoPostagem" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}cartaoPostagemERP" minOccurs="0"/>
+ *         &lt;element name="conteudoProibido" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}simNao" minOccurs="0"/>
  *         &lt;element name="dataAtualizacaoCliente" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="dataAtualizacaoSara" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="dataFechamento" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
@@ -44,6 +45,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "preListaPostagem", propOrder = {
     "cartaoPostagem",
+    "conteudoProibido",
     "dataAtualizacaoCliente",
     "dataAtualizacaoSara",
     "dataFechamento",
@@ -59,6 +61,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class PreListaPostagem {
 
     protected CartaoPostagemERP cartaoPostagem;
+    @XmlSchemaType(name = "string")
+    protected SimNao conteudoProibido;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataAtualizacaoCliente;
     @XmlSchemaType(name = "dateTime")
@@ -104,6 +108,30 @@ public class PreListaPostagem {
      */
     public void setCartaoPostagem(CartaoPostagemERP value) {
         this.cartaoPostagem = value;
+    }
+
+    /**
+     * Gets the value of the conteudoProibido property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SimNao }
+     *     
+     */
+    public SimNao getConteudoProibido() {
+        return conteudoProibido;
+    }
+
+    /**
+     * Sets the value of the conteudoProibido property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SimNao }
+     *     
+     */
+    public void setConteudoProibido(SimNao value) {
+        this.conteudoProibido = value;
     }
 
     /**

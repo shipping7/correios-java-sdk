@@ -18,8 +18,9 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="codAdministrativo" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="codigoServico" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *         &lt;element name="idCartaoPostagem" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="cepDestinatario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="coleta" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}coletaSimultaneaTO" minOccurs="0"/>
+ *         &lt;element name="coleta" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}coletaSimultanea" minOccurs="0"/>
  *         &lt;element name="usuario" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="senha" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "validarPostagemSimultanea", propOrder = {
     "codAdministrativo",
     "codigoServico",
+    "idCartaoPostagem",
     "cepDestinatario",
     "coleta",
     "usuario",
@@ -43,8 +45,9 @@ public class ValidarPostagemSimultanea {
 
     protected Integer codAdministrativo;
     protected Integer codigoServico;
+    protected String idCartaoPostagem;
     protected String cepDestinatario;
-    protected ColetaSimultaneaTO coleta;
+    protected ColetaSimultanea coleta;
     protected String usuario;
     protected String senha;
 
@@ -97,6 +100,30 @@ public class ValidarPostagemSimultanea {
     }
 
     /**
+     * Gets the value of the idCartaoPostagem property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIdCartaoPostagem() {
+        return idCartaoPostagem;
+    }
+
+    /**
+     * Sets the value of the idCartaoPostagem property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIdCartaoPostagem(String value) {
+        this.idCartaoPostagem = value;
+    }
+
+    /**
      * Gets the value of the cepDestinatario property.
      * 
      * @return
@@ -125,10 +152,10 @@ public class ValidarPostagemSimultanea {
      * 
      * @return
      *     possible object is
-     *     {@link ColetaSimultaneaTO }
+     *     {@link ColetaSimultanea }
      *     
      */
-    public ColetaSimultaneaTO getColeta() {
+    public ColetaSimultanea getColeta() {
         return coleta;
     }
 
@@ -137,10 +164,10 @@ public class ValidarPostagemSimultanea {
      * 
      * @param value
      *     allowed object is
-     *     {@link ColetaSimultaneaTO }
+     *     {@link ColetaSimultanea }
      *     
      */
-    public void setColeta(ColetaSimultaneaTO value) {
+    public void setColeta(ColetaSimultanea value) {
         this.coleta = value;
     }
 
