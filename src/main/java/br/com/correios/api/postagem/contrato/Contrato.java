@@ -10,14 +10,10 @@ import br.com.correios.api.postagem.adicional.ServicoCorreio;
 import br.com.correios.api.postagem.cartao.CartaoPostagem;
 import br.com.correios.api.postagem.cartao.StatusDoCartaoDaPostagem;
 import br.com.correios.api.postagem.common.DataVigencia;
-import br.com.correios.webservice.postagem.Cliente;
 
 public class Contrato {
 
     private List<CartaoPostagem> cartoesPostagem;
-
-    //TODO Este cliente ja possui um contrato. Ver a possibilidade de remover daqui
-    private Cliente cliente;
 
     private long codigoCliente;
 
@@ -41,10 +37,6 @@ public class Contrato {
 
     public List<CartaoPostagem> getCartoesPostagem() {
 		return cartoesPostagem;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
 	}
 
 	public long getCodigoCliente() {
@@ -89,11 +81,6 @@ public class Contrato {
 
 		public ContratoBuilder comCartoesDePostagem(List<CartaoPostagem> cartoes) {
 			this.contrato.cartoesPostagem = cartoes;
-			return this;
-		}
-
-		public ContratoBuilder doCliente(Cliente cliente) {
-			this.contrato.cliente = cliente;
 			return this;
 		}
 
@@ -156,7 +143,6 @@ public class Contrato {
 		return MoreObjects.toStringHelper(this)
 			.add("contratoDiretoria", this.contratoDiretoria)
 			.add("cartoesPostagem", this.cartoesPostagem)
-			.add("cliente", this.cliente)
 			.add("codigoCliente", this.codigoCliente)
 			.add("descricaoDiretoriaRegional", this.descricaoDiretoriaRegional)
 			.add("status", this.status)

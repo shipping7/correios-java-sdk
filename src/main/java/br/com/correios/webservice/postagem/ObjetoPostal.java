@@ -20,11 +20,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;sequence>
  *         &lt;element name="codigoEtiqueta" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dataAtualizacaoCliente" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="dataBloqueioObjeto" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="dataCancelamentoEtiqueta" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="dataInclusao" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="objetoPostalPK" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}objetoPostalPK" minOccurs="0"/>
  *         &lt;element name="plpNu" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="preListaPostagem" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}preListaPostagem" minOccurs="0"/>
+ *         &lt;element name="restricaoAerea" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}simNao" minOccurs="0"/>
+ *         &lt;element name="statusBloqueio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="statusEtiqueta" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}statusObjetoPostal" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -38,11 +41,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "objetoPostal", propOrder = {
     "codigoEtiqueta",
     "dataAtualizacaoCliente",
+    "dataBloqueioObjeto",
     "dataCancelamentoEtiqueta",
     "dataInclusao",
     "objetoPostalPK",
     "plpNu",
     "preListaPostagem",
+    "restricaoAerea",
+    "statusBloqueio",
     "statusEtiqueta"
 })
 public class ObjetoPostal {
@@ -51,12 +57,17 @@ public class ObjetoPostal {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataAtualizacaoCliente;
     @XmlSchemaType(name = "dateTime")
+    protected XMLGregorianCalendar dataBloqueioObjeto;
+    @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataCancelamentoEtiqueta;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataInclusao;
     protected ObjetoPostalPK objetoPostalPK;
     protected Long plpNu;
     protected PreListaPostagem preListaPostagem;
+    @XmlSchemaType(name = "string")
+    protected SimNao restricaoAerea;
+    protected String statusBloqueio;
     @XmlSchemaType(name = "string")
     protected StatusObjetoPostal statusEtiqueta;
 
@@ -106,6 +117,30 @@ public class ObjetoPostal {
      */
     public void setDataAtualizacaoCliente(XMLGregorianCalendar value) {
         this.dataAtualizacaoCliente = value;
+    }
+
+    /**
+     * Gets the value of the dataBloqueioObjeto property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDataBloqueioObjeto() {
+        return dataBloqueioObjeto;
+    }
+
+    /**
+     * Sets the value of the dataBloqueioObjeto property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDataBloqueioObjeto(XMLGregorianCalendar value) {
+        this.dataBloqueioObjeto = value;
     }
 
     /**
@@ -226,6 +261,54 @@ public class ObjetoPostal {
      */
     public void setPreListaPostagem(PreListaPostagem value) {
         this.preListaPostagem = value;
+    }
+
+    /**
+     * Gets the value of the restricaoAerea property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SimNao }
+     *     
+     */
+    public SimNao getRestricaoAerea() {
+        return restricaoAerea;
+    }
+
+    /**
+     * Sets the value of the restricaoAerea property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SimNao }
+     *     
+     */
+    public void setRestricaoAerea(SimNao value) {
+        this.restricaoAerea = value;
+    }
+
+    /**
+     * Gets the value of the statusBloqueio property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getStatusBloqueio() {
+        return statusBloqueio;
+    }
+
+    /**
+     * Sets the value of the statusBloqueio property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStatusBloqueio(String value) {
+        this.statusBloqueio = value;
     }
 
     /**

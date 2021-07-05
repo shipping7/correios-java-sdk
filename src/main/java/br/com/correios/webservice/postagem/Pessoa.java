@@ -22,10 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="cidade" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="complemento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ddd" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="endereco" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="logradouro" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="nome" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="numero" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="pais" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="referencia" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="telefone" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="uf" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -43,15 +44,15 @@ import javax.xml.bind.annotation.XmlType;
     "cidade",
     "complemento",
     "ddd",
-    "endereco",
+    "email",
+    "logradouro",
     "nome",
     "numero",
-    "pais",
+    "referencia",
     "telefone",
     "uf"
 })
 @XmlSeeAlso({
-    Destinatario.class,
     Remetente.class
 })
 public class Pessoa {
@@ -61,10 +62,11 @@ public class Pessoa {
     protected String cidade;
     protected String complemento;
     protected String ddd;
-    protected String endereco;
+    protected String email;
+    protected String logradouro;
     protected String nome;
     protected String numero;
-    protected String pais;
+    protected String referencia;
     protected String telefone;
     protected String uf;
 
@@ -189,27 +191,51 @@ public class Pessoa {
     }
 
     /**
-     * Gets the value of the endereco property.
+     * Gets the value of the email property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getEndereco() {
-        return endereco;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * Sets the value of the endereco property.
+     * Sets the value of the email property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setEndereco(String value) {
-        this.endereco = value;
+    public void setEmail(String value) {
+        this.email = value;
+    }
+
+    /**
+     * Gets the value of the logradouro property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    /**
+     * Sets the value of the logradouro property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLogradouro(String value) {
+        this.logradouro = value;
     }
 
     /**
@@ -261,27 +287,27 @@ public class Pessoa {
     }
 
     /**
-     * Gets the value of the pais property.
+     * Gets the value of the referencia property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getPais() {
-        return pais;
+    public String getReferencia() {
+        return referencia;
     }
 
     /**
-     * Sets the value of the pais property.
+     * Sets the value of the referencia property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPais(String value) {
-        this.pais = value;
+    public void setReferencia(String value) {
+        this.referencia = value;
     }
 
     /**

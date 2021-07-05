@@ -22,10 +22,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="bairro" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="cep" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="cidade" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="complemento" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="complemento2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="uf" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="unidadesPostagem" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}unidadePostagemERP" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
@@ -41,10 +39,8 @@ import javax.xml.bind.annotation.XmlType;
     "bairro",
     "cep",
     "cidade",
-    "complemento",
     "complemento2",
     "end",
-    "id",
     "uf",
     "unidadesPostagem"
 })
@@ -53,10 +49,8 @@ public class EnderecoERP {
     protected String bairro;
     protected String cep;
     protected String cidade;
-    protected String complemento;
     protected String complemento2;
     protected String end;
-    protected long id;
     protected String uf;
     @XmlElement(nillable = true)
     protected List<UnidadePostagemERP> unidadesPostagem;
@@ -134,30 +128,6 @@ public class EnderecoERP {
     }
 
     /**
-     * Gets the value of the complemento property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getComplemento() {
-        return complemento;
-    }
-
-    /**
-     * Sets the value of the complemento property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setComplemento(String value) {
-        this.complemento = value;
-    }
-
-    /**
      * Gets the value of the complemento2 property.
      * 
      * @return
@@ -203,22 +173,6 @@ public class EnderecoERP {
      */
     public void setEnd(String value) {
         this.end = value;
-    }
-
-    /**
-     * Gets the value of the id property.
-     * 
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * Sets the value of the id property.
-     * 
-     */
-    public void setId(long value) {
-        this.id = value;
     }
 
     /**

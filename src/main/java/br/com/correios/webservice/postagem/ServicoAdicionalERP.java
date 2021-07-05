@@ -18,6 +18,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="categoria" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="codigo" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="dataAtualizacao" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="datajAtualizacao" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -25,6 +26,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="horajAtualizacao" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="sigla" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="valorDeclarado" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}valorDeclarado" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,16 +37,19 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "servicoAdicionalERP", propOrder = {
+    "categoria",
     "codigo",
     "dataAtualizacao",
     "datajAtualizacao",
     "descricao",
     "horajAtualizacao",
     "id",
-    "sigla"
+    "sigla",
+    "valorDeclarado"
 })
 public class ServicoAdicionalERP {
 
+    protected String categoria;
     protected String codigo;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar dataAtualizacao;
@@ -53,6 +58,31 @@ public class ServicoAdicionalERP {
     protected Integer horajAtualizacao;
     protected Integer id;
     protected String sigla;
+    protected ValorDeclarado valorDeclarado;
+
+    /**
+     * Gets the value of the categoria property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * Sets the value of the categoria property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCategoria(String value) {
+        this.categoria = value;
+    }
 
     /**
      * Gets the value of the codigo property.
@@ -220,6 +250,30 @@ public class ServicoAdicionalERP {
      */
     public void setSigla(String value) {
         this.sigla = value;
+    }
+
+    /**
+     * Gets the value of the valorDeclarado property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ValorDeclarado }
+     *     
+     */
+    public ValorDeclarado getValorDeclarado() {
+        return valorDeclarado;
+    }
+
+    /**
+     * Sets the value of the valorDeclarado property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ValorDeclarado }
+     *     
+     */
+    public void setValorDeclarado(ValorDeclarado value) {
+        this.valorDeclarado = value;
     }
 
 }

@@ -2,6 +2,8 @@ package br.com.correios.api.postagem;
 
 import static java.lang.String.format;
 
+import javax.xml.ws.BindingProvider;
+
 import com.google.common.base.Optional;
 
 import br.com.correios.api.converter.Converter;
@@ -14,6 +16,7 @@ import br.com.correios.api.postagem.webservice.CorreiosClienteApi;
 import br.com.correios.api.postagem.xml.Correioslog;
 import br.com.correios.api.postagem.xml.XmlPlpParser;
 import br.com.correios.credentials.CorreiosCredenciais;
+import br.com.correios.webservice.postagem.AtendeCliente;
 import br.com.correios.webservice.postagem.AutenticacaoException;
 import br.com.correios.webservice.postagem.ClienteERP;
 import br.com.correios.webservice.postagem.Exception_Exception;
@@ -43,7 +46,12 @@ class SoapCorreiosServicoPostagemAPI implements CorreiosServicoPostagemAPI {
 	@Override
 	public Optional<ClienteEmpresa> buscaCliente(ContratoEmpresa contratoEmpresa) {
 		try {
-			ClienteERP clienteRetornadoDosCorreios = clienteApi.getCorreiosWebService().buscaCliente(contratoEmpresa.getContrato(), contratoEmpresa.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
+			AtendeCliente atendeCliente = clienteApi.getCorreiosWebService();
+			
+			((BindingProvider)atendeCliente).getRequestContext().put("javax.xml.ws.client.connectionTimeout", "6000");
+			((BindingProvider)atendeCliente).getRequestContext().put("javax.xml.ws.client.receiveTimeout", "6000");
+
+			ClienteERP clienteRetornadoDosCorreios = atendeCliente.buscaCliente(contratoEmpresa.getContrato(), contratoEmpresa.getCartaoDePostagem(), credenciais.getUsuario(), credenciais.getSenha());
 
 			return Optional.fromNullable(clienteRetornadoDosCorreios)
 						   .transform(clienteEmpresaConverter::convert)

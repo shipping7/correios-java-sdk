@@ -19,9 +19,13 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="categoriaServico" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}categoriaServico" minOccurs="0"/>
  *         &lt;element name="chancela" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}chancelaMaster" minOccurs="0"/>
+ *         &lt;element name="descricao" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="exigeDimensoes" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="exigeValorCobrar" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
  *         &lt;element name="imitm" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="pagamentoEntrega" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="remessaAgrupada" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="restricao" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}simNao" minOccurs="0"/>
  *         &lt;element name="servico" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="servicoERP" type="{http://cliente.bean.master.sigep.bsb.correios.com.br/}servicoERP" minOccurs="0"/>
  *         &lt;element name="ssiCoCodigoPostal" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -37,9 +41,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "servicoSigep", propOrder = {
     "categoriaServico",
     "chancela",
+    "descricao",
     "exigeDimensoes",
     "exigeValorCobrar",
     "imitm",
+    "pagamentoEntrega",
+    "remessaAgrupada",
+    "restricao",
     "servico",
     "servicoERP",
     "ssiCoCodigoPostal"
@@ -49,9 +57,14 @@ public class ServicoSigep {
     @XmlSchemaType(name = "string")
     protected CategoriaServico categoriaServico;
     protected ChancelaMaster chancela;
+    protected String descricao;
     protected Boolean exigeDimensoes;
     protected Boolean exigeValorCobrar;
     protected long imitm;
+    protected String pagamentoEntrega;
+    protected String remessaAgrupada;
+    @XmlSchemaType(name = "string")
+    protected SimNao restricao;
     protected long servico;
     protected ServicoERP servicoERP;
     protected String ssiCoCodigoPostal;
@@ -102,6 +115,30 @@ public class ServicoSigep {
      */
     public void setChancela(ChancelaMaster value) {
         this.chancela = value;
+    }
+
+    /**
+     * Gets the value of the descricao property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
+     * Sets the value of the descricao property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescricao(String value) {
+        this.descricao = value;
     }
 
     /**
@@ -166,6 +203,78 @@ public class ServicoSigep {
      */
     public void setImitm(long value) {
         this.imitm = value;
+    }
+
+    /**
+     * Gets the value of the pagamentoEntrega property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPagamentoEntrega() {
+        return pagamentoEntrega;
+    }
+
+    /**
+     * Sets the value of the pagamentoEntrega property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPagamentoEntrega(String value) {
+        this.pagamentoEntrega = value;
+    }
+
+    /**
+     * Gets the value of the remessaAgrupada property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getRemessaAgrupada() {
+        return remessaAgrupada;
+    }
+
+    /**
+     * Sets the value of the remessaAgrupada property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRemessaAgrupada(String value) {
+        this.remessaAgrupada = value;
+    }
+
+    /**
+     * Gets the value of the restricao property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link SimNao }
+     *     
+     */
+    public SimNao getRestricao() {
+        return restricao;
+    }
+
+    /**
+     * Sets the value of the restricao property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link SimNao }
+     *     
+     */
+    public void setRestricao(SimNao value) {
+        this.restricao = value;
     }
 
     /**
